@@ -1,0 +1,10 @@
+[core]
+	excludesfile = ~/.gitexcludes
+[user]
+	name = kbaribeau
+	email = kevin.baribeau@gmail.com
+[alias]
+	praise = blame
+	ci = commit
+	lg = log --date=local
+	st = status -s

@@ -1,0 +1,36 @@
+module Autotest::Scope
+  Autotest.add_hook :initialize do |at|
+    unless ARGV.empty?
+      at.find_directories = ARGV.length == 1 ? ["spec/#{ARGV.first}","app/#{ARGV.first}"] : ARGV.dup
+    end
+  end
+end
+
+module Autotest::Growl
+
+  def self.growl title, msg, img, pri=0, stick="" 
+    system "growlnotify -n autotest --image #{img} -p #{pri} -m #{msg.inspect} #{title} #{stick}" 
+  end
+
+  Autotest.add_hook :run_command do
+    print "\n"*2 + '-'*80 + "\n"*2
+    print "\e[2J\e[f"   # clear the terminal
+  end
+
+  Autotest.add_hook :ran_command do |autotest|
+    name = Dir.pwd.split(/\//).last
+    if autotest.results.grep(/Finished in/).empty?
+      growl "Project #{name} cannot run examples", '', "~/.autotest_images/ruby_grey.png" 
+    else
+      filtered = autotest.results.grep(/\d+\s.*examples?/)
+      output = filtered.empty? ? '' : filtered.last.slice(/(\d+)\s.*examples?,\s(\d+)\s.*failures?(?:,\s(\d+)\s.*pending)?/)
+      if output =~ /[1-9]\d*\sfailures?/
+        growl "RSpec results", "#{output}", "~/.autotest_images/ruby_red.png" 
+      elsif output =~ /pending/
+        growl "RSpec results", "#{output}", "~/.autotest_images/ruby_yellow.png" 
+      elsif output =~ /0 failures/
+        growl "RSpec results", "#{output}", "~/.autotest_images/ruby_green.png" 
+      end
+    end
+  end
+end
