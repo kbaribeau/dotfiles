@@ -40,6 +40,11 @@ set guioptions+=b
 "extended % functionality
 runtime macros/matchit.vim
 
+"show statusline
+set laststatus=2
+"this looks like the default statusline, but with git info embedded, thanks to vim-fugitive
+set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
 "maps
 :map <C-Right> :tabn<cr>
 :map <C-Left> :tabp<cr>
