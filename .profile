@@ -46,6 +46,7 @@ JAVA_OPTS="-Denvironment=local"
 
 alias 'ls=ls -FC'
 alias 'psg=ps ax | grep'
+alias 'x=exit'
 
 #http://github.com/rupa/z
 . ~/code/dotfiles/z.sh
