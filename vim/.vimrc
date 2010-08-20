@@ -18,13 +18,13 @@ set shiftround
 autocmd FileType * set tabstop=2|set shiftwidth=2|set noexpandtab
 autocmd FileType java set tabstop=4|set shiftwidth=4|set expandtab
 
-"I hate the ruby default folding
-autocmd FileType ruby set foldmethod=manual
+"turn off syntax folding unless we're in c#, where #regions are nice to have
+set foldmethod=manual
+autocmd FileType cs set foldmethod=syntax
 
 "other
 set nowrap
 set showmode
-set foldmethod=syntax
 set backspace=2
 set nf="alpha, hex"
 set scrolloff=3
