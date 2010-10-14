@@ -9,6 +9,7 @@ export MANPATH=/opt/local/share/man:$MANPATH
 
 set -o vi
 
+#prompt
 function parse_git_branch {
 	ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
 		  echo "("${ref#refs/heads/}")"
@@ -21,7 +22,7 @@ export PS1="\w \$(parse_git_branch)\$ "
 ##
 
 # MacPorts Installer addition on 2009-10-13_at_21:59:12: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+PATH=/opt/local/bin:/opt/local/sbin:$PATH
  
 # Finished adapting your PATH environment variable for use with MacPorts.
 
@@ -44,7 +45,7 @@ export CATALINA_HOME="/Users/kbaribeau/apps/apache-tomcat-5.5.28"
 export environment="local"
 JAVA_OPTS="-Denvironment=local"
 
-alias 'ls=ls -FC'
+alias 'ls=ls -G'
 alias 'psg=ps ax | grep'
 alias 'x=exit'
 
