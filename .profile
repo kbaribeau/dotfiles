@@ -22,7 +22,7 @@ export PS1="\w \$(parse_git_branch)\$ "
 ##
 
 # MacPorts Installer addition on 2009-10-13_at_21:59:12: adding an appropriate PATH variable for use with MacPorts.
-PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
  
 # Finished adapting your PATH environment variable for use with MacPorts.
 
