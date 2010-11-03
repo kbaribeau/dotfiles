@@ -8,3 +8,5 @@
 	ci = commit
 	lg = log --date=local
 	st = status -s
+[color]
+	ui = auto
