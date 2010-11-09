@@ -63,4 +63,3 @@ function st {
 
 #rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-rvm 1.9.2@do_ruby_tuesday
