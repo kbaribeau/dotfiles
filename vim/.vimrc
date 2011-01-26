@@ -18,9 +18,9 @@ set shiftround
 autocmd FileType * set tabstop=2|set shiftwidth=2|set noexpandtab
 autocmd FileType java set tabstop=4|set shiftwidth=4|set expandtab
 
-"turn off syntax folding unless we're in c#, where #regions are nice to have
-set foldmethod=manual
-autocmd FileType cs set foldmethod=syntax
+if has("ruby_fold")
+	ruby_fold=
+endif
 
 "other
 set nowrap
