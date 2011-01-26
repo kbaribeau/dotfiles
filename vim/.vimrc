@@ -53,6 +53,10 @@ set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set vb
 set t_vb=
 
+"leader key for plugins
+let mapleader = "\\"
+
+
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
