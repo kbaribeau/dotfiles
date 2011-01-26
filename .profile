@@ -28,6 +28,8 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 #add git-svn to PATH
 export PATH=/opt/local/libexec/git-core:$PATH
+#add mysql
+export PATH=/usr/local/mysql/bin:$PATH
 
 #add groovy/grails to path
 export PATH=/opt/groovy-1.7.3/bin:/opt/grails-1.3.1/bin:$PATH
