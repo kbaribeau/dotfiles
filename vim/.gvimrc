@@ -21,3 +21,6 @@ map <silent> <D-6> :tabn 6<CR>
 map <silent> <D-7> :tabn 7<CR>
 map <silent> <D-8> :tabn 8<CR>
 map <silent> <D-9> :tabn 9<CR>
+
+"fullscreen expands vim window
+set fuoptions=maxvert,maxhorz
