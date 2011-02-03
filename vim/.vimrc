@@ -28,12 +28,13 @@ set backspace=2
 set nf="alpha, hex"
 set scrolloff=3
 set ruler
+set number
 
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
 "set directory=~/.vim-tmp
 
-"bottom scrollbar / line numbers
+"bottom scrollbar
 set guioptions+=b
 
 "extended % functionality
