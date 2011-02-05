@@ -21,8 +21,7 @@ export PS1="\w \$(parse_git_branch)\$ "
 # Your previous /Users/kbaribeau/.profile file was backed up as /Users/kbaribeau/.profile.macports-saved_2009-10-13_at_21:59:12
 ##
 
-# MacPorts Installer addition on 2009-10-13_at_21:59:12: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
  
 # Finished adapting your PATH environment variable for use with MacPorts.
 
