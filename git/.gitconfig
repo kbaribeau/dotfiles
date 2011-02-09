@@ -6,7 +6,7 @@
 [alias]
 	praise = blame
 	ci = commit
-	lg = log --date=local
+	lg = log --date=local --stat
 	st = status -s
 [color]
 	ui = auto
