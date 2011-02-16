@@ -66,6 +66,9 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
+"parse *.prawn as ruby
+autocmd BufRead,BufNewFile *.prawn setfiletype ruby
+
 set t_Co=256
 set bg=dark
 colo kbaribeau
