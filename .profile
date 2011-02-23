@@ -7,7 +7,7 @@
 export MANPATH=/opt/local/share/man:$MANPATH
 # Finished adapting your MANPATH environment variable for use with MacPorts.
 
-set -o vi
+set +o vi -o emacs
 
 #prompt
 function parse_git_branch {
