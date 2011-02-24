@@ -68,6 +68,9 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
+"<leader>g -> execute :GitGrep for word under cursor
+map <leader>g :GitGrep <C-R>=expand("<cword>")<cr><cr>
+
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
