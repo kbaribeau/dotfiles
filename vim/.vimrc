@@ -85,4 +85,6 @@ autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
 set t_Co=256
 set bg=dark
-colo kbaribeau
+if exists("g:kbaribeau_colorscheme")
+  colo kbaribeau
+endif

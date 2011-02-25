@@ -3,6 +3,10 @@
 
 "to use this just create a symlink from ~/.vim/colors/kbaribeau.vim
 "to this file, and :colo kbaribeau
+if !exists("g:kbaribeau_colorscheme")
+    let g:kbaribeau_colorscheme = 1
+end
+
 if exists("g:moria_style")
     let s:moria_style = g:moria_style
 else
