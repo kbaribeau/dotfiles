@@ -1,5 +1,6 @@
 [core]
 	excludesfile = ~/.gitexcludes
+	editor = /usr/bin/vim
 [user]
 	name = kbaribeau
 	email = kevin.baribeau@gmail.com
