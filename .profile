@@ -17,6 +17,11 @@ function parse_git_branch {
 
 export PS1="\w \$(parse_git_branch)\$ "
 
+YELLOWORANGE='\[\033[0;33m\]'
+ORIG_FONT_COLOR='\[\033[0m\]'
+
+export PS1=$YELLOWORANGE$PS1$ORIG_FONT_COLOR
+
 ##
 # Your previous /Users/kbaribeau/.profile file was backed up as /Users/kbaribeau/.profile.macports-saved_2009-10-13_at_21:59:12
 ##
