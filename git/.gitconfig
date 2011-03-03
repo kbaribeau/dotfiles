@@ -11,3 +11,5 @@
 	st = status -s
 [color]
 	ui = auto
+[branch]
+	autosetuprebase = always
