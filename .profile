@@ -15,6 +15,10 @@ function parse_git_branch {
 		  echo "("${ref#refs/heads/}")"
 }
 
+if [ -f ~/bin/hub ]; then
+  alias git=~/bin/hub
+fi
+
 export PS1="\w \$(parse_git_branch)\$ "
 
 YELLOWORANGE='\[\033[0;33m\]'

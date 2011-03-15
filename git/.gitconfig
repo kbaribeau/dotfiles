@@ -13,3 +13,5 @@
 	ui = auto
 [branch]
 	autosetuprebase = always
+[github]
+	user = kbaribeau
