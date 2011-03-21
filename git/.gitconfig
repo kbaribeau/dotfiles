@@ -2,7 +2,7 @@
 	excludesfile = ~/.gitexcludes
 	editor = /usr/bin/vim
 [user]
-	name = kbaribeau
+	name = Kevin Baribeau
 	email = kevin.baribeau@gmail.com
 [alias]
 	praise = blame
