@@ -1,4 +1,12 @@
-:syntax on
+call pathogen#runtime_append_all_bundles() 
+
+filetype plugin indent on
+syntax on
+
+"colors
+set t_Co=256
+set bg=dark
+colo kbaribeau
 
 "search
 set noincsearch
@@ -17,10 +25,6 @@ set shiftround
 
 set expandtab
 
-if has("ruby_fold")
-	ruby_fold=
-endif
-
 "other
 set nowrap
 set showmode
@@ -33,9 +37,6 @@ set number
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
 "set directory=~/.vim-tmp
-
-"bottom scrollbar
-set guioptions+=b
 
 "extended % functionality
 runtime macros/matchit.vim
@@ -87,6 +88,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "parse *.prawn as ruby
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
-set t_Co=256
-set bg=dark
-colo kbaribeau
+if has("ruby_fold")
+	ruby_fold=
+endif
+:silent exe "g:flog_enable"
+

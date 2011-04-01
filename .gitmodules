@@ -1,0 +1,75 @@
+[submodule "vim/.vim/bundle/fugitive"]
+	path = vim/.vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/.vim/bundle/git-grep"]
+	path = vim/.vim/bundle/git-grep
+	url = https://github.com/tjennings/git-grep-vim.git
+[submodule "vim/.vim/bundle/vim-textobj-user"]
+	path = vim/.vim/bundle/vim-textobj-user
+	url = https://github.com/kana/vim-textobj-user
+[submodule "vim/.vim/bundle/vim-textobj-rubyblock"]
+	path = vim/.vim/bundle/vim-textobj-rubyblock
+	url = https://github.com/nelstrom/vim-textobj-rubyblock
+[submodule "vim/.vim/bundle/taglist"]
+	path = vim/.vim/bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim
+[submodule "vim/.vim/bundle/vim-ruby-refactoring"]
+	path = vim/.vim/bundle/vim-ruby-refactoring
+	url = https://github.com/ecomba/vim-ruby-refactoring
+[submodule "vim/.vim/bundle/vim-surround"]
+	path = vim/.vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "vim/.vim/bundle/supertab"]
+	path = vim/.vim/bundle/supertab
+	url = https://github.com/ervandew/supertab
+[submodule "vim/.vim/bundle/vim-css-color"]
+	path = vim/.vim/bundle/vim-css-color
+	url = https://github.com/skammer/vim-css-color
+[submodule "vim/.vim/bundle/vim-cucumber"]
+	path = vim/.vim/bundle/vim-cucumber
+	url = https://github.com/tpope/vim-cucumber
+[submodule "vim/.vim/bundle/vim-autoclose"]
+	path = vim/.vim/bundle/vim-autoclose
+	url = https://github.com/Townk/vim-autoclose
+[submodule "vim/.vim/bundle/vim-align"]
+	path = vim/.vim/bundle/vim-align
+	url = https://github.com/tsaleh/vim-align
+[submodule "vim/.vim/bundle/vim-indent-guides"]
+	path = vim/.vim/bundle/vim-indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides
+[submodule "vim/.vim/bundle/vim-flog"]
+	path = vim/.vim/bundle/vim-flog
+	url = https://github.com/fousa/vim-flog
+[submodule "vim/.vim/bundle/snipmate"]
+	path = vim/.vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim
+[submodule "vim/.vim/bundle/vim-matchit"]
+	path = vim/.vim/bundle/vim-matchit
+	url = https://github.com/mhz/vim-matchit
+[submodule "vim/.vim/bundle/vim-git"]
+	path = vim/.vim/bundle/vim-git
+	url = https://github.com/tpope/vim-git
+[submodule "vim/.vim/bundle/vim-javascript"]
+	path = vim/.vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule "vim/.vim/bundle/vim-endwise"]
+	path = vim/.vim/bundle/vim-endwise
+	url = https://github.com/tpope/vim-endwise
+[submodule "vim/.vim/bundle/html-autoclosetag"]
+	path = vim/.vim/bundle/html-autoclosetag
+	url = https://github.com/vim-scripts/HTML-AutoCloseTag
+[submodule "vim/.vim/bundle/autoalign"]
+	path = vim/.vim/bundle/autoalign
+	url = https://github.com/vim-scripts/AutoAlign
+[submodule "vim/.vim/bundle/syntastic"]
+	path = vim/.vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic
+[submodule "vim/.vim/bundle/vim-indent-object"]
+	path = vim/.vim/bundle/vim-indent-object
+	url = https://github.com/michaeljsmith/vim-indent-object
+[submodule "vim/.vim/bundle/vim-markdown"]
+	path = vim/.vim/bundle/vim-markdown
+	url = https://github.com/tpope/vim-markdown
+[submodule "vim/.vim/bundle/vim-haml"]
+	path = vim/.vim/bundle/vim-haml
+	url = https://github.com/tpope/vim-haml
