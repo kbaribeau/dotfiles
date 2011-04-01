@@ -1,3 +1,5 @@
+let g:CommandTMaxHeight=25
+
 call pathogen#runtime_append_all_bundles() 
 
 filetype plugin indent on
