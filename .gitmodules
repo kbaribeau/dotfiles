@@ -76,3 +76,6 @@
 [submodule "vim/.vim/bundle/command-t"]
 	path = vim/.vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
+[submodule "vim/.vim/bundle/vim-mru"]
+	path = vim/.vim/bundle/vim-mru
+	url = https://github.com/ornicar/vim-mru.git
