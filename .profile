@@ -21,6 +21,9 @@ fi
 
 export PS1="\w \$(parse_git_branch)\$ "
 
+#ignore certain commands in history
+HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:w:* --help"
+
 YELLOWORANGE='\[\033[0;33m\]'
 ORIG_FONT_COLOR='\[\033[0m\]'
 
