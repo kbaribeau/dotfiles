@@ -77,6 +77,9 @@ map <leader>g :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 "prevent nerdtree from overriding netrw. I only have nerdtree installed in case my pair really wants it
 let g:NERDTreeHijackNetrw = 0
 
+"clojure
+let g:clj_paren_rainbow=1
+
 
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
