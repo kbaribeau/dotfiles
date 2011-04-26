@@ -79,6 +79,7 @@ let g:NERDTreeHijackNetrw = 0
 
 "clojure
 let vimclojure#ParenRainbow=1
+autocmd FileType clojure AutoCloseOff
 
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
