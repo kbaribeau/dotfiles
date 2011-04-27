@@ -6,9 +6,8 @@ filetype plugin indent on
 syntax on
 
 "colors
-set t_Co=256
 set bg=dark
-colo kbaribeau
+colo solarized
 
 "search
 set incsearch
