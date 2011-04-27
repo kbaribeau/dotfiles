@@ -11,8 +11,10 @@ set bg=dark
 colo kbaribeau
 
 "search
-set noincsearch
-set nohlsearch
+set incsearch
+set hlsearch
+nnoremap <return> :noh<return><esc><return>
+
 set ignorecase
 set smartcase
 set magic
