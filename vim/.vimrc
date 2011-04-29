@@ -70,7 +70,7 @@ function! RenameFile()
         redraw!
     endif
 endfunction
-map <leader>n :call RenameFile()<cr>
+map <leader>rn :call RenameFile()<cr>
 
 "<leader>g -> execute :GitGrep for word under cursor
 map <leader>g :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
