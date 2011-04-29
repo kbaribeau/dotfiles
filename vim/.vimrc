@@ -75,8 +75,6 @@ map <leader>rn :call RenameFile()<cr>
 "<leader>g -> execute :GitGrep for word under cursor
 map <leader>g :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 
-map <leader>cdg :cd ~/code/groupon<cr>
-
 "prevent nerdtree from overriding netrw. I only have nerdtree installed in case my pair really wants it
 let g:NERDTreeHijackNetrw = 0
 map <leader>n :NERDTreeToggle<cr>
@@ -107,3 +105,7 @@ autocmd BufRead,BufNewFIle *.rb :silent exe "g:flog_enable"
 
 "auto reload vimrc when saving it
 autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC
+
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
