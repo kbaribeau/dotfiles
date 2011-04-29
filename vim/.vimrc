@@ -79,6 +79,7 @@ map <leader>cdg :cd ~/code/groupon<cr>
 
 "prevent nerdtree from overriding netrw. I only have nerdtree installed in case my pair really wants it
 let g:NERDTreeHijackNetrw = 0
+map <leader>n :NERDTreeToggle<cr>
 
 "clojure
 let vimclojure#ParenRainbow=1
