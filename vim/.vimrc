@@ -102,3 +102,5 @@ if has("ruby_fold")
 endif
 autocmd BufRead,BufNewFIle *.rb :silent exe "g:flog_enable"
 
+"auto reload vimrc when saving it
+autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC
