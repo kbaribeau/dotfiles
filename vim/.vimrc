@@ -80,7 +80,10 @@ let g:NERDTreeHijackNetrw = 0
 
 "clojure
 let vimclojure#ParenRainbow=1
+
+"turn off auto close in languages where I need to type unmatched quotes or parens
 autocmd FileType clojure AutoCloseOff
+autocmd FileType vim AutoCloseOff
 
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
