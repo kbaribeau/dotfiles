@@ -25,6 +25,8 @@ map <silent> <D-9> :tabn 9<CR>
 "fullscreen expands vim window
 set fuoptions=maxvert,maxhorz
 
+set guioptions=
+
 "auto reload gvimrc when saving
 autocmd! BufWritePost .gvimrc,gvimrc source $MYGVIMRC
 autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC | source $MYGVIMRC
