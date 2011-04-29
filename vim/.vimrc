@@ -100,5 +100,5 @@ autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 if has("ruby_fold")
 	ruby_fold=
 endif
-:silent exe "g:flog_enable"
+autocmd BufRead,BufNewFIle *.rb :silent exe "g:flog_enable"
 
