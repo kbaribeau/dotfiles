@@ -1,12 +1,13 @@
 let g:CommandTMaxHeight=25
 
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 
 filetype plugin indent on
 syntax on
 
 "colors
 set bg=dark
+let g:solarized_visibility = 'low'
 colo solarized
 
 "search
@@ -36,6 +37,7 @@ set nf="alpha, hex"
 set scrolloff=3
 set ruler
 set number
+set list
 
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
@@ -72,7 +74,7 @@ function! RenameFile()
 endfunction
 map <leader>rn :call RenameFile()<cr>
 
-"<leader>g -> execute :GitGrep for word under cursor
+"execute :GitGrep for word under cursor
 map <leader>g :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 
 "prevent nerdtree from overriding netrw. I only have nerdtree installed in case my pair really wants it
