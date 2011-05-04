@@ -10,6 +10,7 @@
 	ci = commit
 	lg = log --date=local --stat
 	st = status -s
+  cp = cherry-pick
 [color]
 	ui = auto
 [branch]

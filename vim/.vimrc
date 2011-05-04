@@ -12,7 +12,7 @@ colo solarized
 
 "search
 set incsearch
-set hlsearch
+set nohlsearch
 nnoremap <return> :noh<return><esc><return>
 
 set ignorecase
