@@ -13,7 +13,7 @@ colo solarized
 "search
 set incsearch
 set nohlsearch
-nnoremap <return> :noh<return><esc><return>
+nnoremap <return> :noh<return>
 
 set ignorecase
 set smartcase
