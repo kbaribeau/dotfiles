@@ -73,6 +73,9 @@ function st {
  export PROMPT_COMMAND="echo -ne \"\033]0;$1\007\""
 }
 
+#autoexpand ! commands when I press spacebar
+bind Space:magic-space
+
 
 #rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
