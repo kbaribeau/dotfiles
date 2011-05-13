@@ -90,4 +90,4 @@
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vim/.vim/bundle/vim-slime"]
 	path = vim/.vim/bundle/vim-slime
-	url = https://github.com/jpalardy/vim-slime.git
+	url = https://kbaribeau@github.com/kbaribeau/vim-slime.git
