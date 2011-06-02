@@ -11,6 +11,8 @@
 	lg = log --date=local --stat
 	st = status -s
   cp = cherry-pick
+  rp = remote prune
+  pr = pull --rebase
 [color]
 	ui = auto
 [branch]
