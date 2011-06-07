@@ -100,6 +100,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "parse *.prawn as ruby
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
+iabbr rdebug require 'ruby-debug'; debugger
+
 if has("ruby_fold")
 	ruby_fold=
 endif

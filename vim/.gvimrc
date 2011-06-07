@@ -1,7 +1,7 @@
 " Unmap Apple+S to remap to Esc, then :w<CR>
 macmenu &File.Save key=<nop>
 imap <D-s> <Esc>:w<CR>
-map <D-s> :w<CR>
+map <D-s> :wa<CR>
 
 " TABS: safari style tab navigation
 nmap <D-[> :tabprevious<CR>
