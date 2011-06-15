@@ -3,7 +3,7 @@
 	editor = /usr/bin/vim
 	quotepath = false
 [user]
-	name = Kevin Baribeau
+	name = kbaribeau
 	email = kevin.baribeau@gmail.com
 [alias]
 	praise = blame
