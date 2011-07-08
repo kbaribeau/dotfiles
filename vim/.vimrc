@@ -101,6 +101,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
 iabbr rdebug require 'ruby-debug'; debugger
+iabbr cljpp [clojure.pprint :only [pprint]]
 
 if has("ruby_fold")
 	ruby_fold=
