@@ -7,8 +7,8 @@ syntax on
 
 "colors
 set bg=dark
-let g:solarized_visibility = 'low'
-colo solarized
+"let g:solarized_visibility = 'low'
+colo default
 
 "search
 set incsearch
@@ -37,7 +37,7 @@ set nf="alpha, hex"
 set scrolloff=3
 set ruler
 set number
-set list
+set nolist
 
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
