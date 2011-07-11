@@ -13,7 +13,7 @@ colo kbaribeau
 "search
 set incsearch
 set nohlsearch
-nnoremap <return> :set hls!<return>
+nnoremap <return> :set hls!<return><return>
 
 set ignorecase
 set smartcase
