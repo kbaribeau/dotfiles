@@ -76,6 +76,9 @@ function st {
 #autoexpand ! commands when I press spacebar
 bind Space:magic-space
 
-
 #rvm
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
+if [ -e ~/.profile.local ] ; then
+  source ~/.profile.local
+fi
