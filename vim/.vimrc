@@ -38,6 +38,7 @@ set scrolloff=3
 set ruler
 set number
 set nolist
+set cursorline
 
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
