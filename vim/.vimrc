@@ -8,7 +8,7 @@ syntax on
 "colors
 set bg=dark
 "let g:solarized_visibility = 'low'
-colo kbaribeau
+colo kb
 
 "search
 set incsearch
