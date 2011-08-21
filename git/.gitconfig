@@ -6,13 +6,18 @@
 	name = kbaribeau
 	email = kevin.baribeau@gmail.com
 [alias]
-	praise = blame
 	ci = commit
-	lg = log --date=local --stat
+	lg = log --date=relative --stat --graph --abbrev-commit
+	praise = blame
 	st = status -s
+  aa = add --all
+  co = checkout
   cp = cherry-pick
-  rp = remote prune
+  dc = diff --cached
+  di = diff
+  head = !git lg -1
   pr = pull --rebase
+  rp = remote prune
 [color]
 	ui = auto
 [branch]
