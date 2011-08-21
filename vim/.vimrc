@@ -53,8 +53,8 @@ set laststatus=2
 set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "maps
-:map <C-Right> :tabn<cr>
-:map <C-Left> :tabp<cr>
+map <C-Right> :tabn<cr>
+map <C-Left> :tabp<cr>
 
 "turn off the bell
 set vb
