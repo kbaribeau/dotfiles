@@ -77,7 +77,20 @@ endfunction
 map <leader>rn :call RenameFile()<cr>
 
 "execute :GitGrep for word under cursor
-map <leader>g :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
+map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
+
+"command-T mappings
+map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
+map <leader>gp :CommandTFlush<cr>\|:CommandT app/public<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT app/stylesheets<cr>
+
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
 
 "prevent nerdtree from overriding netrw. I only have nerdtree installed in case my pair really wants it
 let g:NERDTreeHijackNetrw = 0
