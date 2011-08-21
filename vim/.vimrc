@@ -62,6 +62,7 @@ set t_vb=
 
 "leader key for plugins
 let mapleader = "\\"
+map <leader><leader> <C-^>
 
 "stolen from @garybernhardt
 function! RenameFile()
