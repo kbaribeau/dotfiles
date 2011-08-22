@@ -3,32 +3,32 @@
 
 "to use this just create a symlink from ~/.vim/colors/kbaribeau.vim
 "to this file, and :colo kbaribeau
-if exists("g:moria_style")
-    let s:moria_style = g:moria_style
+if exists("g:kb_style")
+    let s:kb_style = g:kb_style
 else
-    let s:moria_style = &background
+    let s:kb_style = &background
 endif
 
-if exists("g:moria_monochrome")
-    let s:moria_monochrome = g:moria_monochrome
+if exists("g:kb_monochrome")
+    let s:kb_monochrome = g:kb_monochrome
 else
-    let s:moria_monochrome = 0
+    let s:kb_monochrome = 0
 endif
 
-if exists("g:moria_fontface")
-    let s:moria_fontface = g:moria_fontface
+if exists("g:kb_fontface")
+    let s:kb_fontface = g:kb_fontface
 else
-    let s:moria_fontface = "plain"
+    let s:kb_fontface = "plain"
 endif
 
-execute "command! -nargs=1 Colo let g:moria_style = \"<args>\" | colo moria"
+execute "command! -nargs=1 Colo let g:kb_style = \"<args>\" | colo kb"
 
-if s:moria_style == "black" || s:moria_style == "dark"
+if s:kb_style == "black" || s:kb_style == "dark"
     set background=dark
-elseif s:moria_style == "light" || s:moria_style == "white"
+elseif s:kb_style == "light" || s:kb_style == "white"
     set background=light
 else
-    let s:moria_style = &background 
+    let s:kb_style = &background 
 endif
 
 hi clear
@@ -37,21 +37,21 @@ if exists("syntax_on")
     syntax reset
 endif
 
-let colors_name = "moria"
+let colors_name = "kb"
 
 if &background == "dark"
-    if s:moria_style == "dark"
+    if s:kb_style == "dark"
         hi Normal ctermbg=Black ctermfg=LightGray guibg=#202020 guifg=#d0d0d0 gui=none
 
         hi CursorColumn ctermbg=DarkGray ctermfg=White guibg=#404040 gui=none
         hi CursorLine ctermbg=DarkGray ctermfg=White guibg=#404040 gui=none
-    elseif s:moria_style == "black"
+    elseif s:kb_style == "black"
         hi Normal ctermbg=Black ctermfg=LightGray guibg=#000000 guifg=#d0d0d0 gui=none
 
         hi CursorColumn ctermbg=DarkGray ctermfg=White guibg=#3a3a3a gui=none
         hi CursorLine ctermbg=DarkGray ctermfg=White guibg=#3a3a3a gui=none
     endif
-    if s:moria_monochrome == 1
+    if s:kb_monochrome == 1
         hi FoldColumn ctermbg=bg guibg=bg guifg=#a0a0a0 gui=none
         hi LineNr guifg=#a0a0a0 gui=none
         hi MoreMsg guibg=bg guifg=#b6b6b6 gui=bold
@@ -65,7 +65,7 @@ if &background == "dark"
         hi TabLine guibg=#6e6e6e guifg=fg gui=underline
         hi TabLineFill guibg=#6e6e6e guifg=fg gui=underline
         hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#404040 guifg=fg gui=none
-        if s:moria_fontface == "mixed"
+        if s:kb_fontface == "mixed"
             hi Folded guibg=#4e4e4e guifg=#c0c0c0 gui=bold
         else
             hi Folded guibg=#4e4e4e guifg=#c0c0c0 gui=none
@@ -84,7 +84,7 @@ if &background == "dark"
         hi TabLine guibg=#41609e guifg=fg gui=underline
         hi TabLineFill guibg=#41609e guifg=fg gui=underline
         hi VertSplit ctermbg=LightGray ctermfg=Black guibg=#25365a guifg=fg gui=none
-        if s:moria_fontface == "mixed"
+        if s:kb_fontface == "mixed"
             hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=bold
         else
             hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=none
@@ -132,7 +132,7 @@ if &background == "dark"
     hi Todo guibg=#e0e000 guifg=#000000 gui=none
     hi Underlined ctermbg=Black ctermfg=White guibg=bg guifg=#00a0ff gui=underline    
 
-    if s:moria_fontface == "mixed"
+    if s:kb_fontface == "mixed"
         hi Statement guibg=bg guifg=#7ec0ee gui=bold
         hi Type guibg=bg guifg=#f09479 gui=bold
     else
@@ -148,18 +148,18 @@ if &background == "dark"
     hi htmlUnderline ctermbg=Black ctermfg=White guibg=bg guifg=fg gui=underline
     hi htmlUnderlineItalic ctermbg=Black ctermfg=White guibg=bg guifg=fg gui=underline,italic
 elseif &background == "light"
-    if s:moria_style == "light"
+    if s:kb_style == "light"
         hi Normal ctermbg=White ctermfg=Black guibg=#f0f0f0 guifg=#000000 gui=none
 
         hi CursorColumn ctermbg=LightGray ctermfg=Black guibg=#d8d8d8 gui=none
         hi CursorLine ctermbg=LightGray ctermfg=Black guibg=#d8d8d8 gui=none
-    elseif s:moria_style == "white"
+    elseif s:kb_style == "white"
         hi Normal ctermbg=White ctermfg=Black guibg=#ffffff guifg=#000000 gui=none
 
         hi CursorColumn ctermbg=LightGray ctermfg=Black guibg=#dfdfdf gui=none
         hi CursorLine ctermbg=LightGray ctermfg=Black guibg=#dfdfdf gui=none
     endif
-    if s:moria_monochrome == 1
+    if s:kb_monochrome == 1
         hi FoldColumn ctermbg=bg guibg=bg guifg=#7a7a7a gui=none
         hi Folded guibg=#cfcfcf guifg=#404040 gui=bold
         hi LineNr guifg=#7a7a7a gui=none
