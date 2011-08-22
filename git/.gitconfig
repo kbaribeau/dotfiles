@@ -16,6 +16,7 @@
   dc = diff --cached
   di = diff
   head = !git lg -1
+  pom = push origin master
   pr = pull --rebase
   rp = remote prune
 [color]
