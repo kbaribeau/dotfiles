@@ -58,6 +58,7 @@ export CATALINA_HOME="/Users/kbaribeau/apps/apache-tomcat-5.5.28"
 export environment="local"
 JAVA_OPTS="-Denvironment=local"
 
+alias 'be=bundle exec'
 alias 'ls=ls -G'
 alias 'psg=ps ax | grep'
 alias 'x=exit'
