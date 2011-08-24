@@ -1,7 +1,3 @@
-require 'rubygems' rescue nil
-require 'wirble'
-
-
 class WirableConfig
 
 	def run() 
@@ -41,7 +37,15 @@ class WirableConfig
 	end
 end
 
-config = WirableConfig.new()
-config.run()
+begin
+  require 'rubygems' rescue nil
+  require 'wirble'
+
+  config = WirableConfig.new()
+  config.run()
+rescue LoadError
+  nil
+end
+
 
 
