@@ -14,26 +14,22 @@ class WirableConfig
 
 
 	def change_wirable_colors_to_look_vaguely_like_my_vim()
-		Wirble::Colorize.colors[:string] = :light_purple
-
-		Wirble::Colorize.colors[:comma] = :white
-
-		Wirble::Colorize.colors[:open_hash] = :white
-		Wirble::Colorize.colors[:close_hash] = :white
-
-		Wirble::Colorize.colors[:open_array] = :white
-		Wirble::Colorize.colors[:close_array] = :white
-
-		Wirble::Colorize.colors[:symbol] = :light_purple
-		Wirble::Colorize.colors[:symbol_prefix] = :light_purple
-
-		Wirble::Colorize.colors[:open_string] = :white
-		Wirble::Colorize.colors[:close_string] = :white
-
-		Wirble::Colorize.colors[:number] = :white
-		Wirble::Colorize.colors[:keyword] = :cyan
-		Wirble::Colorize.colors[:class] = :cyan
-		Wirble::Colorize.colors[:range] = :light_purple
+		Wirble::Colorize.colors.merge!(
+      :string => :light_purple,
+      :comma => :white,
+      :open_hash => :white,
+      :close_hash => :white,
+      :open_array => :white,
+      :close_array => :white,
+      :symbol => :light_purple,
+      :symbol_prefix => :light_purple,
+      :open_string => :white,
+      :close_string => :white,
+      :number => :white,
+      :keyword => :cyan,
+      :class => :cyan,
+      :range => :light_purple
+    )
 	end
 end
 
