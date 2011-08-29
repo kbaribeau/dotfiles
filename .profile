@@ -33,7 +33,7 @@ export PS1=$YELLOWORANGE$PS1$ORIG_FONT_COLOR
 # Your previous /Users/kbaribeau/.profile file was backed up as /Users/kbaribeau/.profile.macports-saved_2009-10-13_at_21:59:12
 ##
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
  
 # Finished adapting your PATH environment variable for use with MacPorts.
 
