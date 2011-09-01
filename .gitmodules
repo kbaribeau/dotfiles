@@ -87,7 +87,7 @@
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vim/.vim/bundle/vim-slime"]
 	path = vim/.vim/bundle/vim-slime
-	url = git://github.com/kbaribeau/vim-slime.git
+	url = https://github.com/kbaribeau/vim-slime.git
 [submodule "vim/.vim/bundle/vim-rake"]
 	path = vim/.vim/bundle/vim-rake
 	url = https://github.com/tpope/vim-rake.git
