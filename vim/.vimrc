@@ -8,6 +8,7 @@ syntax on
 "colors
 set bg=dark
 "let g:solarized_visibility = 'low'
+set t_Co=256
 colo kb
 
 "search
