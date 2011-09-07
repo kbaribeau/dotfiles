@@ -42,6 +42,14 @@ set nolist
 set cursorline
 set autoread
 
+set winwidth=120
+
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
 "set directory=~/.vim-tmp
