@@ -58,9 +58,6 @@
 [submodule "vim/.vim/bundle/autoalign"]
 	path = vim/.vim/bundle/autoalign
 	url = https://github.com/vim-scripts/AutoAlign
-[submodule "vim/.vim/bundle/syntastic"]
-	path = vim/.vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic
 [submodule "vim/.vim/bundle/vim-indent-object"]
 	path = vim/.vim/bundle/vim-indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object
