@@ -1,8 +1,5 @@
 "This is a slightly modified version of the moria color scheme from
 "http://www.vim.org/scripts/script.php?script_id=1464
-
-"to use this just create a symlink from ~/.vim/colors/kbaribeau.vim
-"to this file, and :colo kbaribeau
 if exists("g:kb_style")
     let s:kb_style = g:kb_style
 else
