@@ -78,8 +78,8 @@ if &background == "dark"
         hi PmenuSbar guibg=#41609e guifg=fg gui=none
         hi PmenuThumb guibg=#bdcae3 guifg=bg gui=none
         hi SignColumn ctermbg=bg guibg=bg guifg=#8fa5d1 gui=none
-        hi StatusLine ctermbg=7 ctermfg=0 guibg=#334b7d guifg=fg gui=bold
-        hi StatusLineNC ctermbg=8 ctermfg=0 guibg=#25365a guifg=fg gui=none
+        hi StatusLine ctermbg=7 ctermfg=28 guibg=#334b7d guifg=fg gui=bold
+        hi StatusLineNC ctermbg=7 ctermfg=22 guibg=#25365a guifg=fg gui=none
         hi TabLine guibg=#41609e guifg=fg gui=underline
         hi TabLineFill guibg=#41609e guifg=fg gui=underline
         hi VertSplit ctermbg=7 ctermfg=0 guibg=#25365a guifg=fg gui=none
