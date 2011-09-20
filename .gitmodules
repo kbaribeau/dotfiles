@@ -28,9 +28,6 @@
 [submodule "vim/.vim/bundle/vim-cucumber"]
 	path = vim/.vim/bundle/vim-cucumber
 	url = https://github.com/tpope/vim-cucumber
-[submodule "vim/.vim/bundle/vim-autoclose"]
-	path = vim/.vim/bundle/vim-autoclose
-	url = https://github.com/Townk/vim-autoclose
 [submodule "vim/.vim/bundle/vim-align"]
 	path = vim/.vim/bundle/vim-align
 	url = https://github.com/tsaleh/vim-align
@@ -49,9 +46,6 @@
 [submodule "vim/.vim/bundle/vim-endwise"]
 	path = vim/.vim/bundle/vim-endwise
 	url = https://github.com/tpope/vim-endwise
-[submodule "vim/.vim/bundle/html-autoclosetag"]
-	path = vim/.vim/bundle/html-autoclosetag
-	url = https://github.com/vim-scripts/HTML-AutoCloseTag
 [submodule "vim/.vim/bundle/autoalign"]
 	path = vim/.vim/bundle/autoalign
 	url = https://github.com/vim-scripts/AutoAlign
