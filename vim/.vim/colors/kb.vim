@@ -12,12 +12,6 @@ else
     let s:kb_monochrome = 0
 endif
 
-if exists("g:kb_fontface")
-    let s:kb_fontface = g:kb_fontface
-else
-    let s:kb_fontface = "plain"
-endif
-
 execute "command! -nargs=1 Colo let g:kb_style = \"<args>\" | colo kb"
 
 if s:kb_style == "black" || s:kb_style == "dark"
@@ -64,11 +58,7 @@ if &background == "dark"
         hi TabLine guibg=#6e6e6e guifg=fg gui=underline
         hi TabLineFill guibg=#6e6e6e guifg=fg gui=underline
         hi VertSplit ctermbg=7 ctermfg=0 guibg=#404040 guifg=fg gui=none
-        if s:kb_fontface == "mixed"
-            hi Folded guibg=#4e4e4e guifg=#c0c0c0 gui=bold
-        else
-            hi Folded guibg=#4e4e4e guifg=#c0c0c0 gui=none
-        endif            
+        hi Folded guibg=#4e4e4e guifg=#c0c0c0 gui=none
     else
         hi FoldColumn ctermbg=bg guibg=bg guifg=#8fa5d1 gui=none
         hi LineNr guifg=#8fa5d1 gui=none
@@ -83,11 +73,7 @@ if &background == "dark"
         hi TabLine guibg=#41609e guifg=fg gui=underline
         hi TabLineFill guibg=#41609e guifg=fg gui=underline
         hi VertSplit ctermbg=7 ctermfg=0 guibg=#25365a guifg=fg gui=none
-        if s:kb_fontface == "mixed"
-            hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=bold
-        else
-            hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=none
-        endif            
+        hi Folded guibg=#4e4e4e guifg=#bdcae3 gui=none
     endif
     hi Cursor guibg=#ffa500 guifg=bg gui=none
     hi DiffAdd guibg=#008b00 guifg=fg gui=none
@@ -131,13 +117,8 @@ if &background == "dark"
     hi Todo guibg=#e0e000 guifg=#000000 gui=none
     hi Underlined ctermbg=0 ctermfg=15 guibg=bg guifg=#00a0ff gui=underline    
 
-    if s:kb_fontface == "mixed"
-        hi Statement guibg=bg guifg=#7ec0ee gui=bold
-        hi Type guibg=bg guifg=#f09479 gui=bold
-    else
-        hi Statement guibg=bg guifg=#7ec0ee gui=none
-        hi Type guibg=bg guifg=#f09479 gui=none
-    endif
+    hi Statement guibg=bg guifg=#7ec0ee gui=none
+    hi Type guibg=bg guifg=#f09479 gui=none
 
     hi htmlBold ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=bold
     hi htmlBoldItalic ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=bold,italic
