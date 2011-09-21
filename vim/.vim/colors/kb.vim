@@ -106,9 +106,9 @@ if &background == "dark"
     hi WildMenu guibg=#e0e000 guifg=#000000 gui=bold
 
     hi Comment guibg=bg guifg=#d0d0a0 gui=none
-    hi Constant guibg=bg guifg=#87df71 gui=none
+    hi Constant guibg=bg guifg=#87df71 gui=none ctermfg=207
     hi Error guibg=bg guifg=#ee2c2c gui=none
-    hi Identifier guibg=bg guifg=#7ee0ce gui=none
+    hi Identifier guibg=bg guifg=#7ee0ce gui=none ctermfg=184
     hi Ignore guibg=bg guifg=bg gui=none
     hi lCursor guibg=#00e700 guifg=#000000 gui=none
     hi MatchParen guibg=#008b8b gui=none
@@ -118,7 +118,7 @@ if &background == "dark"
     hi Underlined ctermbg=0 ctermfg=15 guibg=bg guifg=#00a0ff gui=underline    
 
     hi Statement guibg=bg guifg=#7ec0ee gui=none
-    hi Type guibg=bg guifg=#f09479 gui=none
+    hi Type guibg=bg guifg=#f09479 gui=none ctermfg=75
 
     hi htmlBold ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=bold
     hi htmlBoldItalic ctermbg=0 ctermfg=15 guibg=bg guifg=fg gui=bold,italic
