@@ -110,10 +110,6 @@ map <leader>n :NERDTreeToggle<cr>
 "clojure
 let vimclojure#ParenRainbow=1
 
-"turn off auto close in languages where I need to type unmatched quotes or parens
-autocmd! FileType clojure AutoCloseOff
-autocmd! BufRead *.vim,.vimrc,.gvimrc AutoCloseOff
-
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
