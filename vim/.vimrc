@@ -86,6 +86,15 @@ function! RenameFile()
 endfunction
 map <leader>rn :call RenameFile()<cr>
 
+" Show syntax highlighting groups for word under cursor
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+map <leader>ss :call SynStack()<CR>
+
 "execute :GitGrep for word under cursor
 map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 
