@@ -49,6 +49,8 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+ "I only ever hit this by accident
+:map K <Nop>
 
 "put all temp files in the same directory
 "set backupdir=~/.vim-tmp
