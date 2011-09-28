@@ -114,10 +114,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
-"prevent nerdtree from overriding netrw. I only have nerdtree installed in case my pair really wants it
-let g:NERDTreeHijackNetrw = 0
-map <leader>n :NERDTreeToggle<cr>
-
 "clojure
 let vimclojure#ParenRainbow=1
 
