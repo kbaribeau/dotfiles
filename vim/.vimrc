@@ -6,6 +6,7 @@ filetype plugin indent on
 syntax on
 
 "colors
+
 set bg=dark
 "let g:solarized_visibility = 'low'
 set t_Co=256
@@ -116,6 +117,7 @@ map <leader>v :view %%
 
 "clojure
 let vimclojure#ParenRainbow=1
+iabbr cljpp [clojure.pprint :only [pprint]]
 
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -129,9 +131,10 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "parse *.prawn as ruby
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
+"ruby specific stuff
 iabbr rdebug require 'ruby-debug'; debugger
-iabbr cljpp [clojure.pprint :only [pprint]]
 
+let ruby_space_errors = 1
 if has("ruby_fold")
 	ruby_fold=
 endif
