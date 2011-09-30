@@ -31,9 +31,6 @@
 [submodule "vim/.vim/bundle/vim-indent-guides"]
 	path = vim/.vim/bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides
-[submodule "vim/.vim/bundle/vim-matchit"]
-	path = vim/.vim/bundle/vim-matchit
-	url = https://github.com/mhz/vim-matchit
 [submodule "vim/.vim/bundle/vim-git"]
 	path = vim/.vim/bundle/vim-git
 	url = https://github.com/tpope/vim-git
