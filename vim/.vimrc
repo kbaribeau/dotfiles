@@ -15,7 +15,7 @@ colo calmar256-dark
 "search
 set incsearch
 set nohlsearch
-nnoremap <return> :set hls!<return><return>
+nnoremap <cr> :set hls!<cr><cr>
 
 set ignorecase
 set smartcase
