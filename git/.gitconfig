@@ -19,6 +19,7 @@
   pom = push origin master
   pr = pull --rebase
   rp = remote prune
+  clown = clone
 [color]
 	ui = auto
 [branch]
