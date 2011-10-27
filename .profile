@@ -59,6 +59,7 @@ export environment="local"
 JAVA_OPTS="-Denvironment=local"
 
 alias 'be=bundle exec'
+alias 'bs=bundle exec spec'
 alias 'ls=ls -G'
 alias 'psg=ps ax | grep'
 alias 'x=exit'
