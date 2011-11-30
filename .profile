@@ -29,34 +29,23 @@ ORIG_FONT_COLOR='\[\033[0m\]'
 
 export PS1=$YELLOWORANGE$PS1$ORIG_FONT_COLOR
 
-##
-# Your previous /Users/kbaribeau/.profile file was backed up as /Users/kbaribeau/.profile.macports-saved_2009-10-13_at_21:59:12
-##
 
+#PATH stuff
+if [ -e ~/bin ]; then
+  export PATH=~/bin:$PATH
+fi
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
- 
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-#add git-svn to PATH
 export PATH=/opt/local/libexec/git-core:$PATH
-#add mysql
 export PATH=/usr/local/mysql/bin:$PATH
 
-#add groovy/grails to path
-export PATH=/opt/groovy-1.7.3/bin:/opt/grails-1.3.1/bin:$PATH
-
-#grails env
-export GRAILS_HOME=/opt/grails-1.3.1
+if [ -e /opt/groovy-1.7.3 ]; then
+  export PATH=/opt/groovy-1.7.3/bin:/opt/grails-1.3.1/bin:$PATH
+  export GRAILS_HOME=/opt/grails-1.3.1
+fi
 
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
-
-#gale stuff
-export JBOSS_HOME="/Users/kbaribeau/apps/jboss-portal-2.7.2"
-export CATALINA_HOME="/Users/kbaribeau/apps/apache-tomcat-5.5.28"
-export environment="local"
-JAVA_OPTS="-Denvironment=local"
 
 alias 'be=bundle exec'
 alias 'bs=bundle exec spec'
