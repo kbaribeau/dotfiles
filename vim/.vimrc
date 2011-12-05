@@ -40,7 +40,7 @@ set scrolloff=3
 set ruler
 set number
 set nolist
-set cursorline
+set nocursorline "turning this on makes things slow :(
 set autoread
 
 set winwidth=120
