@@ -11,6 +11,7 @@
 	praise = blame
 	st = status -s
   aa = add --all
+  ca = commit --amend
   co = checkout
   cp = cherry-pick
   dc = diff --cached
@@ -19,7 +20,9 @@
   pom = push origin master
   pr = pull --rebase
   rp = remote prune
+
   clown = clone
+  stache = stash
 [color]
 	ui = auto
 [branch]
