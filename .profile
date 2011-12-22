@@ -52,6 +52,8 @@ alias 'bs=bundle exec spec'
 alias 'ls=ls -G'
 alias 'psg=ps ax | grep'
 alias 'x=exit'
+alias 'vm=if jobs | grep vim > /dev/null; then fg vim; else vim; fi'
+alias 'rv=git show head > ~/patch.txt;git show head^ > ~/patch_parent.txt' #for reviewboard
 
 #http://github.com/rupa/z
 . ~/code/dotfiles/z.sh
