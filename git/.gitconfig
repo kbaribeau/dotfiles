@@ -7,7 +7,7 @@
 	email = kevin.baribeau@gmail.com
 [alias]
 	ci = commit
-	lg = log --date=relative --stat --graph --abbrev-commit
+	lg = log --date=relative --stat --graph
 	praise = blame
 	st = status -s
   aa = add --all
@@ -29,3 +29,5 @@
 	autosetuprebase = always
 [github]
 	user = kbaribeau
+[rerere]
+	enabled = 1
