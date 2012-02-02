@@ -59,6 +59,8 @@ nnoremap <c-l> <c-w>l
 "let's try running without backup for awhile, just to see if I regret it
 set nobackup
 set nowritebackup
+"if you ever turn backups back on, uncomment this next line
+"au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
 "extended % functionality
 runtime macros/matchit.vim
