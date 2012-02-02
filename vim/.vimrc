@@ -56,9 +56,9 @@ nnoremap <c-l> <c-w>l
  "I only ever hit this by accident
 :map K <Nop>
 
-"put all temp files in the same directory
-"set backupdir=~/.vim-tmp
-"set directory=~/.vim-tmp
+"let's try running without backup for awhile, just to see if I regret it
+set nobackup
+set nowritebackup
 
 "extended % functionality
 runtime macros/matchit.vim
