@@ -52,6 +52,7 @@ nnoremap <c-l> <c-w>l
 
 "autosave when I suspend vim(I do this a lot)
 :noremap <C-Z> :wa<CR><C-Z>
+:imap <C-Z> <Esc><C-Z>
 
  "I only ever hit this by accident
 :map K <Nop>
