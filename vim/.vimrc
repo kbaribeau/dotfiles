@@ -138,7 +138,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
 "ruby specific stuff
-iabbr rdebug require 'ruby-debug'; debugger
+iabbr rdebug require 'ruby-debug'; debugger; puts "debugger should stop here"
 
 let ruby_space_errors = 1
 if has("ruby_fold")
