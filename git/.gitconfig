@@ -19,6 +19,8 @@
   head = !git lg -1
   pom = push origin master
   pr = pull --rebase
+  rc = rebase --continue
+  ri = rebase --interactive
   rp = remote prune
 
   clown = clone
