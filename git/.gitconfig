@@ -25,6 +25,8 @@
 
   clown = clone
   stache = stash
+
+  fixup = commit --fixup
 [color]
 	ui = auto
 [branch]
@@ -33,3 +35,5 @@
 	user = kbaribeau
 [rerere]
 	enabled = 1
+[rebase]
+	autosquash = true
