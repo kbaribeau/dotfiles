@@ -1,15 +1,15 @@
 [core]
-	excludesfile = ~/.gitexcludes
-	editor = /usr/bin/vim
-	quotepath = false
+  excludesfile = ~/.gitexcludes
+  editor = /usr/bin/vim
+  quotepath = false
 [user]
-	name = kbaribeau
-	email = kevin.baribeau@gmail.com
+  name = kbaribeau
+  email = kevin.baribeau@gmail.com
 [alias]
-	ci = commit
-	lg = log --date=relative --stat --graph
-	praise = blame
-	st = status -s
+  ci = commit
+  lg = log --date=relative --stat --graph
+  praise = blame
+  st = status -s
   aa = add --all
   ca = commit --amend
   co = checkout
@@ -28,12 +28,12 @@
 
   fixup = commit --fixup
 [color]
-	ui = auto
+  ui = auto
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [github]
-	user = kbaribeau
+  user = kbaribeau
 [rerere]
-	enabled = 1
+  enabled = 1
 [rebase]
-	autosquash = true
+  autosquash = true
