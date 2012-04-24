@@ -10,7 +10,7 @@ syntax on
 set bg=dark
 "let g:solarized_visibility = 'low'
 set t_Co=256
-colo calmar256-dark
+colo herald
 
 "search
 set incsearch

@@ -4,20 +4,20 @@
 " Maintainer:: calmar <mac@calmar.ws>
 "
 " for a 256 color capable terminal like xterm-256color, ... or gvim as well
-" "{{{
+" 
 " it only works in such a terminal and when you have:
 " set t_Co=256
-" in your vimrc"}}}
+" in your vimrc
 
-" {{{ t_Co=256 is set - check 
+"  t_Co=256 is set - check 
 if &t_Co != 256 && ! has("gui_running")
     echomsg ""
     echomsg "write 'set t_Co=256' in your .vimrc or this file won't load"
     echomsg ""
     finish
 endif
-" }}}
-" {{{ reset colors and set colors_name and store cpo setting
+" 
+"  reset colors and set colors_name and store cpo setting
 set background=dark
 hi clear
 if exists("syntax_on")
@@ -28,9 +28,9 @@ let g:colors_name = "calmar256-dark"
 
 let s:save_cpo = &cpo
 set cpo&vim
-" }}}
+" 
 
-" FORMAT:"{{{
+" FORMAT:
 "
 " \ ["color-group", "term-style", "foreground-color", "background-color", "gui-style", "under-curl-color" ],
 "
@@ -49,7 +49,7 @@ set cpo&vim
 " for the Color numbers (0-255) for the foreground/background and under-curl-colors:
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
  
-"}}}
+
 "============================================================
 "             EDIT/ADD your style/colors below
 "------------------------------------------------------------
@@ -126,7 +126,7 @@ let s:colorvim7 = [
 "        * NO NEED * to edit below (unless bugfixing)
 "============================================================
 "
-" {{{ change empty fields to "NONE"
+"  change empty fields to "NONE"
 
 for s:col in s:colors256
     for i in  [1, 2, 3, 4, 5]
@@ -143,8 +143,8 @@ for s:col in s:colorvim7
         endif
     endfor
 endfor
-" }}}
-" {{{ check args helper function
+" 
+"  check args helper function
 function! s:checkargs(arg)
     if a:arg+0 == 0 && a:arg != "0"  "its a string
         return a:arg
@@ -152,8 +152,8 @@ function! s:checkargs(arg)
         return s:cmap[a:arg+0]       "get rgb color based on the number
     endif
 endfunction
-" }}}
-" {{{ guisetcolor helper function
+" 
+"  guisetcolor helper function
 "
 function! s:guisetcolor(colarg)
     " if gui-style is empty use (c)term-style also for gui
@@ -169,8 +169,8 @@ function! s:guisetcolor(colarg)
 
         exec "hi ".a:colarg[0]." gui=".guival." guifg=".fg." guibg=".bg." guisp=".sp
 endfunction
-" }}}
-" {{{ color setup for terminal
+" 
+"  color setup for terminal
 if ! has("gui_running")
     for s:col in s:colors256
         exec "hi ".s:col[0]." cterm=".s:col[1]." ctermfg=".s:col[2]." ctermbg=".s:col[3]
@@ -181,8 +181,8 @@ if ! has("gui_running")
         endfor
     endif
 else
-" }}}
-    " color-mapping array {{{
+" 
+    " color-mapping array 
     " number of vim colors and #html colors equivalent for gui
     let s:cmap =   [ 
                 \ "#000000", "#800000", "#008000", "#808000", 
@@ -231,8 +231,8 @@ else
                 \ "#444444", "#4e4e4e", "#585858", "#606060", "#666666", "#767676", 
                 \ "#808080", "#8a8a8a", "#949494", "#9e9e9e", "#a8a8a8", "#b2b2b2", 
                 \ "#bcbcbc", "#c6c6c6", "#d0d0d0", "#dadada", "#e4e4e4", "#eeeeee" ]
-    " }}}
-" {{{ color setup for gvim
+    " 
+"  color setup for gvim
     for s:col in s:colors256
         call s:guisetcolor(s:col)
     endfor
@@ -242,6 +242,6 @@ else
         endfor
     endif
 endif
-" }}}
+" 
 let &cpo = s:save_cpo   " restoring &cpo value
 " vim: set fdm=marker fileformat=unix:
