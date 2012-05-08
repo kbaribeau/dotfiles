@@ -1,39 +1,39 @@
 [core]
-  excludesfile = ~/.gitexcludes
-  editor = /usr/bin/vim
-  quotepath = false
+	excludesfile = ~/.gitexcludes
+	editor = /usr/bin/vim
+	quotepath = false
 [user]
-  name = Kevin Baribeau
-  email = kevin.baribeau@gmail.com
+	name = Kevin Baribeau
+	email = kevin.baribeau@gmail.com
 [alias]
-  ci = commit
-  lg = log --date=relative --stat --graph
-  praise = blame
-  st = status -s
-  aa = add --all
-  ca = commit --amend
-  co = checkout
-  cp = cherry-pick
-  dc = diff --cached
-  di = diff
-  head = !git lg -1
-  pom = push origin master
-  pr = pull --rebase
-  rc = rebase --continue
-  ri = rebase --interactive
-  rp = remote prune
+	ci = commit
+	lg = log --date=relative --stat --graph
+	praise = blame
+	st = status -s
+	aa = add --all
+	ca = commit --amend
+	co = checkout
+	cp = cherry-pick
+	dc = diff --cached
+	di = diff
+	head = !git lg -1
+	pom = push origin master
+	pr = pull --rebase
+	rc = rebase --continue
+	ri = rebase --interactive
+	rp = remote prune
 
-  clown = clone
-  stache = stash
+	clown = clone
+	stache = stash
 
-  fixup = commit --fixup
+	fixup = commit --fixup
 [color]
-  ui = auto
+	ui = auto
 [branch]
-  autosetuprebase = always
+	autosetuprebase = always
 [github]
-  user = kbaribeau
+	user = kbaribeau
 [rerere]
-  enabled = 1
+	enabled = 1
 [rebase]
-  autosquash = true
+	autosquash = true
