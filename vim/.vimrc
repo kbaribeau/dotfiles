@@ -138,6 +138,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "parse *.prawn as ruby
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 
+autocmd FileType js set foldmethod=manual
+
 "ruby specific stuff
 iabbr rdebug require 'ruby-debug'; debugger; puts "debugger should stop here"
 

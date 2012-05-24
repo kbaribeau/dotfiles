@@ -37,3 +37,8 @@
 	enabled = 1
 [rebase]
 	autosquash = true
+[git-pair]
+	authors = Zee Spencer <zee@zeespencer.com>
+	authors = Kevin Baribeau <kevin.baribeau@gmail.com>
+[push]
+	default = tracking
