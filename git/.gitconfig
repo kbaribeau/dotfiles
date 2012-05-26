@@ -40,5 +40,6 @@
 [git-pair]
 	authors = Zee Spencer <zee@zeespencer.com>
 	authors = Kevin Baribeau <kevin.baribeau@gmail.com>
+	authors = Elisabeth Hendrickson <esh@qualitytree.com>
 [push]
 	default = tracking
