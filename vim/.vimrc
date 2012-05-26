@@ -151,6 +151,13 @@ endif
 "auto reload vimrc when saving it
 autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC
 
+"jump to last cursor position unless it's invalid or in an event handler
+"(see :help line)"
+:au BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
