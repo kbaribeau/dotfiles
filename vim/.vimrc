@@ -42,6 +42,7 @@ set number
 set nolist
 set nocursorline "turning this on makes things slow :(
 set autoread
+set clipboard=unnamed
 
 set winwidth=120
 
