@@ -42,4 +42,4 @@
 	authors = Kevin Baribeau <kevin.baribeau@gmail.com>
 	authors = Elisabeth Hendrickson <esh@qualitytree.com>
 [push]
-	default = tracking
+	default = upstream
