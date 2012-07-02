@@ -43,3 +43,5 @@
 	authors = Elisabeth Hendrickson <esh@qualitytree.com>
 [push]
 	default = upstream
+[include]
+  path = ~/.gitconfig.local
