@@ -40,9 +40,9 @@ set scrolloff=3
 set ruler
 set number
 set nolist
-set nocursorline "turning this on makes things slow :(
+set cursorline "turning this on makes things slow, but I'll try not to care
 set autoread
-set clipboard=unnamed
+"set clipboard=unnamed "use system clipboard
 
 set winwidth=120
 
