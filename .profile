@@ -82,3 +82,6 @@ bind Space:magic-space
 if [ -e ~/.profile.local ] ; then
   source ~/.profile.local
 fi
+
+#node
+export PATH="node_modules/.bin:$PATH"
