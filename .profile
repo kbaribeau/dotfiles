@@ -48,7 +48,7 @@ export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
 
 alias 'be=bundle exec'
-alias 'bs=bundle exec spec'
+alias 'bs=bundle exec rspec'
 alias 'ls=ls -G'
 alias 'psg=ps ax | grep'
 alias 'x=exit'
