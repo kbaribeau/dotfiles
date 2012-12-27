@@ -55,9 +55,6 @@ alias 'x=exit'
 alias 'vm=if jobs | grep vim > /dev/null; then fg vim; else vim; fi'
 alias 'rv=git show head > ~/patch.txt;git show origin/master > ~/patch_parent.txt' #for reviewboard
 
-#http://github.com/rupa/z
-. ~/code/dotfiles/z.sh
-
 #java
 export MAVEN_OPTS=-Xmx1524m
 
