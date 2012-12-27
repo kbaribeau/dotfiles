@@ -54,6 +54,8 @@ alias 'psg=ps ax | grep'
 alias 'x=exit'
 alias 'vm=if jobs | grep vim > /dev/null; then fg vim; else vim; fi'
 alias 'rv=git show head > ~/patch.txt;git show origin/master > ~/patch_parent.txt' #for reviewboard
+alias 'gg=git grep'
+alias 'ggi=git grep -i'
 
 #java
 export MAVEN_OPTS=-Xmx1524m
@@ -82,3 +84,14 @@ fi
 
 #node
 export PATH="node_modules/.bin:$PATH"
+
+#ruby git grep helpers
+function ggd {
+  git grep -iE "def.*$1"
+}
+
+function ggc {
+  gg -iE "(class|module).*$1"
+}
+
+rb-files () { grep 'rb:' | cut -d : -f 1 | sort | uniq | xargs; }
