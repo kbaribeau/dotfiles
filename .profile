@@ -11,8 +11,8 @@ set +o vi -o emacs
 
 #prompt
 function parse_git_branch {
-	ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-		  echo "("${ref#refs/heads/}")"
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+      echo "("${ref#refs/heads/}")"
 }
 
 if [ -f ~/bin/hub ]; then
