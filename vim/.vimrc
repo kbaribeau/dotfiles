@@ -23,7 +23,6 @@ set magic
 
 "indent and tabs
 set autoindent
-set smartindent
 set softtabstop=0
 set shiftwidth=2
 set tabstop=2
