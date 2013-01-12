@@ -6,39 +6,34 @@ syntax on
 "colors
 
 set bg=dark
-"let g:solarized_visibility = 'low'
 set t_Co=256
 colo herald
 
 "search
-set incsearch
 set nohlsearch
+
+"try to use C-L instead of this and see how it goes (it's configured in
+"vim-sensible")
 nnoremap <cr> :set hls!<cr><cr>
 
 set ignorecase
-set smartcase
 set magic
 
 "indent and tabs
-set autoindent
 set softtabstop=0
 set shiftwidth=2
 set tabstop=2
-set shiftround
 
 set expandtab
 
 "other
 set nowrap
 set showmode
-set backspace=2
 set nf="alpha, hex"
-set scrolloff=3
-set ruler
+set scrolloff=3 "overridden from vim-sensible
 set number
 set nolist
 set cursorline "turning this on makes things slow, but I'll try not to care
-set autoread
 "set clipboard=unnamed "use system clipboard
 
 set winwidth=120
@@ -61,11 +56,6 @@ set nowritebackup
 "if you ever turn backups back on, uncomment this next line
 "au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
-"extended % functionality
-runtime macros/matchit.vim
-
-"show statusline
-set laststatus=2
 "this looks like the default statusline, but with git info embedded, thanks to vim-fugitive
 set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
