@@ -1,8 +1,6 @@
-let g:CommandTMaxHeight=25
 
-call pathogen#runtime_append_all_bundles()
+source ~/.vim/plugins.vim
 
-filetype plugin indent on
 syntax on
 
 "colors
@@ -107,22 +105,11 @@ map <leader>ss :call SynStack()<CR>
 "execute :GitGrep for word under cursor
 map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 
-"command-T mappings
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
-map <leader>gt :CommandTFlush<cr>\|:CommandT spec/<cr>
-
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
 "clojure
-let vimclojure#ParenRainbow=1
 iabbr cljpp [clojure.pprint :only [pprint]]
 
 "code completion
