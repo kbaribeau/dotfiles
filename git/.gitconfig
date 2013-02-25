@@ -6,7 +6,7 @@
 	name = Kevin Baribeau
 	email = kevin.baribeau@gmail.com
 [alias]
-	ci = commit
+	ci = commit -v
 	lg = log --date=relative --stat --graph
 	praise = blame
 	st = status -s
@@ -47,3 +47,5 @@
   path = ~/.gitconfig.local
 [credential]
 	helper = osxkeychain
+[status]
+	relativePaths = false
