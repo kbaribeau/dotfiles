@@ -56,6 +56,7 @@ alias 'vm=if jobs | grep vim > /dev/null; then fg vim; else vim; fi'
 alias 'rv=git show head > ~/patch.txt;git show origin/master > ~/patch_parent.txt' #for reviewboard
 alias 'gg=git grep'
 alias 'ggi=git grep -i'
+alias 'gv=grep -v'
 
 #java
 export MAVEN_OPTS=-Xmx1524m
