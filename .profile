@@ -101,4 +101,4 @@ function ggc {
   gg -iE "(class|module).*$1"
 }
 
-rb-files () { grep 'rb:' | cut -d : -f 1 | sort | uniq | xargs; }
+gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
