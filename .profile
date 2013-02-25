@@ -89,6 +89,9 @@ export PATH="node_modules/.bin:$PATH"
 #python
 export PATH=/Users/kbaribeau/.python_env/bin:$PATH
 
+#lineman
+alias linkman='rm -rf node_modules/lineman && ln -s ~/code/lineman node_modules/lineman'
+
 #ruby git grep helpers
 function ggd {
   git grep -iE "def.*$1"
