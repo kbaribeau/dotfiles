@@ -12,9 +12,14 @@ colo herald
 "search
 set nohlsearch
 
-"try to use C-L instead of this and see how it goes (it's configured in
-"vim-sensible")
-nnoremap <cr> :set hls!<cr><cr>
+"vim-sensible overrides
+  "use C-L for moving between windows instead of C-W C-L
+  "overrides clearing hlsearch in vim-sensible
+  nnoremap <cr> :set hls!<cr><cr>
+
+"display '.' and '..' in netrw
+let g:netrw_list_hide = ',\~$,^tags$'
+
 
 set ignorecase
 set magic
