@@ -86,6 +86,9 @@ fi
 #node
 export PATH="node_modules/.bin:$PATH"
 
+#python
+export PATH=/Users/kbaribeau/.python_env/bin:$PATH
+
 #ruby git grep helpers
 function ggd {
   git grep -iE "def.*$1"
