@@ -13,6 +13,7 @@ Bundle 'gmarik/vundle'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-characterize'
+  Bundle 'tpope/vim-markdown'
   Bundle 'tjennings/git-grep-vim'
   Bundle 'nathanaelkane/vim-indent-guides'
   Bundle 'kchmck/vim-coffee-script'
@@ -47,5 +48,5 @@ Bundle 'gmarik/vundle'
   map <leader>gt :CommandTFlush<cr>\|:CommandT spec/<cr>
 
 
-"autocmd BufWritePost plugins.vim source ~/.vim/plugins.vim
+autocmd BufWritePost plugins.vim source ~/.vim/plugins.vim
 filetype plugin indent on
