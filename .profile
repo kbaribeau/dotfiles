@@ -15,11 +15,11 @@ function parse_git_branch {
       echo "("${ref#refs/heads/}")"
 }
 
+export PS1="\w \$(parse_git_branch)\$ "
+
 if [ -f ~/bin/hub ]; then
   alias git=~/bin/hub
 fi
-
-export PS1="\w \$(parse_git_branch)\$ "
 
 #ignore certain commands in history
 HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:w:* --help"
@@ -38,10 +38,8 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 
-if [ -e /opt/groovy-1.7.3 ]; then
-  export PATH=/opt/groovy-1.7.3/bin:/opt/grails-1.3.1/bin:$PATH
-  export GRAILS_HOME=/opt/grails-1.3.1
-fi
+export PATH=/Users/kbaribeau/grails/bin:$PATH
+export GRAILS_HOME=/Users/kbaribeau/grails
 
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
