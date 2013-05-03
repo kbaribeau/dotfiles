@@ -132,6 +132,15 @@ endif
 "auto reload vimrc when saving it
 autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC
 
+"turn off syntax for large xml files
+function! SynOffForLargeFiles()
+  if line('$') > 1000
+    syn off
+    set nocursorline
+  endif
+endfunction
+autocmd FileType xml :call SynOffForLargeFiles()
+
 "jump to last cursor position unless it's invalid or in an event handler
 "(see :help line)"
 :au BufReadPost *
