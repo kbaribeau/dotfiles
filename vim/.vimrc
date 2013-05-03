@@ -134,7 +134,9 @@ endif
 "auto reload vimrc when saving it
 autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC
 
-"turn off syntax for large xml files
+"vim can be slow when dealing with large xml files
+"turn some stuff off so it's not so bad
+"maybe I should turn this on for large files in general? meh.
 function! SynOffForLargeFiles()
   if line('$') > 1000
     syn off
