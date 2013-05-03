@@ -61,7 +61,8 @@ set nowritebackup
 "if you ever turn backups back on, uncomment this next line
 "au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
-set undodir^=~/.vim/undo
+set undodir=~/.vim/undo
+set backupdir=~/.vim/backups
 
 "this looks like the default statusline, but with git info embedded, thanks to vim-fugitive
 set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
