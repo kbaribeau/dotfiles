@@ -1,4 +1,5 @@
 
+set nocompatible
 filetype off " must be disabled while we configure vundle
 
 set rtp+=~/.vim/bundle/vundle/
@@ -20,8 +21,8 @@ Bundle 'gmarik/vundle'
   Bundle 'pangloss/vim-javascript'
 
   Bundle 'tpope/vim-sensible'
-  "not sure why this is set in vim sensible, I like it, but maybe
-  "there's a good reason I don't know about? leave it on anyway
+  ""not sure why this is set in vim sensible, I like it, but maybe
+  ""there's a good reason I don't know about? leave it on anyway
   set complete+=i
 
 "vimscripts
