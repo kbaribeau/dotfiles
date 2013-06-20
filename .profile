@@ -38,8 +38,8 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 
-export PATH=/Users/kbaribeau/grails/bin:$PATH
-export GRAILS_HOME=/Users/kbaribeau/grails
+export PATH=/Users/kbaribeau/grails-2.2.2/bin:$PATH
+export GRAILS_HOME=/Users/kbaribeau/grails-2.2.2
 
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
