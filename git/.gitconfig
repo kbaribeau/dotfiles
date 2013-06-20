@@ -1,7 +1,8 @@
 [core]
-	excludesfile = ~/.gitexcludes
+	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
 	quotepath = false
+	autocrlf = input
 [user]
 	name = Kevin Baribeau
 	email = kevin.baribeau@gmail.com
@@ -11,7 +12,7 @@
 	praise = blame
 	st = status -s
 	aa = add --all
-	ca = commit --amend
+	ca = commit --amend -v
 	co = checkout
 	cp = cherry-pick
 	dc = diff --cached
