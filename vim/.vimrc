@@ -132,6 +132,9 @@ if has("ruby_fold")
 	ruby_fold=
 endif
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 "auto reload vimrc when saving it
 autocmd! BufWritePost .vimrc,vimrc source $MYVIMRC
 
