@@ -19,6 +19,7 @@ Bundle 'gmarik/vundle'
   Bundle 'nathanaelkane/vim-indent-guides'
   Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
+  Bundle 'mattn/emmet-vim/'
 
   Bundle 'tpope/vim-sensible'
   ""not sure why this is set in vim sensible, I like it, but maybe
@@ -47,7 +48,6 @@ Bundle 'gmarik/vundle'
   map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
   map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
   map <leader>gt :CommandTFlush<cr>\|:CommandT spec/<cr>
-
 
 autocmd BufWritePost plugins.vim source ~/.vim/plugins.vim
 filetype plugin indent on
