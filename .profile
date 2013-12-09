@@ -38,9 +38,6 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 
-export PATH=/Users/kbaribeau/grails-2.2.2/bin:$PATH
-export GRAILS_HOME=/Users/kbaribeau/grails-2.2.2
-
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
@@ -55,6 +52,10 @@ alias 'rv=git show head > ~/patch.txt;git show origin/master > ~/patch_parent.tx
 alias 'gg=git grep'
 alias 'ggi=git grep -i'
 alias 'gv=grep -v'
+alias 'gi=grep -i'
+
+#turn off mysql autocompletion. it makes startup too much slower
+alias 'mysql=mysql -A'
 
 #java
 export MAVEN_OPTS=-Xmx1524m
@@ -74,9 +75,6 @@ function st {
 #autoexpand ! commands when I press spacebar
 bind Space:magic-space
 
-#rvm
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
 if [ -e ~/.profile.local ] ; then
   source ~/.profile.local
 fi
@@ -86,6 +84,10 @@ export PATH="node_modules/.bin:$PATH"
 
 #python
 export PATH=/Users/kbaribeau/.python_env/bin:$PATH
+
+#rvm (do this last: rvm really wants to be the first thing in the path)
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
 
 #lineman
 alias linkman='rm -rf node_modules/lineman && ln -s ~/code/lineman node_modules/lineman'
@@ -100,3 +102,13 @@ function ggc {
 }
 
 gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
+
+shopt -s histappend
+shopt -s extglob
+
+#run this before using gvm
+gvm-init () { [[ -s "/Users/kbaribeau/.gvm/bin/gvm-init.sh" ]] && source "/Users/kbaribeau/.gvm/bin/gvm-init.sh"; }
+
+alias mvn_phudson='CATALINA_HOME=/Users/kbaribeau/tomcat mvn clean install -Phudson && mvn install -PjasmineDesktop && mvn install -PjasmineResponsive'
+
+alias ppedn='java -jar /Users/kbaribeau/bin/ppedn-0.1.0-SNAPSHOT-standalone.jar'
