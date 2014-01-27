@@ -85,10 +85,6 @@ export PATH=/Users/kbaribeau/.python_env/bin:$PATH
 #rvm (do this last: rvm really wants to be the first thing in the path)
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-
-#lineman
-alias linkman='rm -rf node_modules/lineman && ln -s ~/code/lineman node_modules/lineman'
-
 #ruby git grep helpers
 function ggd {
   git grep -iE "def.*$1"
