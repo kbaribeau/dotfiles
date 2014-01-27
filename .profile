@@ -37,6 +37,7 @@ fi
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
+export PATH=$PATH:/Users/kbaribeau/bin/datomic/datomic-pro-0.9.4470/bin
 
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
