@@ -37,7 +37,7 @@ set showmode
 set nf="alpha, hex"
 set scrolloff=3 "overridden from vim-sensible
 set number
-set nolist
+set list
 set cursorline "turning this on makes things slow, but I'll try not to care
 "set clipboard=unnamed "use system clipboard
 
