@@ -15,11 +15,16 @@ Bundle 'gmarik/vundle'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-markdown'
+  Bundle 'tpope/vim-fireplace'
+  Bundle 'tpope/vim-classpath'
   Bundle 'tjennings/git-grep-vim'
   Bundle 'nathanaelkane/vim-indent-guides'
   Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
-  Bundle 'mattn/emmet-vim/'
+  Bundle 'groenewege/vim-less'
+
+  Bundle 'guns/vim-clojure-static'
+  "let vimclojure#ParenRainbow=1
 
   Bundle 'tpope/vim-sensible'
   ""not sure why this is set in vim sensible, I like it, but maybe
@@ -32,10 +37,6 @@ Bundle 'gmarik/vundle'
   Bundle 'vim-indent-object'
   Bundle 'mru.vim'
   Bundle 'SuperTab'
-
-  Bundle 'VimClojure'
-  let vimclojure#ParenRainbow=1
-
 
 "non github
   Bundle 'git://git.wincent.com/command-t.git'
