@@ -62,6 +62,7 @@ set nowritebackup
 "au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
 set undodir=~/.vim/undo
+set undofile
 set backupdir=~/.vim/backups
 set dir=~/.vim/swap
 
