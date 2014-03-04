@@ -105,7 +105,5 @@ gvm-init () { [[ -s "/Users/kbaribeau/.gvm/bin/gvm-init.sh" ]] && source "/Users
 
 alias mvn_phudson='CATALINA_HOME=/Users/kbaribeau/tomcat mvn clean install -Phudson && mvn install -PjasmineDesktop && mvn install -PjasmineResponsive'
 
-alias ppedn='java -jar /Users/kbaribeau/bin/ppedn-0.1.0-SNAPSHOT-standalone.jar'
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

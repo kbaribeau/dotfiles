@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar /Users/kbaribeau/bin/ppedn-0.1.0-SNAPSHOT-standalone.jar
