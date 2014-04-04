@@ -23,13 +23,16 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 	rp = remote prune
-; from @bostonaholic
-	iteration = log --pretty='tformat:%h (%ar) -- %d %s' --since='2 weeks ago' --author='baribeau'
 
+	fixup = commit --fixup
+
+;jokes :)
 	clown = clone
 	stache = stash
 
-	fixup = commit --fixup
+; from @bostonaholic
+	iteration = log --pretty='tformat:%h (%ar) -- %d %s' --since='2 weeks ago' --author='baribeau'
+
 [color]
 	ui = auto
 [branch]
