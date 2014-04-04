@@ -23,6 +23,7 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 	rp = remote prune
+	iteration = log --pretty='tformat:%h (%ar) -- %d %s' --since='2 weeks ago' --author='baribeau'
 
 	clown = clone
 	stache = stash
