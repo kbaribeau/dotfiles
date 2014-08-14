@@ -37,7 +37,10 @@ fi
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
-export PATH=$PATH:/Users/kbaribeau/bin/datomic/datomic-pro-0.9.4470/bin
+export PATH=$PATH:/Users/kbaribeau/bin/datomic/current/bin
+export PATH=$PATH:/Users/kbaribeau/bin/aws
+
+export PATH="/usr/local/heroku/bin:$PATH" ### Added by the Heroku Toolbelt
 
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
@@ -105,5 +108,7 @@ gvm-init () { [[ -s "/Users/kbaribeau/.gvm/bin/gvm-init.sh" ]] && source "/Users
 
 alias mvn_phudson='CATALINA_HOME=/Users/kbaribeau/tomcat mvn clean install -Phudson && mvn install -PjasmineDesktop && mvn install -PjasmineResponsive'
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# source all homebrew-installed completion scripts
+[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+
+export NOMAD_ENV="dev"
