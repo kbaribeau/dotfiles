@@ -48,6 +48,8 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+nnoremap  <F1> <Esc>
+
 "autosave when I suspend vim(I do this a lot)
 :noremap <C-Z> :wa<CR><C-Z>
 :inoremap <C-Z> <Esc>:wa<CR><C-Z>
