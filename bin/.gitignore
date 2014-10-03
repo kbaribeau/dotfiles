@@ -1,3 +1,4 @@
 datomic
 lein
 infinispan*
+ec2*
