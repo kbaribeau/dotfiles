@@ -111,6 +111,8 @@ alias mvn_phudson='CATALINA_HOME=/Users/kbaribeau/tomcat mvn clean install -Phud
 # source all homebrew-installed completion scripts
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 
+. ~/.git-completion.bash
+
 export NOMAD_ENV="dev"
 
 alias tmux="TERM=screen-256color tmux"
