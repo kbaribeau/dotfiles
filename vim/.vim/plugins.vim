@@ -24,7 +24,9 @@ Bundle 'gmarik/vundle'
   Bundle 'groenewege/vim-less'
 
   Bundle 'guns/vim-clojure-static'
-  "let vimclojure#ParenRainbow=1
+  Bundle 'kien/rainbow_parentheses.vim'
+
+  Bundle 'flazz/vim-colorschemes'
 
   Bundle 'tpope/vim-sensible'
   ""not sure why this is set in vim sensible, I like it, but maybe

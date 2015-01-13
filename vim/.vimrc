@@ -7,7 +7,7 @@ syntax on
 
 set bg=dark
 set t_Co=256
-colo herald
+colo blacklight
 
 "search
 set nohlsearch
@@ -163,3 +163,9 @@ autocmd FileType xml :call SynOffForLargeFiles()
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
+
+"rainbow parens
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
