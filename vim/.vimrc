@@ -7,15 +7,10 @@ syntax on
 
 set bg=dark
 set t_Co=256
-colo blacklight
+colo grb256
 
 "search
-set nohlsearch
-
-"vim-sensible overrides
-  "use C-L for moving between windows instead of C-W C-L
-  "overrides clearing hlsearch in vim-sensible
-  nnoremap <cr> :set hls!<cr><cr>
+set hlsearch
 
 "display '.' and '..' in netrw
 let g:netrw_list_hide = ',\~$,^tags$'
