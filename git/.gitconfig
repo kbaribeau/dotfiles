@@ -8,7 +8,7 @@
 	email = kevin.baribeau@gmail.com
 [alias]
 	ci = commit -v
-	lg = log --date=relative --stat --graph --follow
+	lg = log --date=relative --stat --graph
 	praise = blame
 	st = status -s
 	aa = add --all
