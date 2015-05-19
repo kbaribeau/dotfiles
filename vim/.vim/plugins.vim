@@ -10,7 +10,6 @@ Bundle 'gmarik/vundle'
 
 "github
   Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-cucumber'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-characterize'
