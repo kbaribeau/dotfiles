@@ -64,13 +64,6 @@ alias 'mysql=mysql -A'
 #java
 export MAVEN_OPTS=-Xmx1524m
 
-#ruby (ree)
-export RUBY_GC_MALLOC_LIMIT=59000000
-export RUBY_HEAP_FREE_MIN=100000
-#export RUBY_HEAP_MIN_SLOTS=600000 #obsolete in new rubies (ruby 2?)
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_HEAP_SLOTS_INCREMENT=250000
-
 #function to set window/tab title
 function st {
  export PROMPT_COMMAND="echo -ne \"\033]0;$1\007\""
