@@ -1,4 +1,3 @@
-
 source ~/.vim/plugins.vim
 
 syntax on

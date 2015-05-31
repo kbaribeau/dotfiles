@@ -1,4 +1,3 @@
-
 set nocompatible
 filetype off " must be disabled while we configure vundle
 
