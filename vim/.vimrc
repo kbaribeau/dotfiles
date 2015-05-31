@@ -78,6 +78,8 @@ set t_vb=
 let mapleader = "\\"
 map <leader><leader> <C-^>
 
+"virtual whitespace
+set virtualedit+=block
 "stolen from @garybernhardt
 function! RenameFile()
     let old_name = expand('%')
