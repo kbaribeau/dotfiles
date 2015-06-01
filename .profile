@@ -112,3 +112,4 @@ alias tmux="TERM=screen-256color tmux"
 
 #enable forward bash history search with C-s: http://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r
 stty -ixon
+complete -C aws_completer aws
