@@ -2,3 +2,5 @@
 *.iml
 *.ipr
 .scratch.clj*
+
+tags
