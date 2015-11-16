@@ -113,3 +113,28 @@ alias tmux="TERM=screen-256color tmux"
 #enable forward bash history search with C-s: http://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r
 stty -ixon
 complete -C aws_completer aws
+
+#play midifiles with a soundfont + fluidsynth (brew install fluidsynth)
+#stolen from: http://apple.stackexchange.com/questions/107297/how-can-i-play-a-midi-file-from-terminal
+function playmidi {
+
+    SOUNDFONT="/Users/kbaribeau/bin/generaluser.v.1.44.sf2"
+
+    if [ -e "$SOUNDFONT" ]
+    then
+
+      for i in "$@"
+      do
+        if [ -e "$i" ]
+        then
+          (fluidsynth -i "$SOUNDFONT" "$i"  2>&1) >/dev/null
+        else
+          echo "[playmidi]: cannot find file at $i"
+          return 1
+        fi
+      done
+    else
+      echo "[playmidi]: SOUNDFONT file not found at $SOUNDFONT"
+      return 1
+    fi
+}
