@@ -109,6 +109,7 @@ map <leader>v :view %%
 
 "clojure
 iabbr cljpp [clojure.pprint :only [pprint]]
+autocmd FileType cljc setf clojure
 
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -121,6 +122,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 "parse *.prawn as ruby
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
+"parse *.boot as clj
+autocmd BufRead,BufNewFile *.boot setfiletype clj
 
 autocmd FileType js set foldmethod=manual
 
