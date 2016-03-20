@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+CLONE_URL="git@github.com:$@.git"
+CLONE_PATH="$HOME/code/$@"
+
+if [ -d "$CLONE_PATH" ]; then
+  cd "$CLONE_PATH"
+  git pull --rebase
+else
+  mkdir -p "$CLONE_PATH"
+  cd "$CLONE_PATH/.."
+  git clone "$CLONE_URL"
+  cd "$CLONE_PATH"
+fi

@@ -42,6 +42,8 @@ export PATH=$PATH:/Users/kbaribeau/bin/aws
 
 export PATH="/usr/local/heroku/bin:$PATH" ### Added by the Heroku Toolbelt
 
+export CDPATH=".:$HOME:$HOME/code"
+
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
