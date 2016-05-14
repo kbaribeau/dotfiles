@@ -22,7 +22,7 @@ if [ -f ~/bin/hub ]; then
 fi
 
 #ignore certain commands in history
-HISTIGNORE="clear:bg:fg:cd:cd -:exit:date:w:* --help"
+HISTIGNORE="clear:bg:fg:jobs:cd:cd -:exit:date:w:* --help"
 
 YELLOWORANGE='\[\033[0;33m\]'
 ORIG_FONT_COLOR='\[\033[0m\]'
@@ -140,3 +140,5 @@ function playmidi {
       return 1
     fi
 }
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
