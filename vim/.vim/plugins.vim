@@ -39,7 +39,6 @@ Bundle 'gmarik/vundle'
   Bundle 'SuperTab'
 
 "non github
-  Bundle 'git://git.wincent.com/command-t.git'
   let g:CommandTMaxHeight=25
   map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
   map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
