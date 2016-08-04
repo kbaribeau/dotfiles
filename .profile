@@ -24,6 +24,9 @@ fi
 #ignore certain commands in history
 HISTIGNORE="clear:bg:fg:jobs:cd:cd -:exit:date:w:* --help"
 
+#more bash history
+HISTSIZE=5000
+
 YELLOWORANGE='\[\033[0;33m\]'
 ORIG_FONT_COLOR='\[\033[0m\]'
 
