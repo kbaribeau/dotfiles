@@ -16,6 +16,7 @@ let g:netrw_list_hide = ',\~$,^tags$'
 
 
 set ignorecase
+set smartcase
 set magic
 
 "indent and tabs
