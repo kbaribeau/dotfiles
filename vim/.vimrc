@@ -70,6 +70,8 @@ set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 map <C-Right> :tabn<cr>
 map <C-Left> :tabp<cr>
 
+nmap Q <Nop>
+
 "turn off the bell
 set vb
 set t_vb=
