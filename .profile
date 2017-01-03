@@ -62,6 +62,7 @@ alias 'gg=git grep'
 alias 'ggi=git grep -i'
 alias 'gv=grep -v'
 alias 'gi=grep -i'
+alias fixcam='sudo killall VDCAssistant' # fixes broken webcam on OSX
 
 #turn off mysql autocompletion. it makes startup too much slower
 alias 'mysql=mysql -A'
