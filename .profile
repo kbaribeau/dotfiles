@@ -85,9 +85,6 @@ export PATH="node_modules/.bin:$PATH"
 #python
 export PATH=/Users/kbaribeau/.python_env/bin:$PATH
 
-#rvm (do this last: rvm really wants to be the first thing in the path)
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
 #ruby git grep helpers
 function ggd {
   git grep -iE "def.*$1"
@@ -145,4 +142,8 @@ function playmidi {
     fi
 }
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# Disable spring because of issues with fsevent_watch (https://github.com/rails/rails/issues/26158)
+export DISABLE_SPRING=1
