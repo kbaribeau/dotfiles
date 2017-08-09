@@ -49,6 +49,7 @@
 	authors = Elisabeth Hendrickson <esh@qualitytree.com>
 [push]
 	default = current
+	followTags = true
 [include]
 	path = ~/.gitconfig.local
 [credential]
@@ -59,3 +60,7 @@
 	insteadOf = https://github.com/
 [diff]
 	renames = true
+[pull]
+	rebase = preserve
+[merge]
+	defaultToUpstream = true
