@@ -13,6 +13,7 @@
 	st = status -s
 	aa = add --all
 	ca = commit --amend -v
+	can = commit --amend -v --no-edit
 	co = checkout
 	cp = cherry-pick
 	dc = diff --cached
