@@ -189,6 +189,7 @@ endfunction
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>c :call SelectaCommand("find /Users/kbaribeau/code/hendrick/engine-builder/app/assets/javascripts/components -type f", "", ":e")<cr>
 
 "rainbow parens -- these seem buggy? Jan 4 2017
 "au VimEnter * RainbowParenthesesToggle
