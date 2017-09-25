@@ -33,7 +33,11 @@ set nf="alpha, hex"
 set scrolloff=3 "overridden from vim-sensible
 set number
 set list
-set cursorline "turning this on makes things slow, but I'll try not to care
+
+"turning this on makes things slow sometimes, so provide a mapping to toggle it
+set cursorline
+nnoremap <Leader>l :set cursorline!<CR>
+
 "set clipboard=unnamed "use system clipboard
 
 set winwidth=120
