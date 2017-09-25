@@ -6,7 +6,7 @@ syntax on
 
 set bg=dark
 set t_Co=256
-colo herald
+colorscheme badwolf
 
 "search
 set hlsearch
