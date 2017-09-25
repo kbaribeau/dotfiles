@@ -57,8 +57,9 @@
 	helper = osxkeychain
 [status]
 	relativePaths = false
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+;; This screws up cargo/rust
+;; [url "ssh://git@github.com/"]
+;; 	insteadOf = https://github.com/
 [diff]
 	renames = true
 [pull]

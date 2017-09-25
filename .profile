@@ -147,3 +147,5 @@ eval "$(rbenv init -)"
 
 # Disable spring because of issues with fsevent_watch (https://github.com/rails/rails/issues/26158)
 export DISABLE_SPRING=1
+
+export PATH="$HOME/.cargo/bin:$PATH"
