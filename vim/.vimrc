@@ -117,6 +117,7 @@ map <leader>v :view %%
 "clojure
 iabbr cljpp [clojure.pprint :only [pprint]]
 autocmd FileType cljc setf clojure
+autocmd FileType edn setf clojure
 
 "code completion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
