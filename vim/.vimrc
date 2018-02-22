@@ -10,6 +10,7 @@ colorscheme badwolf
 
 "search
 set hlsearch
+nnoremap <leader>h :set hlsearch!<cr>
 
 "display '.' and '..' in netrw
 let g:netrw_list_hide = ',\~$,^tags$'
