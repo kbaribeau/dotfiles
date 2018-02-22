@@ -44,6 +44,7 @@ export PATH=$PATH:/Users/kbaribeau/bin/datomic/current/bin
 export PATH=$PATH:/Users/kbaribeau/bin/aws
 
 export PATH="/usr/local/heroku/bin:$PATH" ### Added by the Heroku Toolbelt
+export PATH="/usr/local/opt/qt/bin:$PATH" # qt is installed with brew via a keg
 
 export CDPATH=".:$HOME:$HOME/code"
 
