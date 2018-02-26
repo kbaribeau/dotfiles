@@ -150,3 +150,5 @@ eval "$(rbenv init -)"
 export DISABLE_SPRING=1
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+ulimit -n 4096
