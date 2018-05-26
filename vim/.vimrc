@@ -83,7 +83,6 @@ set t_vb=
 
 "leader key for plugins
 let mapleader = "\\"
-map <leader><leader> <C-^>
 
 "virtual whitespace
 set virtualedit+=block
@@ -133,6 +132,8 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd BufRead,BufNewFile *.prawn setfiletype ruby
 "parse *.boot as clj
 autocmd BufRead,BufNewFile *.boot setfiletype clj
+"parse *.vue as js
+autocmd BufRead,BufNewFile *.vue setfiletype javascript
 
 autocmd FileType js set foldmethod=manual
 
@@ -198,3 +199,8 @@ nnoremap <leader>c :call SelectaCommand("find /Users/kbaribeau/code/hendrick/eng
 "au Syntax * RainbowParenthesesLoadRound
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
+
+" \\ - save everything
+map <leader><leader> :wa<cr>
+imap <leader><leader> <esc>:wa<cr>
+
