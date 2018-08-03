@@ -44,6 +44,7 @@
 	enabled = 1
 [rebase]
 	autosquash = true
+	autoStash = true
 [git-pair]
 	authors = Zee Spencer <zee@zeespencer.com>
 	authors = Kevin Baribeau <kevin.baribeau@gmail.com>
