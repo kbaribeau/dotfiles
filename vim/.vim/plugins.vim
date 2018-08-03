@@ -20,6 +20,8 @@ Bundle 'gmarik/vundle'
   Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
   Bundle 'groenewege/vim-less'
+  Bundle 'posva/vim-vue'
+
 
   Bundle 'guns/vim-clojure-static'
   Bundle 'kien/rainbow_parentheses.vim'
