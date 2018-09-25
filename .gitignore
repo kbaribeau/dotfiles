@@ -2,6 +2,8 @@
 *.iml
 *.ipr
 .scratch.clj*
+.rubocop.yml
+.rspec-local
 
 tags
 
