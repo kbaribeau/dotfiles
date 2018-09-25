@@ -179,7 +179,7 @@ endif
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
   try
-    let selection = system(a:choice_command . " | grep -v target | grep -v cljsbuild | selecta " . a:selecta_args)
+    let selection = system(a:choice_command . " | selecta" . a:selecta_args)
   catch /Vim:Interrupt/
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
@@ -192,8 +192,7 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
-nnoremap <leader>c :call SelectaCommand("find /Users/kbaribeau/code/hendrick/engine-builder/app/assets/javascripts/components -type f", "", ":e")<cr>
+nnoremap <leader>f :call SelectaCommand("git ls-files", "", ":e")<cr>
 
 "rainbow parens -- these seem buggy? Jan 4 2017
 "au VimEnter * RainbowParenthesesToggle
