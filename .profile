@@ -108,7 +108,7 @@ alias mvn_phudson='CATALINA_HOME=/Users/kbaribeau/tomcat mvn clean install -Phud
 # source all homebrew-installed completion scripts
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 
-. ~/.git-completion.bash
+[[ -f ~/.git-completion.bash ]] && source ~/.git-completion.bash
 
 export NOMAD_ENV="dev"
 
@@ -143,8 +143,11 @@ function playmidi {
     fi
 }
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ -d $HOME/.rbenv ]
+then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 # Disable spring because of issues with fsevent_watch (https://github.com/rails/rails/issues/26158)
 export DISABLE_SPRING=1
