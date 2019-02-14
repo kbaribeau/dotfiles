@@ -20,6 +20,7 @@
 	di = diff
 	head = !git lg -1
 	pom = push origin master
+	pushf = push --force-with-lease
 	pr = pull --rebase
 	rc = rebase --continue
 	ri = rebase --interactive
