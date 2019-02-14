@@ -192,7 +192,7 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>f :call SelectaCommand("git ls-files", "", ":e")<cr>
+nnoremap <leader>f :call SelectaCommand("git ls-files -co --exclude-standard", "", ":e")<cr>
 
 "rainbow parens -- these seem buggy? Jan 4 2017
 "au VimEnter * RainbowParenthesesToggle
