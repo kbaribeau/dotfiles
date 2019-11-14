@@ -12,6 +12,9 @@ colorscheme badwolf
 set hlsearch
 nnoremap <leader>h :set hlsearch!<cr>
 
+"reload
+nnoremap <leader>r :windo :e %<cr>
+
 "display '.' and '..' in netrw
 let g:netrw_list_hide = ',\~$,^tags$'
 
@@ -34,6 +37,7 @@ set nf="alpha, hex"
 set scrolloff=3 "overridden from vim-sensible
 set number
 set list
+set autoread
 
 "turning this on makes things slow sometimes, so provide a mapping to toggle it
 set cursorline
@@ -69,7 +73,9 @@ set backupdir=~/.vim/backups
 set dir=~/.vim/swap
 
 "this looks like the default statusline, but with git info embedded, thanks to vim-fugitive
-set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+"march 2018: I'm using pretty long branch names now and tend to have lots of
+"windows open. branch names are obscuring my path, which I want to see more
+"set statusline=%<%f%{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "maps
 map <C-Right> :tabn<cr>
@@ -78,7 +84,7 @@ map <C-Left> :tabp<cr>
 nmap Q <Nop>
 
 "turn off the bell
-set vb
+set visualbell
 set t_vb=
 
 "leader key for plugins
@@ -111,6 +117,7 @@ map <leader>ss :call SynStack()<CR>
 map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+cnoremap %f <C-R>=expand('%:f').''<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
