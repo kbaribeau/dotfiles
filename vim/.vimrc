@@ -117,7 +117,7 @@ endfunc
 map <leader>ss :call SynStack()<CR>
 
 "execute :GitGrep for word under cursor
-map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
+" map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 cnoremap %f <C-R>=expand('%:f').''<cr>
