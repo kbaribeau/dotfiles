@@ -21,6 +21,7 @@ Bundle 'gmarik/vundle'
   Bundle 'pangloss/vim-javascript'
   Bundle 'groenewege/vim-less'
   Bundle 'posva/vim-vue'
+  Bundle 'vim-syntastic/syntastic'
 
 
   Bundle 'guns/vim-clojure-static'
