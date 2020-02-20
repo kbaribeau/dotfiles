@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec /Users/kbaribeau/code/lilypond-2.18.2/out/bin/lilypond --relocate "$@"
