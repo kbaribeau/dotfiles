@@ -12,10 +12,11 @@ set +o vi -o emacs
 #prompt
 function parse_git_branch {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+      # this probably broke in the zsh switchover
       echo "("${ref#refs/heads/}")"
 }
 
-export PROMPT="%n \$(parse_git_branch)\$ "
+export PROMPT="%~ $(parse_git_branch)\$ "
 
 if [ -f ~/bin/hub ]; then
   alias git=~/bin/hub
