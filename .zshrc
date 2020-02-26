@@ -12,11 +12,14 @@ set +o vi -o emacs
 #prompt
 function parse_git_branch {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-      # this probably broke in the zsh switchover
-      echo "("${ref#refs/heads/}")"
+  echo "("${ref#refs/heads/}")"
 }
 
-export PROMPT="%~ $(parse_git_branch)\$ "
+setopt prompt_subst
+PROMPT='%~ $(parse_git_branch)\$ '
+# PROMPT='
+# %{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
+# $(virtualenv_info)$(prompt_char) '
 
 if [ -f ~/bin/hub ]; then
   alias git=~/bin/hub
@@ -30,6 +33,8 @@ HISTSIZE=5000
 
 export PROMPT="%F{yellow}$PROMPT%f"
 
+# tab completion
+autoload -Uz compinit && compinit
 
 #PATH stuff
 if [ -e ~/bin ]; then
