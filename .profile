@@ -64,6 +64,7 @@ alias 'ggi=git grep -i'
 alias 'gv=grep -v'
 alias 'gi=grep -i'
 alias fixcam='sudo killall VDCAssistant' # fixes broken webcam on OSX
+alias psr='ps ax | grep ruby | gv fsevent' # find ruby process, but ignore spring's file watcher
 
 #turn off mysql autocompletion. it makes startup too much slower
 alias 'mysql=mysql -A'
