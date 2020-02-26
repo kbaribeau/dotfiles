@@ -16,7 +16,7 @@ nnoremap <leader>h :set hlsearch!<cr>
 nnoremap <leader>r :windo :e %<cr>
 
 "copy current file name to clipboard
-nmap <leader>p :let @" = expand("%")<cr>:!echo '<c-r>"' \| pbcopy<cr>
+nmap <leader>p :let @" = expand("%")<cr>:!echo '<c-r>"' \| pbcopy<cr><cr>
 
 "display '.' and '..' in netrw
 let g:netrw_list_hide = ',\~$,^tags$'
