@@ -18,6 +18,11 @@ nnoremap <leader>r :windo :e %<cr>
 "copy current file name to clipboard
 nmap <leader>p :let @" = expand("%")<cr>:!echo '<c-r>"' \| pbcopy<cr><cr>
 
+"make a session in tmp/foo
+nmap <leader>s :mksession! /tmp/tmpvimsession<cr><cr>
+nmap <leader>ls :source /tmp/tmpvimsession<cr><cr>
+
+
 "display '.' and '..' in netrw
 let g:netrw_list_hide = ',\~$,^tags$'
 
@@ -114,7 +119,9 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-map <leader>ss :call SynStack()<CR>
+" I barely use this and it kinda conflicts with <leader>s.
+" Leave it disabled so I dont have to wait for vim to resolve the mapping.
+" map <leader>ss :call SynStack()<CR>
 
 "execute :GitGrep for word under cursor
 " map <leader>gg :GitGrep <C-R>=expand("<cword>")<cr><cr><C-w>p<C-o><C-w>p
