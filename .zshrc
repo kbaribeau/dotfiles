@@ -16,6 +16,7 @@ function parse_git_branch {
 }
 
 setopt prompt_subst
+setopt INTERACTIVE_COMMENTS
 PROMPT='%~ $(parse_git_branch)\$ '
 # PROMPT='
 # %{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
