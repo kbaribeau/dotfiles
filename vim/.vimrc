@@ -15,13 +15,15 @@ nnoremap <leader>h :set hlsearch!<cr>
 "reload
 nnoremap <leader>r :windo :e %<cr>
 
-"copy current file name to clipboard
-nmap <leader>p :let @" = expand("%")<cr>:!echo '<c-r>"' \| pbcopy<cr><cr>
-
 "make a session in tmp/foo
 nmap <leader>s :mksession! /tmp/tmpvimsession<cr><cr>
 nmap <leader>ls :source /tmp/tmpvimsession<cr><cr>
 
+"copy current file name to clipboard
+"nmap <leader>p :let @" = expand("%")<cr>:!echo '<c-r>"' \| pbcopy<cr><cr>
+
+"toggle paste mode
+nmap <leader>p :set paste!<cr>
 
 "display '.' and '..' in netrw
 let g:netrw_list_hide = ',\~$,^tags$'
