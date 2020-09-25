@@ -156,3 +156,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 ulimit -n 4096
 export MBC_WORK_ROOT=/Users/kbaribeau/code/MerchantsBonding
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
