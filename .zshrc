@@ -56,6 +56,9 @@ export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
 
+# Hendrick AWS
+export AWS_PROFILE=AdministratorAccess-082053811088
+
 alias 'be=bundle exec'
 alias 'bs=bundle exec rspec'
 alias 'ls=ls -G'
