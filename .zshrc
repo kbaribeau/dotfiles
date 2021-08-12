@@ -104,6 +104,10 @@ function ggc {
 
 gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
 
+function psls {
+  ls -1 ~/Personalysis\ -\ All\ Employees | grep -i "$1" | head -n 1 | xargs open
+}
+
 # given a local path, give me a link to it on github. requires hub
 function gh {
   echo `hub browse -u`/blob/`git rev-parse --abbrev-ref HEAD`/$1
