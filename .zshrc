@@ -57,7 +57,7 @@ export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
 
 # Hendrick AWS
-export AWS_PROFILE=AdministratorAccess-082053811088
+export AWS_PROFILE=hendrick-legacy-aws
 
 alias 'be=bundle exec'
 alias 'bs=bundle exec rspec'
@@ -104,9 +104,6 @@ function ggc {
 
 gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
 
-function psls {
-  ls -1 ~/Personalysis\ -\ All\ Employees | grep -i "$1" | head -n 1 | xargs open
-}
 
 # given a local path, give me a link to it on github. requires hub
 function gh {
@@ -189,3 +186,9 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+psls () {
+  PERSONALYSIS_PATH="/Users/kbaribeau/Personalysis - All Employees"
+  file_name=`ls -1 $PERSONALYSIS_PATH | grep -i "$1" | head -n 1`
+  open "$PERSONALYSIS_PATH/$file_name"
+}
