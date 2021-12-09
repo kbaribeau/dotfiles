@@ -9,26 +9,22 @@
 [alias]
 	ci = commit -v
 	lg = log --date=relative --stat --graph
-	praise = blame
 	st = status -s
 	aa = add --all
 	ca = commit --amend -v
-	can = commit --amend -v --no-edit
 	co = checkout
 	cp = cherry-pick
 	dc = diff --cached
 	di = diff
-	head = !git lg -1
-	pom = push origin master
 	pushf = push --force-with-lease
 	pr = pull --rebase
 	rc = rebase --continue
 	ri = rebase --interactive
-	rp = remote prune
 
 	fixup = commit --fixup
 
 ;jokes :)
+	praise = blame
 	clown = clone
 	stache = stash
 
