@@ -17,14 +17,14 @@ function parse_git_branch {
 
 setopt prompt_subst
 setopt INTERACTIVE_COMMENTS
+
+# Get [] to work without escaping
+unsetopt nomatch
+
 PROMPT='%~ $(parse_git_branch)\$ '
 # PROMPT='
 # %{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
 # $(virtualenv_info)$(prompt_char) '
-
-if [ -f ~/bin/hub ]; then
-  alias git=~/bin/hub
-fi
 
 #ignore certain commands in history
 HISTIGNORE="clear:bg:fg:jobs:cd:cd -:exit:date:w:* --help"
@@ -104,11 +104,6 @@ function ggc {
 
 gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
 
-
-# given a local path, give me a link to it on github. requires hub
-function gh {
-  echo `hub browse -u`/blob/`git rev-parse --abbrev-ref HEAD`/$1
-}
 
 #run this before using gvm
 gvm-init () { [[ -s "/Users/kbaribeau/.gvm/bin/gvm-init.sh" ]] && source "/Users/kbaribeau/.gvm/bin/gvm-init.sh"; }
