@@ -72,6 +72,11 @@ alias 'gv=grep -v'
 alias 'gi=grep -i'
 alias fixcam='sudo killall VDCAssistant' # fixes broken webcam on OSX
 
+function hrc {
+  # colorizing output in rails c can cause tmux(?) to slow down a lot. Have had problems with JSON output in rails c causing me to restart my tmux window
+  heroku run 'rails c -- --nocolorize --noautocomplete' -a $1
+}
+
 #turn off mysql autocompletion. it makes startup too much slower
 alias 'mysql=mysql -A'
 
