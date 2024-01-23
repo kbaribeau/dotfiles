@@ -33,6 +33,7 @@ HISTIGNORE="clear:bg:fg:jobs:cd:cd -:exit:date:w:* --help"
 HISTSIZE=5000
 
 export PROMPT="%F{yellow}$PROMPT%f"
+export RPROMPT='%t'
 
 # tab completion
 autoload -Uz compinit && compinit
@@ -57,7 +58,7 @@ export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
 
 # Hendrick AWS
-export AWS_PROFILE=hendrick-legacy-aws
+# export AWS_PROFILE=hendrick-legacy-aws
 
 alias 'be=bundle exec'
 alias 'bs=bundle exec rspec'
@@ -104,7 +105,7 @@ function ggd {
 }
 
 function ggc {
-  gg -iE "(class|module).*$1"
+  gg -E "(class|module).*$1"
 }
 
 gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
@@ -192,3 +193,7 @@ psls () {
   file_name=`ls -1 $PERSONALYSIS_PATH | grep -i "$1" | head -n 1`
   open "$PERSONALYSIS_PATH/$file_name"
 }
+
+# This is slow?
+# export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# export DOCKER_DEFAULT_PLATFORM=linux/arm64 # doesn't work?
