@@ -60,7 +60,5 @@
 ;; 	insteadOf = https://github.com/
 [diff]
 	renames = true
-[pull]
-	rebase = preserve
 [merge]
 	defaultToUpstream = true

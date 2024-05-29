@@ -2,3 +2,6 @@ datomic
 lein
 infinispan*
 ec2*
+catacomb
+encrypted.txt
+ops
