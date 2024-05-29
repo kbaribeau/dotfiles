@@ -159,7 +159,9 @@ autocmd FileType js set foldmethod=manual
 "ruby specific stuff
 iabbr rdebug require 'ruby-debug'; debugger; puts "debugger should stop here"
 iabbr rpry require 'pry'; binding.pry; puts "debugger should stop here"
-iabbr byebug require 'byebug'; byebug; puts 'debugger should stop here'
+" iabbr byebug require 'byebug'; byebug; puts 'debugger should stop here'
+iabbr byebug require 'debug'; byebug; puts 'debugger should stop here'
+iabbr debug require "debug"; binding.break; puts "debugger should stop here"
 
 let ruby_space_errors = 1
 if has("ruby_fold")
