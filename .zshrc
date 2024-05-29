@@ -15,11 +15,16 @@ function parse_git_branch {
   echo "("${ref#refs/heads/}")"
 }
 
+# Options: https://zsh.sourceforge.io/Doc/Release/Options.html#Description-of-Options
+
 setopt prompt_subst
 setopt INTERACTIVE_COMMENTS
 
 # Get [] to work without escaping
 unsetopt nomatch
+
+# Can cause tab completion to be slow
+unsetopt pathdirs
 
 PROMPT='%~ $(parse_git_branch)\$ '
 # PROMPT='
@@ -193,6 +198,8 @@ psls () {
   file_name=`ls -1 $PERSONALYSIS_PATH | grep -i "$1" | head -n 1`
   open "$PERSONALYSIS_PATH/$file_name"
 }
+
+export PUMA_DEBUG=1
 
 # This is slow?
 # export DOCKER_DEFAULT_PLATFORM=linux/amd64
