@@ -119,8 +119,6 @@ gg-files () { grep -E '.[a-zA-Z]{2,4}:' | cut -d : -f 1 | sort | uniq | xargs; }
 #run this before using gvm
 gvm-init () { [[ -s "/Users/kbaribeau/.gvm/bin/gvm-init.sh" ]] && source "/Users/kbaribeau/.gvm/bin/gvm-init.sh"; }
 
-alias mvn_phudson='CATALINA_HOME=/Users/kbaribeau/tomcat mvn clean install -Phudson && mvn install -PjasmineDesktop && mvn install -PjasmineResponsive'
-
 export NOMAD_ENV="dev"
 
 alias tmux="TERM=screen-256color tmux"
@@ -165,11 +163,9 @@ export DISABLE_SPRING=1
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ulimit -n 4096
-export MBC_WORK_ROOT=/Users/kbaribeau/code/MerchantsBonding
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Change node versions with nvm based on .nvmrc files
 autoload -U add-zsh-hook
