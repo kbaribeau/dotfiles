@@ -72,7 +72,9 @@ alias 'psg=ps ax | grep'
 alias 'x=exit'
 alias 'vm=if jobs | grep vim > /dev/null; then fg vim; else vim; fi'
 alias 'rv=git show head > ~/patch.txt;git show origin/master > ~/patch_parent.txt' #for reviewboard
-alias 'gg=git grep'
+function gg {
+  git grep $* ':!.yarn/*' ':!app/assets/*'
+}
 alias 'ggi=git grep -i'
 alias 'gv=grep -v'
 alias 'gi=grep -i'
@@ -168,26 +170,26 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Change node versions with nvm based on .nvmrc files
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# autoload -U add-zsh-hook
+# load-nvmrc() {
+#   local node_version="$(nvm version)"
+#   local nvmrc_path="$(nvm_find_nvmrc)"
+# 
+#   if [ -n "$nvmrc_path" ]; then
+#     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+# 
+#     if [ "$nvmrc_node_version" = "N/A" ]; then
+#       nvm install
+#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
+#       nvm use
+#     fi
+#   elif [ "$node_version" != "$(nvm version default)" ]; then
+#     echo "Reverting to nvm default version"
+#     nvm use default
+#   fi
+# }
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
 
 psls () {
   PERSONALYSIS_PATH="/Users/kbaribeau/Personalysis - All Employees"
@@ -200,3 +202,7 @@ export PUMA_DEBUG=1
 # This is slow?
 # export DOCKER_DEFAULT_PLATFORM=linux/amd64
 # export DOCKER_DEFAULT_PLATFORM=linux/arm64 # doesn't work?
+
+rubofix () {
+  bundle exec rubocop --force-exclusion --display-cop-names --display-style-guide -a $(git diff --merge-base --diff-filter AMR --cached --name-only master | command egrep '\.rb$')
+}
