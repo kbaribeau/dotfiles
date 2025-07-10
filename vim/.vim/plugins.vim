@@ -18,7 +18,7 @@ Bundle 'gmarik/vundle'
   Bundle 'tpope/vim-classpath'
   Bundle 'nathanaelkane/vim-indent-guides'
   Bundle 'kchmck/vim-coffee-script'
-  Bundle 'pangloss/vim-javascript'
+  " Bundle 'pangloss/vim-javascript'
   Bundle 'groenewege/vim-less'
   Bundle 'vim-syntastic/syntastic'
 

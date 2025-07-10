@@ -1,4 +1,19 @@
 ## [Help Maintain Vundle](https://github.com/VundleVim/Vundle.vim/issues/383)
+<<<<<<< Updated upstream
+
+## Table of Contents
+
+- [About](#about)
+- [Quick Start](#quick-start)
+- [Docs](#docs)
+- [Changelog](#changelog)
+- [People Using Vundle](#people-using-vundle)
+- [Contributors](#contributors)
+- [Inspiration & Ideas](#inspiration--ideas)
+- [Also](#also)
+- [TODO](#todo)
+=======
+>>>>>>> Stashed changes
 
 ## About
 
@@ -38,11 +53,17 @@
 
 2. Set up [Vundle]:
 
+<<<<<<< Updated upstream
+   ```bash
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   ```
+=======
    `$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+>>>>>>> Stashed changes
 
 3. Configure Plugins:
 
-   Put this at the top of your `.vimrc` to use Vundle. Remove plugins you don't need, they are for illustration purposes.
+   Put this at the top of your `.vimrc` to use Vundle. You may have to create a `.vimrc` file if it doesn't already exist at `~/.vimrc`. Remove plugins you don't need, they are for illustration purposes.
 
    ```vim
    set nocompatible              " be iMproved, required
@@ -62,7 +83,7 @@
    " plugin on GitHub repo
    Plugin 'tpope/vim-fugitive'
    " plugin from http://vim-scripts.org/vim/scripts.html
-   Plugin 'L9'
+   " Plugin 'L9'
    " Git plugin not hosted on GitHub
    Plugin 'git://git.wincent.com/command-t.git'
    " git repos on your local machine (i.e. when working on your own plugin)
@@ -72,7 +93,11 @@
    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
    " Install L9 and avoid a Naming conflict if you've already installed a
    " different version somewhere else.
+<<<<<<< Updated upstream
+   " Plugin 'ascenator/L9', {'name': 'newL9'}
+=======
    Plugin 'ascenator/L9', {'name': 'newL9'}
+>>>>>>> Stashed changes
 
    " All of your Plugins must be added before the following line
    call vundle#end()            " required
@@ -95,6 +120,8 @@
    Launch `vim` and run `:PluginInstall`
 
    To install from command line: `vim +PluginInstall +qall`
+
+5. (optional) For those using the fish shell: add `set shell=/bin/bash` to your `.vimrc`
 
 ## Docs
 
@@ -125,20 +152,20 @@ see [Vundle contributors](https://github.com/VundleVim/Vundle.vim/graphs/contrib
 * Vundle was developed and tested with [Vim] 7.3 on OS X, Linux and Windows
 * Vundle tries to be as [KISS](http://en.wikipedia.org/wiki/KISS_principle) as possible
 
-## TODO:
+## TODO
 [Vundle] is a work in progress, so any ideas and patches are appreciated.
 
-* ✓ activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
-* ✓ use preview window for search results
-* ✓ Vim documentation
-* ✓ put Vundle in `bundles/` too (will fix Vundle help)
-* ✓ tests
-* ✓ improve error handling
-* allow specifying revision/version?
-* handle dependencies
-* show description in search results
-* search by description as well
-* make it rock!
+* [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
+* [x] use preview window for search results
+* [x] Vim documentation
+* [x] put Vundle in `bundles/` too (will fix Vundle help)
+* [x] tests
+* [x] improve error handling
+* [ ] allow specifying revision/version?
+* [ ] handle dependencies
+* [ ] show description in search results
+* [ ] search by description as well
+* [ ] make it rock!
 
 [Vundle]:http://github.com/VundleVim/Vundle.vim
 [Windows setup]:https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows
