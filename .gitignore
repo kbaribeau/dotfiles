@@ -9,3 +9,16 @@ tags
 
 .ruby-gemset
 .aider*
+
+thoughts/
+
+# Beads and Dolt files
+.beads/
+.dolt/
+*.db
+
+.claude/
+.runtime/
+config.json
+
+witness/

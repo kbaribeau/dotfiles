@@ -52,6 +52,8 @@ export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 export PATH=$PATH:/Users/kbaribeau/bin/datomic/current/bin
 export PATH=$PATH:/Users/kbaribeau/bin/aws
+export PATH=$PATH:/Users/kbaribeau/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="/usr/local/heroku/bin:$PATH" ### Added by the Heroku Toolbelt
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH" # qt is installed with brew via a keg. This is for capybara-webkit
@@ -123,8 +125,6 @@ gvm-init () { [[ -s "/Users/kbaribeau/.gvm/bin/gvm-init.sh" ]] && source "/Users
 
 export NOMAD_ENV="dev"
 
-alias tmux="TERM=screen-256color tmux"
-
 #enable forward bash history search with C-s: http://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r
 stty -ixon
 
@@ -171,23 +171,23 @@ export NVM_DIR="$HOME/.nvm"
 
 # Change node versions with nvm based on .nvmrc files
 # autoload -U add-zsh-hook
-# load-nvmrc() {
-#   local node_version="$(nvm version)"
-#   local nvmrc_path="$(nvm_find_nvmrc)"
-# 
-#   if [ -n "$nvmrc_path" ]; then
-#     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-# 
-#     if [ "$nvmrc_node_version" = "N/A" ]; then
-#       nvm install
-#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
-#       nvm use
-#     fi
-#   elif [ "$node_version" != "$(nvm version default)" ]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
 # add-zsh-hook chpwd load-nvmrc
 # load-nvmrc
 
@@ -204,5 +204,15 @@ export PUMA_DEBUG=1
 # export DOCKER_DEFAULT_PLATFORM=linux/arm64 # doesn't work?
 
 rubofix () {
-  bundle exec rubocop --force-exclusion --display-cop-names --display-style-guide -a $(git diff --merge-base --diff-filter AMR --cached --name-only master | command egrep '\.rb$')
+  bundle exec rubocop --force-exclusion --display-cop-names --display-style-guide -a $(git diff --merge-base --diff-filter AMR --cached --name-only origin/master | command egrep '\.rb$')
 }
+
+rubysyn () {
+  git diff --merge-base --diff-filter AMR --cached --name-only origin/master | command egrep '\.rb$' | xargs -L 1 ruby -c
+}
+
+# --- Gas Town Integration (managed by gt) ---
+[[ -f "/Users/kbaribeau/.config/gastown/shell-hook.sh" ]] && source "/Users/kbaribeau/.config/gastown/shell-hook.sh"
+# --- End Gas Town ---
+
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
