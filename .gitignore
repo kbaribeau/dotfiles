@@ -22,3 +22,20 @@ thoughts/
 config.json
 
 witness/
+
+# -----------------------------------------------------------------------------
+# Gas Town / sling meta layout at repo roots (e.g. HQ, fleet wrapper, API wrapper)
+# Mirrors prior mudflap_fleet_web/.gitignore so sibling clones need not repeat it.
+# -----------------------------------------------------------------------------
+plugins/
+.repo.git/
+.land-worktree/
+.archive/
+crew/
+daemon/
+mayor/
+polecats/
+refinery/
+settings/
+state.json
+AGENTS.md
