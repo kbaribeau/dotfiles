@@ -10,3 +10,18 @@ tags
 .ruby-gemset
 .aider*
 
+
+# Gas Town (added by gt)
+.runtime/
+.claude/
+.logs/
+__pycache__/
+state.json
+CLAUDE.md
+CLAUDE.local.md
+
+# Gas Town polecat scaffolding (written per-clone by gt, never committed)
+.cursor/hooks.json
+.cursor/commands/done.md
+.cursor/commands/handoff.md
+.cursor/commands/review.md
