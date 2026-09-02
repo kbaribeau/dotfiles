@@ -246,3 +246,10 @@ gcd() {
 
   builtin cd "$rigdir"
 }
+
+# added by Snowflake SnowflakeCLI installer v1.0
+export PATH=/Applications/SnowflakeCLI.app/Contents/MacOS/:$PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
