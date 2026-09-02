@@ -216,3 +216,33 @@ rubysyn () {
 # --- End Gas Town ---
 
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+
+gcd() {
+  emulate -L zsh
+  typeset -A gcd_map=(
+    kgc  ~/code/kb-gc-city
+    mapi ~/code/mudflapapp/mudflap-api
+    sf   ~/code/mudflapapp/scratch-files
+    cp   ~/code/mudflapapp/claude-plugins
+    mfw  ~/code/mudflapapp/mudflap-fleet-web
+    mu   ~/code/mudflapapp/mudflap
+    ma   ~/code/mudflapapp/mudflap-android
+    fm   ~/code/kunchenguid/firstmate
+  )
+
+  local prefix="${1:l}"
+  if [[ -z "$prefix" ]]; then
+    builtin cd "${gcd_map[kgc]}"
+    return
+  fi
+
+  local rigdir="${gcd_map[$prefix]}"
+  if [[ -z "$rigdir" ]]; then
+    print -u2 "gcd: unknown prefix: $1"
+    print -u2 "known: ${(k)gcd_map}"
+    return 1
+  fi
+
+  builtin cd "$rigdir"
+}
