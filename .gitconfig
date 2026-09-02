@@ -5,7 +5,7 @@
 	autocrlf = input
 [user]
 	name = Kevin Baribeau
-	email = kevin.baribeau@gmail.com
+	email = kevin@mudflapinc.com
 [alias]
 	ci = commit -v
 	lg = log --date=relative --stat --graph
@@ -62,3 +62,5 @@
 	renames = true
 [merge]
 	defaultToUpstream = true
+[init]
+	defaultBranch = main
