@@ -1,0 +1,3 @@
+# Per-project post_create hooks stay on this machine. Never commit them.
+*
+!.gitignore

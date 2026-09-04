@@ -1,0 +1,5 @@
+# User-level Treehouse config (hooks run only from here; repo treehouse.toml
+# hooks are ignored). post_create dispatches to hooks/<origin-repo>-post-create.sh.
+
+[hooks]
+post_create = ["$HOME/.config/treehouse/post-create.sh"]
