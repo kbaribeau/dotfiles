@@ -221,14 +221,8 @@ eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 gcd() {
   emulate -L zsh
   typeset -A gcd_map=(
-    kgc  ~/code/kb-gc-city
-    mapi ~/code/mudflapapp/mudflap-api
-    sf   ~/code/mudflapapp/scratch-files
-    cp   ~/code/mudflapapp/claude-plugins
-    mfw  ~/code/mudflapapp/mudflap-fleet-web
-    mu   ~/code/mudflapapp/mudflap
-    ma   ~/code/mudflapapp/mudflap-android
-    fm   ~/code/kunchenguid/firstmate
+    dt   ~/projects/dotfiles
+    fm   ~/projects/firstmate
   )
 
   local prefix="${1:l}"
