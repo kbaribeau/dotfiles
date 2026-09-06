@@ -1,6 +1,6 @@
 ---
 name: consulting-principles
-description: Use when giving consulting advice, exploring client-engagement tradeoffs, or applying consulting-oriented problem-solving principles; not for routine coding tasks without that context.
+description: Use for consulting advice, client-engagement tradeoffs, and problem-solving principles from Secrets of Consulting by Gerry Weinberg, or when a request references the book title or author; not for routine coding tasks without that context.
 ---
 
 Only when that context is relevant, read [the Weinberg consulting notes](../../notes/weinberg-secrets-of-consulting.md), resolving the path from this skill directory. Otherwise, do not load the reference.
