@@ -1,2 +1,0 @@
-#requires autotest-standalone and autotest-growl gems
-require 'autotest/growl'

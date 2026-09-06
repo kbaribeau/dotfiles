@@ -1,6 +1,6 @@
 # Agent notes
 
-Root-level files (`.zshrc`, `.gitconfig`, `bin/`, …) are meant to land in `$HOME` by symlink. There is no install or stow script. `vim/` is the exception: `vim/.vimrc` and `vim/.vim` map to `~/.vimrc` and `~/.vim`.
+Root-level files (`.zshrc`, `.gitconfig`, …) are meant to land in `$HOME` by symlink. There is no install or stow script. `vim/` is the exception: `vim/.vimrc` and `vim/.vim` map to `~/.vimrc` and `~/.vim`.
 
 `.config/treehouse/` is the first XDG path in this repo. Do not symlink all of `~/.config`; only the `treehouse` directory (a merge does not update the live copy). After pull: `ln -snf /path/to/this/repo/.config/treehouse ~/.config/treehouse` (move an existing real directory aside first).
 
