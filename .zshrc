@@ -44,14 +44,9 @@ export RPROMPT='%t'
 autoload -Uz compinit && compinit
 
 #PATH stuff
-if [ -e ~/bin ]; then
-  export PATH=~/bin:$PATH
-fi
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/libexec/git-core:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
-export PATH=$PATH:/Users/kbaribeau/bin/datomic/current/bin
-export PATH=$PATH:/Users/kbaribeau/bin/aws
 export PATH=$PATH:/Users/kbaribeau/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -127,31 +122,6 @@ export NOMAD_ENV="dev"
 
 #enable forward bash history search with C-s: http://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r
 stty -ixon
-
-#play midifiles with a soundfont + fluidsynth (brew install fluidsynth)
-#stolen from: http://apple.stackexchange.com/questions/107297/how-can-i-play-a-midi-file-from-terminal
-function playmidi {
-
-    SOUNDFONT="/Users/kbaribeau/bin/generaluser.v.1.44.sf2"
-
-    if [ -e "$SOUNDFONT" ]
-    then
-
-      for i in "$@"
-      do
-        if [ -e "$i" ]
-        then
-          (fluidsynth -i "$SOUNDFONT" "$i"  2>&1) >/dev/null
-        else
-          echo "[playmidi]: cannot find file at $i"
-          return 1
-        fi
-      done
-    else
-      echo "[playmidi]: SOUNDFONT file not found at $SOUNDFONT"
-      return 1
-    fi
-}
 
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
