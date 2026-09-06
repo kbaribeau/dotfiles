@@ -153,6 +153,8 @@ function playmidi {
     fi
 }
 
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
 if [ -d $HOME/.rbenv ]
 then
   export PATH="$HOME/.rbenv/bin:$PATH"
@@ -214,8 +216,6 @@ rubysyn () {
 # --- Gas Town Integration (managed by gt) ---
 [[ -f "/Users/kbaribeau/.config/gastown/shell-hook.sh" ]] && source "/Users/kbaribeau/.config/gastown/shell-hook.sh"
 # --- End Gas Town ---
-
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
 
 gcd() {
