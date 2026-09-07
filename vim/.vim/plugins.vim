@@ -35,7 +35,6 @@ Bundle 'gmarik/vundle'
   Bundle 'Align'
   Bundle 'vim-indent-object'
   Bundle 'mru.vim'
-  Bundle 'SuperTab'
 
 "non github
   let g:CommandTMaxHeight=25
