@@ -14,6 +14,11 @@
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive",
       "version": "'3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0'"
+    },
+    "vim-surround": {
+      "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
+      "src": "https://github.com/tpope/vim-surround",
+      "version": "'3d188ed2113431cf8dac77be61b842acb64433d9'"
     }
   }
 }
