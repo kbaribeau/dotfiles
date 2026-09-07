@@ -15,6 +15,11 @@
       "src": "https://github.com/tpope/vim-fugitive",
       "version": "'3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0'"
     },
+    "vim-indent-object": {
+      "rev": "8ab36d5ec2a3a60468437a95e142ce994df598c6",
+      "src": "https://github.com/michaeljsmith/vim-indent-object",
+      "version": "'8ab36d5ec2a3a60468437a95e142ce994df598c6'"
+    },
     "vim-surround": {
       "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
       "src": "https://github.com/tpope/vim-surround",

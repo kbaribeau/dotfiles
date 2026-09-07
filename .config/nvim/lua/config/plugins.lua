@@ -16,6 +16,10 @@ vim.pack.add({
     src = "https://github.com/tpope/vim-surround",
     version = "3d188ed2113431cf8dac77be61b842acb64433d9",
   },
+  {
+    src = "https://github.com/michaeljsmith/vim-indent-object",
+    version = "8ab36d5ec2a3a60468437a95e142ce994df598c6",
+  },
 })
 
 -- Declining installation should leave the rest of Neovim usable.
