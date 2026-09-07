@@ -37,7 +37,7 @@ Organizational life cycle stages -- https://www.adizes.com/organizational-lifecy
     99% of infant companies don't survive infancy
       can't produce sales or cash
 
-      Scott (from Kompass advisors) claims every founder he's seen in 10 years has been dominant in red (focus on completing tasks) and blue (knowledge building). These are needed to get passed the infant and toddler stages. 
+      An advisor reports that every founder they have seen in 10 years has been dominant in red (focus on completing tasks) and blue (knowledge building). These are needed to get passed the infant and toddler stages.
 
   * toddler
     * vision starts to become clear

@@ -127,6 +127,5 @@ export DISABLE_SPRING=1
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ulimit -n 4096
-export MBC_WORK_ROOT=/Users/kbaribeau/code/MerchantsBonding
 
 eval "$(nodenv init -)"

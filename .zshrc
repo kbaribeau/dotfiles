@@ -59,9 +59,6 @@ export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
 
-# Hendrick AWS
-# export AWS_PROFILE=hendrick-legacy-aws
-
 alias 'be=bundle exec'
 alias 'bs=bundle exec rspec'
 alias 'ls=ls -G'
@@ -162,12 +159,6 @@ load-nvmrc() {
 }
 # add-zsh-hook chpwd load-nvmrc
 # load-nvmrc
-
-psls () {
-  PERSONALYSIS_PATH="/Users/kbaribeau/Personalysis - All Employees"
-  file_name=`ls -1 $PERSONALYSIS_PATH | grep -i "$1" | head -n 1`
-  open "$PERSONALYSIS_PATH/$file_name"
-}
 
 export PUMA_DEBUG=1
 
