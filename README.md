@@ -152,7 +152,7 @@ no Unimpaired plugin or extra bracket-map layer is added.
 | --- | --- |
 | Ctrl-H/J/K/L | Move between splits (Ctrl-L intentionally no longer clears/redraws) |
 | Ctrl-Left/Right | Previous/next tab; actual terminal/tmux key delivery varies |
-| `%%` / `%f` on command line | Escaped current directory / absolute filename |
+| `%%` / `%f` on command line | Escaped current file's directory / absolute filename |
 | `\e` / `\v` | Start edit/view beside the current file; type a filename and Enter |
 | `\h` / `\l` | Toggle search highlighting / this window's cursorline |
 | `\r` | Re-edit every window, with normal modified-buffer protection; not reload/discard |
@@ -285,7 +285,10 @@ RUN_NVIM_BASELINE_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_
 ```
 
 Tests use synthetic clones and temporary homes under the clone only; they never
-copy private config contents or install into the real home. The offline Neovim smoke
+copy private config contents or install into the real home. Neovim config copies
+exclude `local.lua`; synthetic-override regressions in
+[`tests/test_nvim_fixture_isolation.py`](tests/test_nvim_fixture_isolation.py)
+cover the installer smoke test and opt-in picker fixture. The offline Neovim smoke
 test copies public configuration and stubs plugin loading to verify startup wiring without network or
 writes to the config clone; it is skipped if `nvim` is unavailable. The opt-in real
 integration test uses isolated HOME/XDG paths under the worktree, native vim.pack
