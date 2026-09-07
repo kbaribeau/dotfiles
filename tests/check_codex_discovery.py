@@ -14,7 +14,7 @@ import subprocess
 import tempfile
 import time
 
-from test_install import fixture
+from test_install import ROOT, SKILLS, fixture
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
     if not codex:
         raise SystemExit("Codex is required for this optional integration check")
     version = subprocess.check_output([codex, "--version"], text=True).strip()
-    with tempfile.TemporaryDirectory(prefix="dotfiles-codex-") as temp:
+    with tempfile.TemporaryDirectory(prefix=".dotfiles-codex-", dir=ROOT) as temp:
         root = Path(temp).resolve()
         repo, home, cwd = fixture(root)
         codex_home = home / ".codex"
@@ -87,7 +87,7 @@ def main():
                 result = response(2)
                 data = next(item for item in result["data"] if item["cwd"] == str(cwd))
                 skills = {item["name"]: item for item in data["skills"]}
-                for name in ["consulting-principles", "organizational-lifecycle"]:
+                for name in SKILLS:
                     skill = skills[name]
                     expected = repo / "skills" / name / "SKILL.md"
                     assert skill["path"] == str(expected), "Expected canonical fixture skill path"
@@ -111,7 +111,7 @@ def main():
                     server.kill()
                     server.wait(timeout=10)
                 server.stdout.close()
-        print(f"{version}: both user skills discovered at canonical fixture paths; "
+        print(f"{version}: all three user skills discovered at canonical fixture paths; "
               "references readable; disabled setting and managed skill preserved. "
               "No model turn or skill invocation.")
 

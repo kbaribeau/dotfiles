@@ -19,3 +19,10 @@ vim/.vim	.vim
 vim/.gvimrc	.gvimrc
 skills/consulting-principles	.agents/skills/consulting-principles
 skills/organizational-lifecycle	.agents/skills/organizational-lifecycle
+skills/notion-axi	.agents/skills/notion-axi
+skills/consulting-principles	.cursor/skills/consulting-principles
+skills/organizational-lifecycle	.cursor/skills/organizational-lifecycle
+skills/notion-axi	.cursor/skills/notion-axi
+skills/consulting-principles	.claude/skills/consulting-principles
+skills/organizational-lifecycle	.claude/skills/organizational-lifecycle
+skills/notion-axi	.claude/skills/notion-axi

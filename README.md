@@ -117,15 +117,18 @@ For a separately approved live installation, inspect the dry-run above first and
 reconcile any existing Neovim destination separately; the installer never replaces
 it. This change performs no live installation.
 
-## Codex skills
+## Shared skills: Codex, Cursor, Claude Code
 
-The installer links each skill individually at
-`~/.agents/skills/{consulting-principles,organizational-lifecycle}`. It never replaces
-`.agents` or its shared `skills` parent. [Codex documentation](https://developers.openai.com/codex/skills/)
-supports user-scope discovery there and follows symlinked skill folders. This is a
-shared discovery location, **not Codex exclusivity**. Existing disable settings are
-preserved; discovery does not force invocation. Dedicated Cursor/Claude integration
-is deferred to https://github.com/kbaribeau/dotfiles/issues/11.
+The installer links `consulting-principles`, `organizational-lifecycle`, and
+`notion-axi` individually under each of `~/.agents/skills`, `~/.cursor/skills`, and
+`~/.claude/skills`. All three destinations use the same canonical `skills/<name>`
+source; their shared parents and existing settings are never replaced.
+
+See [skills/README.md](skills/README.md) for authoritative discovery paths,
+symlink evidence and live-verification limits, plus manual future-laptop Node/ntn
+setup and authorization. notion-axi follows upstream's on-demand npx approach,
+with a reviewed skill revision and pinned CLI version; no dependency installer,
+Notion login, content access, or automatic session hooks run from dotfiles.
 
 Each directory carries `SKILL.md` and its own `references/` document. Reads do not
 depend on root `notes/`, parent traversal, per-tool copies, or a custom loader.
@@ -142,7 +145,7 @@ python3 -B tests/check_codex_discovery.py      # optional, requires installed Co
 RUN_NVIM_PICKER_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_picker.py -v
 ```
 
-Tests use synthetic clones and temporary homes only; they never copy private config
+Tests use synthetic clones and temporary homes under the task clone only; they never copy private config
 contents or install into the real home. The offline Neovim smoke test copies public
 configuration and stubs plugin loading to verify startup wiring without network or
 writes to the config clone; it is skipped if `nvim` is unavailable. The opt-in real
@@ -160,15 +163,20 @@ Permission tests require an unprivileged user.
 
 The opt-in Codex probe starts its own isolated stdio app-server with temporary `HOME`
 and `CODEX_HOME`, using the documented [initialize / skills/list protocol](https://developers.openai.com/codex/app-server/).
-It checks both canonical user-scope skill paths, an existing disabled-skill setting,
+It checks all three canonical user-scope skill paths, an existing disabled-skill setting,
 and an unrelated managed skill. It sends **no model turn or skill invocation** and
 changes no live settings. Filesystem checks read references through both installed and
-reported paths; the unit suite also verifies standalone copied skill directories.
+reported paths; the unit suite also verifies all nine tool-destination links,
+shared-source updates, standalone copied skill directories, and conflict refusal
+across all three skill roots.
 
-Validation on macOS with system Bash 3.2 and **codex-cli 0.153.2** confirms live
-fixture discovery. Documentation/layout checks are static evidence; filesystem reads
-are not proof of model-driven reads inside every sandbox or compatibility with every
-agent/version. No live-home installation has been performed by this change.
+Validation on macOS with system Bash 3.2 and **codex-cli 0.153.2** confirms
+all three skills' live fixture discovery, including notion-axi. Cursor and Claude
+executables were unavailable; see the manual discovery checks in
+[skills/README.md](skills/README.md). Documentation/layout checks are static evidence;
+filesystem reads are not proof of model-driven reads inside every sandbox or
+compatibility with every agent/version. No live-home installation has been performed
+by this change.
 
 Design proposal: https://github.com/kbaribeau/dotfiles/issues/6. Its earlier
 root-note canonicalization workaround is superseded by the self-contained references.

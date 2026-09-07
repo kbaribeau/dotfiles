@@ -13,8 +13,10 @@ ROOT = Path(__file__).resolve().parents[1]
 MAPPINGS = [tuple(line.split("\t")) for line in
             (ROOT / "install/links.tsv").read_text().splitlines()
             if line and not line.startswith("#")]
-DIRECTORIES = {"vim/.vim", ".config/treehouse", ".config/nvim",
-               "skills/consulting-principles", "skills/organizational-lifecycle"}
+SKILLS = ("consulting-principles", "organizational-lifecycle", "notion-axi")
+SKILL_ROOTS = (".agents/skills", ".cursor/skills", ".claude/skills")
+DIRECTORIES = {"vim/.vim", ".config/treehouse", ".config/nvim"} | {
+    "skills/" + name for name in SKILLS}
 
 
 def fixture(root):
@@ -58,7 +60,7 @@ def snapshot(root):
 
 class InstallerTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix="dotfiles-tests-")
+        self.temp = tempfile.TemporaryDirectory(prefix=".dotfiles-tests-", dir=ROOT)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
         self.repo, self.home, self.cwd = fixture(self.root)
@@ -80,8 +82,8 @@ class InstallerTests(unittest.TestCase):
         return result
 
     def test_full_inventory_default_home_and_repeat(self):
-        self.assertEqual(len(MAPPINGS), 20)
-        self.assertEqual(len({s for s, _ in MAPPINGS}), 19)
+        self.assertEqual(len(MAPPINGS), 27)
+        self.assertEqual(len({s for s, _ in MAPPINGS}), 20)
         for source, _ in MAPPINGS:
             self.assertTrue((ROOT / source).exists(), "A manifest source is missing from the clone")
             self.assertTrue(os.access(ROOT / source, os.R_OK))
@@ -94,8 +96,8 @@ class InstallerTests(unittest.TestCase):
             ".config/nvim": ".config/nvim",
             ".profile": ".profile", ".git-completion.bash": ".git-completion.bash",
             ".gitexcludes": ".gitexcludes", ".rdebugrc": ".rdebugrc",
-            ".agents/skills/consulting-principles": "skills/consulting-principles",
-            ".agents/skills/organizational-lifecycle": "skills/organizational-lifecycle",
+            **{f"{root}/{name}": f"skills/{name}"
+               for root in SKILL_ROOTS for name in SKILLS},
         })
         self.run_install(explicit=False)
         for source, destination in MAPPINGS:
@@ -104,7 +106,7 @@ class InstallerTests(unittest.TestCase):
                          (self.home / ".rspec-config.rb").resolve())
         before = snapshot(self.home)
         result = self.run_install()
-        self.assertIn("0 links created, 20 links kept", result.stdout)
+        self.assertIn("0 links created, 27 links kept", result.stdout)
         self.assertEqual(before, snapshot(self.home))
 
     def test_explicit_home_overrides_default_and_tool_overrides_do_not_retarget(self):
@@ -118,13 +120,14 @@ class InstallerTests(unittest.TestCase):
     def test_dry_run_no_writes_including_missing_home(self):
         before = snapshot(self.root)
         result = self.run_install("--dry-run")
-        self.assertEqual(result.stdout.count("create:"), 20)
+        self.assertEqual(result.stdout.count("create:"), 27)
         self.assertEqual(before, snapshot(self.root))
         self.assertFalse(self.home.exists())
 
     def test_shared_state_and_removed_links_preserved(self):
-        for relative in [".agents/skills/tool-managed/SKILL.md", ".codex/config.toml",
-                         ".config/other/settings", ".viminfo"]:
+        for relative in [f"{root}/tool-managed/SKILL.md" for root in SKILL_ROOTS] + [
+                ".codex/config.toml", ".cursor/settings.json", ".claude/settings.json",
+                ".config/other/settings", ".viminfo"]:
             path = self.home / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("unrelated fixture state\n")
@@ -142,7 +145,7 @@ class InstallerTests(unittest.TestCase):
             else:
                 self.assertEqual(original, after[path])
         self.assertEqual(source_before, snapshot(self.repo))
-        for parent in [".agents", ".agents/skills", ".config"]:
+        for parent in [".agents", ".cursor", ".claude", ".config", *SKILL_ROOTS]:
             self.assertFalse((self.home / parent).is_symlink())
 
     def test_skill_references_linked_and_standalone(self):
@@ -156,7 +159,10 @@ class InstallerTests(unittest.TestCase):
             self.assertEqual(len(refs), 1)
             ref = refs[0]
             self.assertEqual((linked / ref).read_bytes(), (self.repo / source / ref).read_bytes())
-            copied = self.cwd / Path(source).name
+            self.assertEqual(linked.resolve(), self.repo / source)
+            self.assertIn(f"name: {Path(source).name}\n", wrapper)
+            self.assertIn("description:", wrapper)
+            copied = self.cwd / destination
             shutil.copytree(linked, copied)
             self.assertEqual((copied / ref).read_bytes(), (linked / ref).read_bytes())
         self.assertFalse((self.repo / "notes").exists())
@@ -179,7 +185,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         linked_parent = self.cwd / "linked clone"
         linked_parent.symlink_to(self.repo)
-        self.assertIn("20 links kept", self.run_install(script=linked_parent / "install.sh").stdout)
+        self.assertIn("27 links kept", self.run_install(script=linked_parent / "install.sh").stdout)
 
     def test_script_loop_rejected_by_os(self):
         first, second = self.cwd / "first", self.cwd / "second"
@@ -211,7 +217,7 @@ class InstallerTests(unittest.TestCase):
         self.run_install()
         for path, original in before.items():
             self.assertEqual(original, (path.lstat().st_ino, os.readlink(path)))
-        self.assertIn("20 links kept", self.run_install().stdout)
+        self.assertIn("27 links kept", self.run_install().stdout)
 
     def test_all_conflicts_reported_in_manifest_order_without_writes(self):
         self.home.mkdir()
@@ -300,11 +306,66 @@ end
         self.assertEqual(before, snapshot(self.repo))
 
     def test_skill_conflict_prevents_configuration_writes(self):
-        path = self.home / ".agents/skills/consulting-principles"
-        path.mkdir(parents=True)
-        (path / "SKILL.md").write_text("existing skill")
-        self.preserve_failure()
-        self.assertFalse((self.home / ".zshrc").exists())
+        for root in SKILL_ROOTS:
+            for name in SKILLS:
+                for kind in ["directory", "file", "wrong-link", "dangling-link", "loop"]:
+                    with self.subTest(root=root, name=name, kind=kind):
+                        path = self.home / root / name
+                        path.parent.mkdir(parents=True, exist_ok=True)
+                        if kind == "directory":
+                            path.mkdir()
+                            (path / "SKILL.md").write_text("existing skill")
+                        elif kind == "file":
+                            path.write_text("user-owned file")
+                        else:
+                            target = {"wrong-link": self.cwd, "dangling-link": "missing",
+                                      "loop": name}[kind]
+                            path.symlink_to(target)
+                        for args in [(), ("--dry-run",)]:
+                            result = self.preserve_failure(1, *args)
+                            self.assertIn(f"destination conflict: {root}/{name}", result.stderr)
+                            self.assertFalse((self.home / ".zshrc").exists())
+                        if kind == "directory":
+                            shutil.rmtree(path)
+                        else:
+                            path.unlink()
+
+    def test_skill_shared_source_changes_visible_in_all_tools(self):
+        self.run_install()
+        before = snapshot(self.home)
+        for name in SKILLS:
+            ref = self.repo / "skills" / name / "references/future.md"
+            ref.write_text("new fixture reference\n")
+            for root in SKILL_ROOTS:
+                self.assertEqual((self.home / root / name / "references/future.md").read_bytes(),
+                                 ref.read_bytes())
+        self.run_install()
+        self.assertEqual(before, snapshot(self.home))
+
+    def test_skill_root_symlink_refused_for_every_tool(self):
+        self.home.mkdir()
+        outside = self.root / "outside-skills"
+        outside.mkdir()
+        for root in SKILL_ROOTS:
+            with self.subTest(root=root):
+                path = self.home / root
+                path.parent.mkdir(exist_ok=True)
+                path.symlink_to(outside)
+                self.preserve_failure()
+                self.assertEqual(list(outside.iterdir()), [])
+                path.unlink()
+
+    def test_notion_skill_is_pinned_inert_and_attributed(self):
+        skill = (self.repo / "skills/notion-axi/SKILL.md").read_text()
+        reference = (self.repo / "skills/notion-axi/references/notion-axi.md").read_text()
+        self.assertIn("npx -y notion-axi@2.1.0", skill)
+        self.assertIn("npx -y notion-axi@2.1.0 whoami", reference)
+        self.assertIn("9f04aa0f465529f90e3f903ec866cc7efe88f7f3", reference)
+        self.assertIn("MIT License", (self.repo / "skills/notion-axi/LICENSE").read_text())
+        self.assertNotIn("hooks:", skill)
+        self.assertNotIn("allowed-tools:", skill)
+        self.assertNotIn("!`", skill)
+        self.assertNotIn("npx -y notion-axi ", skill + reference)
 
     def test_unsafe_ancestors_and_home(self):
         self.home.mkdir()
@@ -415,7 +476,7 @@ end
         self.assertIn("partial progress: 1 links", result.stderr)
         self.assertTrue((self.home / ".zshrc").is_symlink())
         self.assertFalse((self.home / ".gitconfig").exists())
-        self.assertIn("19 links created, 1 links kept", self.run_install().stdout)
+        self.assertIn("26 links created, 1 links kept", self.run_install().stdout)
 
     def test_source_rechecked_during_apply(self):
         tools = self.root / "tools"
