@@ -1,4 +1,4 @@
--- Structural starting point only; Vim workflows will migrate incrementally.
+-- Vim workflows migrate incrementally; keep Vim's runtime and state separate.
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")

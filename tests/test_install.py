@@ -256,7 +256,8 @@ class InstallerTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("nvim"), "headless smoke test requires Neovim")
     def test_nvim_headless_startup_isolated(self):
-        # Only the public skeleton is copied; all other configs remain synthetic.
+        # Offline wiring smoke test. Real vim.pack/picker coverage is opt-in in
+        # test_nvim_picker.py; this test must never download plugins.
         shutil.copytree(ROOT / ".config/nvim", self.repo / ".config/nvim",
                         dirs_exist_ok=True)
         self.run_install()
@@ -285,7 +286,14 @@ else
   vim.cmd("qa!")
 end
 ''')
-        result = subprocess.run([shutil.which("nvim"), "--headless", "-c", "luafile check.lua"],
+        bootstrap = self.cwd / "offline.lua"
+        bootstrap.write_text('''vim.pack = { add = function() end }
+package.preload["mini.pick"] = function()
+  return { setup = function() end }
+end
+''')
+        result = subprocess.run([shutil.which("nvim"), "--headless",
+                                 "--cmd", "luafile offline.lua", "-c", "luafile check.lua"],
                                 cwd=self.cwd, env=env, capture_output=True,
                                 text=True, timeout=30)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
