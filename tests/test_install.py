@@ -286,7 +286,7 @@ class InstallerTests(unittest.TestCase):
         # Offline wiring smoke test. Real vim.pack/picker coverage is opt-in in
         # test_nvim_picker.py; this test must never download plugins.
         shutil.copytree(ROOT / ".config/nvim", self.repo / ".config/nvim",
-                        dirs_exist_ok=True)
+                        dirs_exist_ok=True, ignore=shutil.ignore_patterns("local.lua"))
         self.run_install()
         before = snapshot(self.repo)
         env = {"PATH": os.environ["PATH"], "HOME": str(self.home),
