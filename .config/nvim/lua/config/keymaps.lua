@@ -19,6 +19,7 @@ map("n", "<leader>v", ":view %%", { remap = true, desc = "View beside current fi
 map("n", "<leader>h", function() vim.o.hlsearch = not vim.o.hlsearch end)
 map("n", "<leader>l", function() vim.wo.cursorline = not vim.wo.cursorline end)
 map("n", "<leader>r", function() require("config.workflows").refresh() end)
+map("n", "<leader>rn", function() require("config.rename").prompt() end)
 map("n", "<leader>s", function() require("config.sessions").save() end)
 map("n", "<leader>ls", function() require("config.sessions").load() end)
 map("n", "<F1>", "<Esc>")
