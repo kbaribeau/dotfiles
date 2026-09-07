@@ -68,6 +68,22 @@ function M.rename(target, buf)
       end
     end
   end
+  -- Refresh external changes without ever writing the buffer. A changed source
+  -- needs inspection/retry, not a rename that leaves stale text under a new name.
+  local tick, autoread = vim.api.nvim_buf_get_changedtick(buf), vim.bo[buf].autoread
+  local checked, check_error = pcall(vim.api.nvim_buf_call, buf, function()
+    vim.bo.autoread = true
+    vim.cmd("checktime")
+  end)
+  if not vim.api.nvim_buf_is_valid(buf) or not vim.api.nvim_buf_is_loaded(buf) then
+    return nil, "Source buffer disappeared during file check"
+  end
+  vim.bo[buf].autoread = autoread
+  if not checked then return nil, "Source check failed: " .. tostring(check_error) end
+  if vim.api.nvim_buf_get_changedtick(buf) ~= tick or vim.bo[buf].modified
+    or vim.api.nvim_buf_get_name(buf) ~= old then
+    return nil, "Source changed; inspect the buffer and retry"
+  end
   local ok, err = move(source, destination)
   if not ok then return nil, "Rename refused: " .. err end
   local renamed, failure = pcall(vim.api.nvim_buf_set_name, buf, destination)

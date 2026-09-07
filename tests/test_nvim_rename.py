@@ -67,6 +67,19 @@ edit("source.txt"); vim.bo.buftype = "nofile"; assert(not rename(root .. "/speci
         for name in ("reserved.txt", "modified.txt", "hard-new.txt", "symbolic-new.txt", "special.txt"):
             self.assertFalse((root / name).exists())
 
+    def test_external_changes_and_missing_source(self):
+        self.check(r'''
+edit("source.txt")
+vim.fn.writefile({"externally changed content, not the old buffer"}, root .. "/source.txt")
+local ok, err = rename(root .. "/new.txt")
+assert(not ok and err:find("Source changed", 1, true), err)
+assert(vim.fn.getline(1) == "externally changed content, not the old buffer")
+assert(not vim.uv.fs_lstat(root .. "/new.txt"))
+vim.uv.fs_unlink(root .. "/source.txt")
+assert(not rename(root .. "/new.txt"))
+assert(vim.fn.getline(1) == "externally changed content, not the old buffer")
+''')
+
     def test_destination_created_after_preflight_is_not_clobbered(self):
         self.check(r'''
 edit("source.txt")
