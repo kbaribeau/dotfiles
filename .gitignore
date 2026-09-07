@@ -5,6 +5,9 @@
 .rubocop.yml
 .rspec-local
 
+# Optional private Neovim override, loaded last.
+.config/nvim/local.lua
+
 tags
 
 .ruby-gemset
