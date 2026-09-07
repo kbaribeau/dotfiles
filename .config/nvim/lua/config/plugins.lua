@@ -1,0 +1,1 @@
+-- Future plugin and workflow configuration. No plugin manager is bootstrapped.

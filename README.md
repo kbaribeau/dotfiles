@@ -5,9 +5,9 @@ Personal configuration and [self-contained reference skills](skills/README.md).
 ## Conservative link installer
 
 [`install/links.tsv`](install/links.tsv) is the complete, unconditional inventory:
-**19 links to 18 sources** (17 configuration links and two whole skill directories).
+**20 links to 19 sources** (18 configuration links and two whole skill directories).
 It includes both RSpec aliases, all three special Vim mappings, and only the
-Treehouse subdirectory of `.config`. There are no core/legacy groups or selection flags.
+Treehouse and Neovim subdirectories of `.config`. There are no core/legacy groups or selection flags.
 
 ```sh
 ./install.sh --dry-run                 # inspect the plan for $HOME; writes nothing
@@ -43,7 +43,7 @@ No GNU-only `ln -T` or `readlink -f` is used. Missing dependencies are not insta
   overwritten, backed up, merged, removed, or repointed. Reconcile conflicts separately.
 - Only missing links and required parents are created. Existing shared directories,
   tool-managed skills, private hooks, local Vim state, and links outside the manifest
-  remain untouched. An existing real `~/.vim` or `~/.config/treehouse` is a conflict,
+  remain untouched. An existing real `~/.vim`, `~/.config/nvim`, or `~/.config/treehouse` is a conflict,
   not permission to merge its contents. A skill conflict prevents config writes too.
 - `--home` defaults to `$HOME`; it must be a normalized, non-root absolute path.
   **All destination ancestors, including the selected home, must be real directories,
@@ -69,6 +69,22 @@ This only links files: no packages, plugins/submodules, startup sourcing, hook o
 skill invocation, settings edits, private configuration generation, or old home-link
 cleanup. Linking a shell file is not a claim that a particular shell loads it.
 
+## Neovim migration skeleton
+
+The installer links the whole [`.config/nvim`](.config/nvim) directory to
+`~/.config/nvim`, so future nested configuration needs no manifest changes.
+`init.lua` loads four nearly empty modules under `lua/config/`: `options.lua`,
+`keymaps.lua`, `autocmds.lua`, and `plugins.lua` for later plugin/workflow setup.
+No plugins, plugin manager, LSPs, or Vim behavior are configured yet. Keep runtime
+state in Neovim's standard XDG data/state/cache locations, outside this config.
+
+Vim's sources and links remain independent and unchanged. Continue invoking `vim`
+and `nvim` separately; aliases and `EDITOR`/`VISUAL` are not changed. Behavioral
+migration remains tracked in https://github.com/kbaribeau/dotfiles/issues/9.
+For a separately approved live installation, inspect the dry-run above first and
+reconcile any existing Neovim destination separately; the installer never replaces
+it. This change performs no live installation.
+
 ## Codex skills
 
 The installer links each skill individually at
@@ -93,7 +109,11 @@ python3 -B tests/check_codex_discovery.py      # optional, requires installed Co
 ```
 
 Tests use synthetic clones and temporary homes only; they never copy personal config
-contents or install into the real home. They cover the full inventory, preservation,
+contents or install into the real home. The Neovim smoke test copies only the public
+skeleton and runs headlessly with isolated HOME and XDG config/data/state/cache;
+it is skipped if `nvim` is unavailable. It verifies startup wiring and no writes to
+the config clone. Fixture tests also cover occupied Neovim destinations and future
+nested files becoming visible through the directory link without installer changes. They cover the full inventory, preservation,
 repeat runs, dry runs, path/symlink resolution, malformed data, all conflict classes,
 unsafe/unwritable ancestors, unavailable sources, and injected partial/racing failures.
 Permission tests require an unprivileged user.

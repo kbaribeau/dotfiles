@@ -9,6 +9,7 @@
 .tmux.conf	.tmux.conf
 vim/.vimrc	.vimrc
 vim/.vim	.vim
+.config/nvim	.config/nvim
 .config/treehouse	.config/treehouse
 .profile	.profile
 .git-completion.bash	.git-completion.bash

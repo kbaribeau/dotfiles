@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MAPPINGS = [tuple(line.split("\t")) for line in
             (ROOT / "install/links.tsv").read_text().splitlines()
             if line and not line.startswith("#")]
-DIRECTORIES = {"vim/.vim", ".config/treehouse",
+DIRECTORIES = {"vim/.vim", ".config/treehouse", ".config/nvim",
                "skills/consulting-principles", "skills/organizational-lifecycle"}
 
 
@@ -80,8 +80,8 @@ class InstallerTests(unittest.TestCase):
         return result
 
     def test_full_inventory_default_home_and_repeat(self):
-        self.assertEqual(len(MAPPINGS), 19)
-        self.assertEqual(len({s for s, _ in MAPPINGS}), 18)
+        self.assertEqual(len(MAPPINGS), 20)
+        self.assertEqual(len({s for s, _ in MAPPINGS}), 19)
         for source, _ in MAPPINGS:
             self.assertTrue((ROOT / source).exists(), "A manifest source is missing from the clone")
             self.assertTrue(os.access(ROOT / source, os.R_OK))
@@ -91,6 +91,7 @@ class InstallerTests(unittest.TestCase):
             ".rspec-config": ".rspec-config.rb", ".rspec-config.rb": ".rspec-config.rb",
             ".tmux.conf": ".tmux.conf", ".vimrc": "vim/.vimrc", ".vim": "vim/.vim",
             ".gvimrc": "vim/.gvimrc", ".config/treehouse": ".config/treehouse",
+            ".config/nvim": ".config/nvim",
             ".profile": ".profile", ".git-completion.bash": ".git-completion.bash",
             ".gitexcludes": ".gitexcludes", ".rdebugrc": ".rdebugrc",
             ".agents/skills/consulting-principles": "skills/consulting-principles",
@@ -103,7 +104,7 @@ class InstallerTests(unittest.TestCase):
                          (self.home / ".rspec-config.rb").resolve())
         before = snapshot(self.home)
         result = self.run_install()
-        self.assertIn("0 links created, 19 links kept", result.stdout)
+        self.assertIn("0 links created, 20 links kept", result.stdout)
         self.assertEqual(before, snapshot(self.home))
 
     def test_explicit_home_overrides_default_and_tool_overrides_do_not_retarget(self):
@@ -117,7 +118,7 @@ class InstallerTests(unittest.TestCase):
     def test_dry_run_no_writes_including_missing_home(self):
         before = snapshot(self.root)
         result = self.run_install("--dry-run")
-        self.assertEqual(result.stdout.count("create:"), 19)
+        self.assertEqual(result.stdout.count("create:"), 20)
         self.assertEqual(before, snapshot(self.root))
         self.assertFalse(self.home.exists())
 
@@ -178,7 +179,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         linked_parent = self.cwd / "linked clone"
         linked_parent.symlink_to(self.repo)
-        self.assertIn("19 links kept", self.run_install(script=linked_parent / "install.sh").stdout)
+        self.assertIn("20 links kept", self.run_install(script=linked_parent / "install.sh").stdout)
 
     def test_script_loop_rejected_by_os(self):
         first, second = self.cwd / "first", self.cwd / "second"
@@ -210,7 +211,7 @@ class InstallerTests(unittest.TestCase):
         self.run_install()
         for path, original in before.items():
             self.assertEqual(original, (path.lstat().st_ino, os.readlink(path)))
-        self.assertIn("19 links kept", self.run_install().stdout)
+        self.assertIn("20 links kept", self.run_install().stdout)
 
     def test_all_conflicts_reported_in_manifest_order_without_writes(self):
         self.home.mkdir()
@@ -230,6 +231,65 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(conflicts, [d for _, d in MAPPINGS[:6]])
         self.assertEqual(result.stderr, self.run_install("--dry-run", code=1).stderr)
         self.assertEqual(list((self.home / ".gitconfig").iterdir()), [])
+
+    def test_nvim_directory_link_exposes_future_nested_files(self):
+        self.run_install()
+        linked = self.home / ".config/nvim"
+        self.assertTrue(linked.is_symlink())
+        before = linked.lstat()
+        future = self.repo / ".config/nvim/lua/config/workflows/example.lua"
+        future.parent.mkdir(parents=True)
+        future.write_text("return { fixture = true }\n")
+        self.assertEqual((linked / "lua/config/workflows/example.lua").read_bytes(),
+                         future.read_bytes())
+        self.run_install()
+        self.assertEqual(before, linked.lstat())
+
+    def test_nvim_occupied_destination_preserved(self):
+        path = self.home / ".config/nvim"
+        path.mkdir(parents=True)
+        (path / "init.lua").write_text("-- existing fixture configuration\n")
+        for args in [(), ("--dry-run",)]:
+            result = self.preserve_failure(1, *args)
+            self.assertIn("destination conflict: .config/nvim", result.stderr)
+            self.assertFalse((self.home / ".vimrc").exists())
+
+    @unittest.skipUnless(shutil.which("nvim"), "headless smoke test requires Neovim")
+    def test_nvim_headless_startup_isolated(self):
+        # Only the public skeleton is copied; all other configs remain synthetic.
+        shutil.copytree(ROOT / ".config/nvim", self.repo / ".config/nvim",
+                        dirs_exist_ok=True)
+        self.run_install()
+        before = snapshot(self.repo)
+        env = {"PATH": os.environ["PATH"], "HOME": str(self.home),
+               "XDG_CONFIG_HOME": str(self.home / ".config"),
+               "XDG_CONFIG_DIRS": str(self.root / "config-dirs"),
+               "XDG_DATA_DIRS": str(self.root / "data-dirs")}
+        for kind in ["DATA", "STATE", "CACHE", "RUNTIME"]:
+            directory = self.root / kind.lower()
+            directory.mkdir(mode=0o700)
+            env["XDG_" + kind + ("_DIR" if kind == "RUNTIME" else "_HOME")] = str(directory)
+        check = self.cwd / "check.lua"
+        check.write_text('''local ok, err = pcall(function()
+  assert(vim.fn.resolve(vim.env.MYVIMRC) ==
+         vim.fn.resolve(vim.env.XDG_CONFIG_HOME .. "/nvim/init.lua"))
+  assert(vim.v.errmsg == "", vim.v.errmsg)
+  for _, name in ipairs({"options", "keymaps", "autocmds", "plugins"}) do
+    assert(package.loaded["config." .. name], name .. " was not loaded")
+  end
+end)
+if not ok then
+  io.stderr:write(tostring(err))
+  vim.cmd("cquit")
+else
+  vim.cmd("qa!")
+end
+''')
+        result = subprocess.run([shutil.which("nvim"), "--headless", "-c", "luafile check.lua"],
+                                cwd=self.cwd, env=env, capture_output=True,
+                                text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(before, snapshot(self.repo))
 
     def test_skill_conflict_prevents_configuration_writes(self):
         path = self.home / ".agents/skills/consulting-principles"
@@ -347,7 +407,7 @@ class InstallerTests(unittest.TestCase):
         self.assertIn("partial progress: 1 links", result.stderr)
         self.assertTrue((self.home / ".zshrc").is_symlink())
         self.assertFalse((self.home / ".gitconfig").exists())
-        self.assertIn("18 links created, 1 links kept", self.run_install().stdout)
+        self.assertIn("19 links created, 1 links kept", self.run_install().stdout)
 
     def test_source_rechecked_during_apply(self):
         tools = self.root / "tools"
