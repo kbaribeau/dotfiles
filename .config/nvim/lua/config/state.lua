@@ -13,5 +13,6 @@ function M.directory(name)
 end
 
 vim.g.MRU_File = M.directory("mru") .. "/files"
+vim.g.MRU_Add_Menu = 0 -- Terminal baseline; legacy menus can leave E328 in Neovim.
 vim.g.netrw_home = M.directory("netrw")
 return M

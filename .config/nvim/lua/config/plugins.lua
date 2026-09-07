@@ -4,6 +4,10 @@ vim.pack.add({
     src = "https://github.com/nvim-mini/mini.pick",
     version = "b27dc13b3d6dafc10e868b6ddc682cc4f047f4d1",
   },
+  {
+    src = "https://github.com/yegappan/mru",
+    version = "dcba22de1201523acda1e1a60d6fc3d9d7b6a519",
+  },
 })
 
 -- Declining installation should leave the rest of Neovim usable.
