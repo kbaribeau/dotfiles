@@ -4,6 +4,22 @@ vim.pack.add({
     src = "https://github.com/nvim-mini/mini.pick",
     version = "b27dc13b3d6dafc10e868b6ddc682cc4f047f4d1",
   },
+  {
+    src = "https://github.com/yegappan/mru",
+    version = "dcba22de1201523acda1e1a60d6fc3d9d7b6a519",
+  },
+  {
+    src = "https://github.com/tpope/vim-fugitive",
+    version = "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+  },
+  {
+    src = "https://github.com/tpope/vim-surround",
+    version = "3d188ed2113431cf8dac77be61b842acb64433d9",
+  },
+  {
+    src = "https://github.com/michaeljsmith/vim-indent-object",
+    version = "8ab36d5ec2a3a60468437a95e142ce994df598c6",
+  },
 })
 
 -- Declining installation should leave the rest of Neovim usable.
