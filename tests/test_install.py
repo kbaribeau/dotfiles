@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MAPPINGS = [tuple(line.split("\t")) for line in
             (ROOT / "install/links.tsv").read_text().splitlines()
             if line and not line.startswith("#")]
-SKILLS = ("consulting-principles", "organizational-lifecycle", "notion-axi")
+SKILLS = ("consulting-principles", "organizational-lifecycle")
 SKILL_ROOTS = (".agents/skills", ".cursor/skills", ".claude/skills")
 DIRECTORIES = {"vim/.vim", ".config/treehouse", ".config/nvim"} | {
     "skills/" + name for name in SKILLS}
@@ -82,8 +82,8 @@ class InstallerTests(unittest.TestCase):
         return result
 
     def test_full_inventory_default_home_and_repeat(self):
-        self.assertEqual(len(MAPPINGS), 27)
-        self.assertEqual(len({s for s, _ in MAPPINGS}), 20)
+        self.assertEqual(len(MAPPINGS), 24)
+        self.assertEqual(len({s for s, _ in MAPPINGS}), 19)
         for source, _ in MAPPINGS:
             self.assertTrue((ROOT / source).exists(), "A manifest source is missing from the clone")
             self.assertTrue(os.access(ROOT / source, os.R_OK))
@@ -106,7 +106,7 @@ class InstallerTests(unittest.TestCase):
                          (self.home / ".rspec-config.rb").resolve())
         before = snapshot(self.home)
         result = self.run_install()
-        self.assertIn("0 links created, 27 links kept", result.stdout)
+        self.assertIn("0 links created, 24 links kept", result.stdout)
         self.assertEqual(before, snapshot(self.home))
 
     def test_explicit_home_overrides_default_and_tool_overrides_do_not_retarget(self):
@@ -120,7 +120,7 @@ class InstallerTests(unittest.TestCase):
     def test_dry_run_no_writes_including_missing_home(self):
         before = snapshot(self.root)
         result = self.run_install("--dry-run")
-        self.assertEqual(result.stdout.count("create:"), 27)
+        self.assertEqual(result.stdout.count("create:"), 24)
         self.assertEqual(before, snapshot(self.root))
         self.assertFalse(self.home.exists())
 
@@ -131,6 +131,16 @@ class InstallerTests(unittest.TestCase):
             path = self.home / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("unrelated fixture state\n")
+        operator_source = self.root / "operator-skill-source"
+        operator_source.mkdir()
+        (operator_source / "SKILL.md").write_text("inert operator-owned skill\n")
+        (operator_source / "reference.md").write_text("operator supporting document\n")
+        for root in SKILL_ROOTS:
+            directory = self.home / root / "operator-copied"
+            shutil.copytree(operator_source, directory)
+            (self.home / root / "operator-linked").symlink_to(
+                os.path.relpath(operator_source, self.home / root))
+        operator_before = snapshot(operator_source)
         (self.home / "bin").symlink_to("retired-missing-directory")
         hook = self.repo / ".config/treehouse/hooks/local-post-create.sh"
         hook.parent.mkdir()
@@ -138,7 +148,18 @@ class InstallerTests(unittest.TestCase):
         before = snapshot(self.home)
         source_before = snapshot(self.repo)
         self.run_install()
+        installed = snapshot(self.home)
+        self.run_install()
         after = snapshot(self.home)
+        self.assertEqual(installed, after)
+        self.assertEqual(operator_before, snapshot(operator_source))
+        for root in SKILL_ROOTS:
+            for name in ["operator-copied", "operator-linked"]:
+                skill = self.home / root / name
+                self.assertEqual((skill / "SKILL.md").read_bytes(),
+                                 (operator_source / "SKILL.md").read_bytes())
+                self.assertEqual((skill / "reference.md").read_bytes(),
+                                 (operator_source / "reference.md").read_bytes())
         for path, original in before.items():
             if stat.S_ISDIR(original[0]):
                 self.assertEqual(original[:2], after[path][:2])
@@ -185,7 +206,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         linked_parent = self.cwd / "linked clone"
         linked_parent.symlink_to(self.repo)
-        self.assertIn("27 links kept", self.run_install(script=linked_parent / "install.sh").stdout)
+        self.assertIn("24 links kept", self.run_install(script=linked_parent / "install.sh").stdout)
 
     def test_script_loop_rejected_by_os(self):
         first, second = self.cwd / "first", self.cwd / "second"
@@ -217,7 +238,7 @@ class InstallerTests(unittest.TestCase):
         self.run_install()
         for path, original in before.items():
             self.assertEqual(original, (path.lstat().st_ino, os.readlink(path)))
-        self.assertIn("27 links kept", self.run_install().stdout)
+        self.assertIn("24 links kept", self.run_install().stdout)
 
     def test_all_conflicts_reported_in_manifest_order_without_writes(self):
         self.home.mkdir()
@@ -355,18 +376,6 @@ end
                 self.assertEqual(list(outside.iterdir()), [])
                 path.unlink()
 
-    def test_notion_skill_is_pinned_inert_and_attributed(self):
-        skill = (self.repo / "skills/notion-axi/SKILL.md").read_text()
-        reference = (self.repo / "skills/notion-axi/references/notion-axi.md").read_text()
-        self.assertIn("npx -y notion-axi@2.1.0", skill)
-        self.assertIn("npx -y notion-axi@2.1.0 whoami", reference)
-        self.assertIn("9f04aa0f465529f90e3f903ec866cc7efe88f7f3", reference)
-        self.assertIn("MIT License", (self.repo / "skills/notion-axi/LICENSE").read_text())
-        self.assertNotIn("hooks:", skill)
-        self.assertNotIn("allowed-tools:", skill)
-        self.assertNotIn("!`", skill)
-        self.assertNotIn("npx -y notion-axi ", skill + reference)
-
     def test_unsafe_ancestors_and_home(self):
         self.home.mkdir()
         outside = self.root / "outside"
@@ -476,7 +485,7 @@ end
         self.assertIn("partial progress: 1 links", result.stderr)
         self.assertTrue((self.home / ".zshrc").is_symlink())
         self.assertFalse((self.home / ".gitconfig").exists())
-        self.assertIn("26 links created, 1 links kept", self.run_install().stdout)
+        self.assertIn("23 links created, 1 links kept", self.run_install().stdout)
 
     def test_source_rechecked_during_apply(self):
         tools = self.root / "tools"

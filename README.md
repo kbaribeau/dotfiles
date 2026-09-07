@@ -2,6 +2,26 @@
 
 Personal configuration and [self-contained reference skills](skills/README.md).
 
+## Philosophy: skill ownership
+
+Dotfiles owns the shared Codex, Cursor, and Claude Code framework and the personal
+skills maintained in this repository. Each repository-owned skill has one canonical
+source, linked individually into the tools' discovery directories.
+
+**Third-party skills belong to the operator of each laptop.** The operator chooses,
+installs, authenticates, updates, and removes them using their upstream guidance.
+Dotfiles does not vendor third-party skills or acquire them through downloaders,
+submodules, bootstrap commands, or manifest entries. It does not manage their
+runtime dependencies, credentials, or optional hooks. A new laptop therefore needs
+its own deliberate third-party skill setup; cloning dotfiles does not reproduce it.
+
+Repository-owned and operator-managed skills must coexist: never take ownership of
+an entire shared skills directory or overwrite user material. Unrelated skills and
+settings stay untouched; colliding destinations require separate reconciliation.
+See [skills/README.md](skills/README.md) for the installation layout, discovery
+evidence, and verification. This policy concerns skills, not a change to the
+separately documented editor/plugin dependencies below.
+
 ## Conservative link installer
 
 [`install/links.tsv`](install/links.tsv) is the complete, unconditional inventory.
@@ -119,20 +139,10 @@ it. This change performs no live installation.
 
 ## Shared skills: Codex, Cursor, Claude Code
 
-The installer links `consulting-principles`, `organizational-lifecycle`, and
-`notion-axi` individually under each of `~/.agents/skills`, `~/.cursor/skills`, and
-`~/.claude/skills`. All three destinations use the same canonical `skills/<name>`
-source; their shared parents and existing settings are never replaced.
-
-See [skills/README.md](skills/README.md) for authoritative discovery paths,
-symlink evidence and live-verification limits, plus manual future-laptop Node/ntn
-setup and authorization. notion-axi follows upstream's on-demand npx approach,
-with a reviewed skill revision and pinned CLI version; no dependency installer,
-Notion login, content access, or automatic session hooks run from dotfiles.
-
-Each directory carries `SKILL.md` and its own `references/` document. Reads do not
-depend on root `notes/`, parent traversal, per-tool copies, or a custom loader.
-Filesystem access to the clone is still required by the consuming agent/sandbox.
+The [skill installation guide](skills/README.md) owns the per-tool discovery paths,
+canonical source/reference layout, coexistence behavior, and live-verification
+limits. The [ownership policy](#philosophy-skill-ownership) above defines the boundary
+between repository-owned personal skills and operator-managed third-party skills.
 
 ## Validation
 
@@ -145,9 +155,9 @@ python3 -B tests/check_codex_discovery.py      # optional, requires installed Co
 RUN_NVIM_PICKER_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_picker.py -v
 ```
 
-Tests use synthetic clones and temporary homes under the task clone only; they never copy private config
-contents or install into the real home. The offline Neovim smoke test copies public
-configuration and stubs plugin loading to verify startup wiring without network or
+Tests use synthetic clones and temporary homes under the clone only; they never
+copy private config contents or install into the real home. The offline Neovim smoke
+test copies public configuration and stubs plugin loading to verify startup wiring without network or
 writes to the config clone; it is skipped if `nvim` is unavailable. The opt-in real
 integration test uses isolated HOME/XDG paths under the worktree, native vim.pack
 confirmation/installation, and disposable Git repositories. It checks pinned plugin
@@ -163,15 +173,16 @@ Permission tests require an unprivileged user.
 
 The opt-in Codex probe starts its own isolated stdio app-server with temporary `HOME`
 and `CODEX_HOME`, using the documented [initialize / skills/list protocol](https://developers.openai.com/codex/app-server/).
-It checks all three canonical user-scope skill paths, an existing disabled-skill setting,
+It checks both canonical user-scope skill paths, an existing disabled-skill setting,
 and an unrelated managed skill. It sends **no model turn or skill invocation** and
 changes no live settings. Filesystem checks read references through both installed and
-reported paths; the unit suite also verifies all nine tool-destination links,
+reported paths; the unit suite also verifies all six tool-destination links,
 shared-source updates, standalone copied skill directories, and conflict refusal
-across all three skill roots.
+across all three skill roots. Unrelated operator-installed skill directories and
+symlinks, their supporting files, and tool settings are preserved across repeat runs.
 
 Validation on macOS with system Bash 3.2 and **codex-cli 0.153.2** confirms
-all three skills' live fixture discovery, including notion-axi. Cursor and Claude
+both repository-owned skills' live fixture discovery. Cursor and Claude
 executables were unavailable; see the manual discovery checks in
 [skills/README.md](skills/README.md). Documentation/layout checks are static evidence;
 filesystem reads are not proof of model-driven reads inside every sandbox or

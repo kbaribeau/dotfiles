@@ -111,7 +111,7 @@ def main():
                     server.kill()
                     server.wait(timeout=10)
                 server.stdout.close()
-        print(f"{version}: all three user skills discovered at canonical fixture paths; "
+        print(f"{version}: both repository-owned user skills discovered at canonical fixture paths; "
               "references readable; disabled setting and managed skill preserved. "
               "No model turn or skill invocation.")
 
