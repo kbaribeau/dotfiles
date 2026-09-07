@@ -19,6 +19,7 @@ function M.save()
     vim.uv.fs_unlink(tmp)
     error(failure)
   end
+  vim.v.this_session = target
   vim.notify("Saved Neovim session: " .. target)
 end
 

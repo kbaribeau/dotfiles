@@ -12,8 +12,10 @@ for key, direction in pairs({ h = "h", j = "j", k = "k", l = "l" }) do
 end
 map("n", "<C-Right>", "<Cmd>tabnext<CR>")
 map("n", "<C-Left>", "<Cmd>tabprevious<CR>")
-map("c", "%%", function() return vim.fn.fnameescape(vim.fn.expand("%:p:h") .. "/") end, { expr = true })
-map("c", "%f", function() return vim.fn.fnameescape(vim.fn.expand("%:p")) end, { expr = true })
+map("c", "%%", function() return vim.fn.fnameescape(vim.fn.expand("%:p:h") .. "/") end,
+  { expr = true, replace_keycodes = false })
+map("c", "%f", function() return vim.fn.fnameescape(vim.fn.expand("%:p")) end,
+  { expr = true, replace_keycodes = false })
 map("n", "<leader>e", ":edit %%", { remap = true, desc = "Edit beside current file" })
 map("n", "<leader>v", ":view %%", { remap = true, desc = "View beside current file" })
 map("n", "<leader>h", function() vim.o.hlsearch = not vim.o.hlsearch end)

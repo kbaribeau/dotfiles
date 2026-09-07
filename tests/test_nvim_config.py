@@ -102,6 +102,19 @@ keys(":let g:expanded = '" .. "%f" .. "'<CR>")
 assert(vim.g.expanded == vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)))
 ''')
 
+    def test_edit_view_path_expansions_are_literal(self):
+        folder = self.fixture.root / "space % # | <CR>"
+        folder.mkdir()
+        (folder / "from.txt").write_text("from\n")
+        (folder / "to.txt").write_text("to\n")
+        self.check(r'''
+edit("space % # | <CR>/from.txt")
+keys("\\eto.txt<CR>")
+assert(vim.api.nvim_buf_get_name(0) == root .. "/space % # | <CR>/to.txt")
+keys("\\vfrom.txt<CR>")
+assert(vim.api.nvim_buf_get_name(0) == root .. "/space % # | <CR>/from.txt" and vim.bo.readonly)
+''')
+
     def test_save_failures_refresh_and_explicit_clipboard(self):
         (self.fixture.root / "one.txt").write_text("one\n")
         (self.fixture.root / "two.txt").write_text("two\n")
@@ -174,6 +187,7 @@ vim.cmd.vsplit(); edit("two.txt"); vim.cmd.tabnew(); edit("one.txt")
 require("config.sessions").save()
 local st = vim.uv.fs_stat(root .. "/state/nvim/sessions/last.vim")
 assert(bit.band(st.mode, 511) == 384)
+assert(vim.v.this_session == root .. "/state/nvim/sessions/last.vim")
 assert(bit.band(vim.uv.fs_stat(root .. "/state/nvim/sessions").mode, 511) == 448)
 ''')
         self.check(r'''
@@ -187,6 +201,13 @@ assert(not pcall(require("config.sessions").load))
 vim.uv.fs_unlink(target); vim.uv.fs_symlink(root .. "/one.txt", target)
 assert(not pcall(require("config.sessions").load))
 ''')
+
+    def test_invalid_cursor_mark_after_file_shrinks(self):
+        file = self.fixture.root / "shrunk.txt"
+        file.write_text("one\ntwo\nthree\n")
+        self.check('edit("shrunk.txt"); vim.api.nvim_win_set_cursor(0, {3, 1})')
+        file.write_text("short\n")
+        self.check('edit("shrunk.txt"); assert(vim.fn.line(".") == 1)')
 
     def test_bundled_filetypes_abbreviations_and_manual_completion(self):
         self.check(r'''
@@ -216,6 +237,13 @@ vim.bo.modified = false; edit("sample.html")
 assert(vim.bo.omnifunc == "htmlcomplete#CompleteTags")
 edit("sample.css"); assert(vim.bo.omnifunc == "csscomplete#CompleteCSS")
 edit("plain.txt"); assert(vim.bo.omnifunc == "")
+vim.fn.writefile({"fixture"}, root .. "/completion-target.txt")
+vim.api.nvim_buf_set_lines(0, 0, -1, false, {"completion-t"})
+vim.api.nvim_win_set_cursor(0, {1, 11}); keys("A<C-x><C-f><Esc>")
+assert(vim.fn.getline(1) == "completion-target.txt")
+vim.bo.modified = false; edit("Makefile")
+assert(not vim.bo.expandtab)
+keys("i<Tab>x<Esc>"); assert(vim.fn.getline(1) == "\tx")
 ''')
 
 
