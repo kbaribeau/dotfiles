@@ -208,12 +208,6 @@ endfunction
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("git ls-files -co --exclude-standard", "", ":e")<cr>
 
-"rainbow parens -- these seem buggy? Jan 4 2017
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
-
 " \\ - save everything
 map <leader><leader> :wa<cr>
 imap <leader><leader> <esc>:wa<cr>

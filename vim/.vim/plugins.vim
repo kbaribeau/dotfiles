@@ -12,7 +12,6 @@ Bundle 'gmarik/vundle'
   Bundle 'tpope/vim-endwise'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-unimpaired'
-  Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-markdown'
   Bundle 'tpope/vim-classpath'
   Bundle 'nathanaelkane/vim-indent-guides'
@@ -21,7 +20,6 @@ Bundle 'gmarik/vundle'
   Bundle 'vim-syntastic/syntastic'
 
 
-  Bundle 'kien/rainbow_parentheses.vim'
 
   Bundle 'flazz/vim-colorschemes'
 
@@ -35,7 +33,6 @@ Bundle 'gmarik/vundle'
   Bundle 'Align'
   Bundle 'vim-indent-object'
   Bundle 'mru.vim'
-  Bundle 'SuperTab'
 
 "non github
   let g:CommandTMaxHeight=25
