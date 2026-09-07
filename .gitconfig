@@ -5,7 +5,7 @@
 	autocrlf = input
 [user]
 	name = Kevin Baribeau
-	email = kevin@mudflapinc.com
+	email = kevin.baribeau@gmail.com
 [alias]
 	ci = commit -v
 	lg = log --date=relative --stat --graph
@@ -42,10 +42,6 @@
 [rebase]
 	autosquash = true
 	autoStash = true
-[git-pair]
-	authors = Zee Spencer <zee@zeespencer.com>
-	authors = Kevin Baribeau <kevin.baribeau@gmail.com>
-	authors = Elisabeth Hendrickson <esh@qualitytree.com>
 [push]
 	default = current
 	followTags = true
