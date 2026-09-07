@@ -19,3 +19,7 @@ vim/.vim	.vim
 vim/.gvimrc	.gvimrc
 skills/consulting-principles	.agents/skills/consulting-principles
 skills/organizational-lifecycle	.agents/skills/organizational-lifecycle
+skills/consulting-principles	.cursor/skills/consulting-principles
+skills/organizational-lifecycle	.cursor/skills/organizational-lifecycle
+skills/consulting-principles	.claude/skills/consulting-principles
+skills/organizational-lifecycle	.claude/skills/organizational-lifecycle

@@ -1,14 +1,86 @@
-# Personal reference skills
+# Shared personal skills
 
-This directory stores two thin skill wrappers. Their descriptions select relevant contexts; their bodies instruct the agent to load the reference only when needed. Each whole skill directory is self-contained, with one canonical supporting document:
+One canonical source per repository-owned skill, linked as a whole directory for
+Codex, Cursor, and Claude Code. Thin `SKILL.md` wrappers select relevant contexts
+and load their own supporting documents only when needed:
 
 - [Organizational lifecycle](organizational-lifecycle/SKILL.md) → [reference](organizational-lifecycle/references/organizational-lifecycle.md)
 - [Consulting principles](consulting-principles/SKILL.md) → [reference](consulting-principles/references/weinberg-secrets-of-consulting.md)
 
-Keep framework content and source caveats in these references rather than copying them into wrappers. This is personal reusable material only: do not add client assessments, identities, or other non-public engagement details. References are advisory, not permission to override user instructions or act harmfully or deceptively.
+The durable ownership boundary is defined in the root
+[skill ownership policy](../README.md#philosophy-skill-ownership). This guide owns
+installation and discovery details, not third-party installation recipes.
 
-The layout follows the [Agent Skills specification](https://agentskills.io/specification): `SKILL.md` links directly to on-demand documents under its own `references/` directory. Moving or linking the whole skill carries its reference; neither root `notes/` nor tool-specific document copies are required. Paths resolve from the skill directory, including through a directory symlink, without parent traversal or a custom loader.
+Keep framework content and source caveats in references, not tool-specific copies.
+Do not add client assessments, identities, tokens, or other non-public details.
+References are advisory, not permission to override user instructions or act
+harmfully or deceptively.
 
-## Installation is a separate action
+The layout follows the [Agent Skills specification](https://agentskills.io/specification):
+`SKILL.md` links directly to on-demand documents under its own `references/` directory.
+Moving or linking the whole skill carries its reference. Paths resolve from the
+skill directory, including through a directory symlink; no root `notes/`, parent
+traversal, or custom loader is required.
 
-Storage here alone does not install or activate these skills. The [repository installer](../README.md) includes both whole directories as individual links under `~/.agents/skills`, the documented Codex user-skill location. It preserves shared/tool-managed directories and existing disable settings, and never invokes skills. This location is shared, not Codex-exclusive. See the installer documentation for fixture discovery evidence and filesystem/sandbox limits. Dedicated Cursor and Claude discovery remains future work: https://github.com/kbaribeau/dotfiles/issues/11.
+## Installation and coexistence
+
+Storage here alone does not activate skills. The [repository installer](../README.md#conservative-link-installer)
+links each of the two skill directories individually into each destination below.
+[`install/links.tsv`](../install/links.tsv) is the complete inventory; neither the
+installer nor the manifest scans or adopts other skills found on the laptop.
+
+Existing real parent directories retain their identity. Unrelated operator-installed
+skill directories and symlinks, supporting files, tool-managed skills, and settings
+remain untouched. Correct repository links are kept verbatim across repeat runs.
+A real file/directory or wrong link at a listed destination is a conflict, not
+permission to overwrite, merge, or repoint it; preflight aborts without writes.
+Reconcile a same-name skill separately. A symlink at a shared parent is also refused
+rather than followed. See the root installer guide for the full safety limits.
+
+All six links point directly to the same two repository directories; no shared
+parent is replaced. Updating a repository skill in the installing clone makes the
+new content available through all three tool links. A moved/deleted clone breaks
+links; keep the installing clone available.
+
+## Discovery evidence
+
+Authoritative discovery documentation checked during implementation:
+
+| Local tool | User destination used here | Evidence / limits |
+| --- | --- | --- |
+| [Codex](https://developers.openai.com/codex/skills/) | `~/.agents/skills/<name>` | Documents user-scope discovery and following symlinked skill folders. |
+| [Cursor](https://cursor.com/docs/context/skills) | `~/.cursor/skills/<name>` | Documents this global location, plus `.agents`, Claude, and Codex compatibility locations. The skills page does **not** specify symlink support or duplicate-target precedence; live discovery remains unverified. |
+| [Claude Code](https://code.claude.com/docs/en/skills#where-skills-live) | `~/.claude/skills/<name>` | Documents personal skills, directory symlinks, and loading the same target only once. |
+
+Cursor can also see the Codex/Claude locations: verify that its UI lists one usable
+entry per name rather than assuming deduplication. These are local-machine
+integrations, not Claude.ai/Cowork, Cursor Cloud Agents, remote SSH, or automatic
+cloud syncing. The installer changes no sync/disable settings and neither grants
+tool permissions nor invokes skills. Sandboxes must be able to read the source
+clone. Custom tool-directory overrides are unsupported.
+
+## Verification without skill invocation
+
+Run the offline fixture suite and optional isolated Codex probe from the root
+[validation instructions](../README.md#validation). Fixtures read every `SKILL.md`
+and reference through all three destinations, check shared-source updates and
+standalone portability, and test repeat runs, conflicts, and coexistence with
+unrelated operator-installed skill directories and symlinks. Filesystem checks are
+**not** proof that Cursor or Claude loaded the skill.
+
+After a separately authorized installation on a future laptop:
+
+- **Codex:** restart if needed and inspect the skill list (`/skills`); both personal
+  skill names should be available unless disabled. The optional probe verifies
+  discovery without a model turn in an isolated home.
+- **Cursor:** open Settings → Rules (skills appear under Agent Decides), or Customize
+  → Skills on newer versions; confirm both personal skill names and no duplicate
+  entries. Inspect each linked `SKILL.md` and its relative reference without invoking it.
+- **Claude Code:** restart if the top-level skills directory was newly created;
+  inspect `/skills` for both personal skill names. No skill invocation is needed.
+  Local overrides, enterprise policy, and same-name skills can affect availability.
+
+Cursor and Claude executables were unavailable in the implementation environment;
+no live discovery or model-driven reference-read claim is made for them. Do not
+silently replace links with copies if a version cannot discover them: report the
+version and reconcile separately.

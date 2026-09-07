@@ -2,6 +2,26 @@
 
 Personal configuration and [self-contained reference skills](skills/README.md).
 
+## Philosophy: skill ownership
+
+Dotfiles owns the shared Codex, Cursor, and Claude Code framework and the personal
+skills maintained in this repository. Each repository-owned skill has one canonical
+source, linked individually into the tools' discovery directories.
+
+**Third-party skills belong to the operator of each laptop.** The operator chooses,
+installs, authenticates, updates, and removes them using their upstream guidance.
+Dotfiles does not vendor third-party skills or acquire them through downloaders,
+submodules, bootstrap commands, or manifest entries. It does not manage their
+runtime dependencies, credentials, or optional hooks. A new laptop therefore needs
+its own deliberate third-party skill setup; cloning dotfiles does not reproduce it.
+
+Repository-owned and operator-managed skills must coexist: never take ownership of
+an entire shared skills directory or overwrite user material. Unrelated skills and
+settings stay untouched; colliding destinations require separate reconciliation.
+See [skills/README.md](skills/README.md) for the installation layout, discovery
+evidence, and verification. This policy concerns skills, not a change to the
+separately documented editor/plugin dependencies below.
+
 ## Conservative link installer
 
 [`install/links.tsv`](install/links.tsv) is the complete, unconditional inventory.
@@ -117,19 +137,12 @@ For a separately approved live installation, inspect the dry-run above first and
 reconcile any existing Neovim destination separately; the installer never replaces
 it. This change performs no live installation.
 
-## Codex skills
+## Shared skills: Codex, Cursor, Claude Code
 
-The installer links each skill individually at
-`~/.agents/skills/{consulting-principles,organizational-lifecycle}`. It never replaces
-`.agents` or its shared `skills` parent. [Codex documentation](https://developers.openai.com/codex/skills/)
-supports user-scope discovery there and follows symlinked skill folders. This is a
-shared discovery location, **not Codex exclusivity**. Existing disable settings are
-preserved; discovery does not force invocation. Dedicated Cursor/Claude integration
-is deferred to https://github.com/kbaribeau/dotfiles/issues/11.
-
-Each directory carries `SKILL.md` and its own `references/` document. Reads do not
-depend on root `notes/`, parent traversal, per-tool copies, or a custom loader.
-Filesystem access to the clone is still required by the consuming agent/sandbox.
+The [skill installation guide](skills/README.md) owns the per-tool discovery paths,
+canonical source/reference layout, coexistence behavior, and live-verification
+limits. The [ownership policy](#philosophy-skill-ownership) above defines the boundary
+between repository-owned personal skills and operator-managed third-party skills.
 
 ## Validation
 
@@ -142,9 +155,9 @@ python3 -B tests/check_codex_discovery.py      # optional, requires installed Co
 RUN_NVIM_PICKER_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_picker.py -v
 ```
 
-Tests use synthetic clones and temporary homes only; they never copy private config
-contents or install into the real home. The offline Neovim smoke test copies public
-configuration and stubs plugin loading to verify startup wiring without network or
+Tests use synthetic clones and temporary homes under the clone only; they never
+copy private config contents or install into the real home. The offline Neovim smoke
+test copies public configuration and stubs plugin loading to verify startup wiring without network or
 writes to the config clone; it is skipped if `nvim` is unavailable. The opt-in real
 integration test uses isolated HOME/XDG paths under the worktree, native vim.pack
 confirmation/installation, and disposable Git repositories. It checks pinned plugin
@@ -163,12 +176,18 @@ and `CODEX_HOME`, using the documented [initialize / skills/list protocol](https
 It checks both canonical user-scope skill paths, an existing disabled-skill setting,
 and an unrelated managed skill. It sends **no model turn or skill invocation** and
 changes no live settings. Filesystem checks read references through both installed and
-reported paths; the unit suite also verifies standalone copied skill directories.
+reported paths; the unit suite also verifies all six tool-destination links,
+shared-source updates, standalone copied skill directories, and conflict refusal
+across all three skill roots. Unrelated operator-installed skill directories and
+symlinks, their supporting files, and tool settings are preserved across repeat runs.
 
-Validation on macOS with system Bash 3.2 and **codex-cli 0.153.2** confirms live
-fixture discovery. Documentation/layout checks are static evidence; filesystem reads
-are not proof of model-driven reads inside every sandbox or compatibility with every
-agent/version. No live-home installation has been performed by this change.
+Validation on macOS with system Bash 3.2 and **codex-cli 0.153.2** confirms
+both repository-owned skills' live fixture discovery. Cursor and Claude
+executables were unavailable; see the manual discovery checks in
+[skills/README.md](skills/README.md). Documentation/layout checks are static evidence;
+filesystem reads are not proof of model-driven reads inside every sandbox or
+compatibility with every agent/version. No live-home installation has been performed
+by this change.
 
 Design proposal: https://github.com/kbaribeau/dotfiles/issues/6. Its earlier
 root-note canonicalization workaround is superseded by the self-contained references.
