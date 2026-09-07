@@ -14,16 +14,13 @@ Bundle 'gmarik/vundle'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-markdown'
-  Bundle 'tpope/vim-fireplace'
   Bundle 'tpope/vim-classpath'
   Bundle 'nathanaelkane/vim-indent-guides'
-  Bundle 'kchmck/vim-coffee-script'
   " Bundle 'pangloss/vim-javascript'
   Bundle 'groenewege/vim-less'
   Bundle 'vim-syntastic/syntastic'
 
 
-  Bundle 'guns/vim-clojure-static'
   Bundle 'kien/rainbow_parentheses.vim'
 
   Bundle 'flazz/vim-colorschemes'
