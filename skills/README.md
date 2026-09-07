@@ -11,4 +11,4 @@ The layout follows the [Agent Skills specification](https://agentskills.io/speci
 
 ## Installation is a separate action
 
-Storage here does not install or activate these skills. Link individual whole skills, preserving existing tool-managed skills rather than replacing a shared skills directory. No live configuration changes are included in the reference relocation. Dedicated Cursor and Claude discovery remains future work: https://github.com/kbaribeau/dotfiles/issues/11.
+Storage here alone does not install or activate these skills. The [repository installer](../README.md) includes both whole directories as individual links under `~/.agents/skills`, the documented Codex user-skill location. It preserves shared/tool-managed directories and existing disable settings, and never invokes skills. This location is shared, not Codex-exclusive. See the installer documentation for fixture discovery evidence and filesystem/sandbox limits. Dedicated Cursor and Claude discovery remains future work: https://github.com/kbaribeau/dotfiles/issues/11.

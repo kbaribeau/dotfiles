@@ -1,8 +1,8 @@
 # Agent notes
 
-Root-level files (`.zshrc`, `.gitconfig`, …) are meant to land in `$HOME` by symlink. There is no install or stow script. `vim/` is the exception: `vim/.vimrc` and `vim/.vim` map to `~/.vimrc` and `~/.vim`.
+`install.sh` and `install/links.tsv` own the complete link inventory; see `README.md` for usage, safety limits, and fixture-only validation commands. Sources come from the resolved script's clone. Never run an apply against the real home without explicit authorization; conflicts require separate reconciliation.
 
-`.config/treehouse/` is the first XDG path in this repo. Do not symlink all of `~/.config`; only the `treehouse` directory (a merge does not update the live copy). After pull: `ln -snf /path/to/this/repo/.config/treehouse ~/.config/treehouse` (move an existing real directory aside first).
+Link shared configuration/skill directories only at the manifest's individual subdirectories, never all of `~/.config` or `~/.agents/skills`. Personal skills carry canonical supporting documents under their own `references/`; see `skills/README.md`.
 
 Treehouse `post_create` is user-level only. The registered hook is `.config/treehouse/post-create.sh`, which runs `hooks/<origin-basename>-post-create.sh` when that file is executable and otherwise exits 0. Per-project scripts under `hooks/` are local-only and gitignored. Add one on a machine as `~/.config/treehouse/hooks/<origin-basename>-post-create.sh` (executable); do not commit it. A fresh clone still has the `hooks/` path via the tracked gitignore there.
 

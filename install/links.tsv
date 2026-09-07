@@ -1,0 +1,20 @@
+# Repository-relative source<TAB>home-relative destination; all rows are unconditional.
+.zshrc	.zshrc
+.gitconfig	.gitconfig
+.gitignore	.gitignore
+.irbrc	.irbrc
+.psqlrc	.psqlrc
+.rspec	.rspec
+.rspec-config.rb	.rspec-config
+.tmux.conf	.tmux.conf
+vim/.vimrc	.vimrc
+vim/.vim	.vim
+.config/treehouse	.config/treehouse
+.profile	.profile
+.git-completion.bash	.git-completion.bash
+.gitexcludes	.gitexcludes
+.rspec-config.rb	.rspec-config.rb
+.rdebugrc	.rdebugrc
+vim/.gvimrc	.gvimrc
+skills/consulting-principles	.agents/skills/consulting-principles
+skills/organizational-lifecycle	.agents/skills/organizational-lifecycle
