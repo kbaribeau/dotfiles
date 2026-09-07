@@ -1,0 +1,1 @@
+-- Future autocommands and filetype-specific behavior.

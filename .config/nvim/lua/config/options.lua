@@ -1,0 +1,2 @@
+-- Future editor settings. Keep runtime state in Neovim's standard XDG paths,
+-- not in this linked configuration directory or Vim's state directories.
