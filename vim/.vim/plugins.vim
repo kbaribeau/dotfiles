@@ -20,7 +20,6 @@ Bundle 'gmarik/vundle'
   Bundle 'vim-syntastic/syntastic'
 
 
-  Bundle 'kien/rainbow_parentheses.vim'
 
   Bundle 'flazz/vim-colorschemes'
 
