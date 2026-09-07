@@ -4,8 +4,7 @@ Personal configuration and [self-contained reference skills](skills/README.md).
 
 ## Conservative link installer
 
-[`install/links.tsv`](install/links.tsv) is the complete, unconditional inventory:
-**20 links to 19 sources** (18 configuration links and two whole skill directories).
+[`install/links.tsv`](install/links.tsv) is the complete, unconditional inventory.
 It includes both RSpec aliases, all three special Vim mappings, and only the
 Treehouse and Neovim subdirectories of `.config`. There are no core/legacy groups or selection flags.
 
