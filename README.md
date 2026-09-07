@@ -83,7 +83,7 @@ leaves Neovim usable, but the picker is unavailable until installation is accept
 Plugins live under Neovim's `stdpath('data')/site/pack/core/opt`, never `~/.vim`.
 Data/state/cache remain in Neovim's standard paths; the native lockfile is config.
 
-**`\\f`** runs mini.pick's explicit Git file tool in the **editor's current
+**`\f`** runs mini.pick's explicit Git file tool in the **editor's current
 working directory**, including window/tab-local cwd. It lists tracked files
 (including tracked files matching ignore rules) plus nonignored untracked files,
 including eligible dotfiles. It neither expands to repository root nor switches
