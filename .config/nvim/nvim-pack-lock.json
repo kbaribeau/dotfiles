@@ -10,6 +10,10 @@
       "src": "https://github.com/yegappan/mru",
       "version": "'dcba22de1201523acda1e1a60d6fc3d9d7b6a519'"
     },
+    "nvim": {
+      "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
+      "src": "https://github.com/catppuccin/nvim"
+    },
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive",

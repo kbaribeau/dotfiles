@@ -10,3 +10,8 @@ local local_config = vim.fn.stdpath("config") .. "/local.lua"
 if vim.fn.filereadable(local_config) == 1 then
   dofile(local_config)
 end
+
+vim.pack.add({
+  { src = "https://github.com/catppuccin/nvim" },
+})
+ vim.cmd.colorscheme("catppuccin-mocha")
