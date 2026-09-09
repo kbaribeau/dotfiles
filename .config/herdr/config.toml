@@ -1,0 +1,19 @@
+onboarding = false
+
+[keys]
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+navigate_pane_down = "down"
+navigate_pane_up = "up"
+
+[ui]
+prompt_new_tab_name = false
+status_indicators = "symbols"
+agent_panel_sort = "priority"
+mouse_capture = false
+
+[ui.toast]
+delivery = "herdr"
+
+[ui.sound]
+enabled = false
