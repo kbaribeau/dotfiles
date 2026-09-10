@@ -19,7 +19,7 @@ class PickerIntegrationTests(unittest.TestCase):
             home = base / "home"
             home.mkdir()
             config = base / "config/nvim"
-            shutil.copytree(ROOT / ".config/nvim", config,
+            shutil.copytree(ROOT / "packages/nvim/.config/nvim", config,
                             ignore=shutil.ignore_patterns("local.lua"))
             env = {"PATH": os.environ["PATH"], "HOME": str(home),
                    "XDG_CONFIG_HOME": str(base / "config"),

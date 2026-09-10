@@ -30,7 +30,7 @@ class PluginTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertFalse(any((declined.root / "data/nvim/site/pack").glob("**/.git")))
         # Lockfile is the serialized native package contract, not an implementation-text test.
-        expected = json.loads((ROOT / ".config/nvim/nvim-pack-lock.json").read_text())["plugins"]
+        expected = json.loads((ROOT / "packages/nvim/.config/nvim/nvim-pack-lock.json").read_text())["plugins"]
         self.check('local expected = vim.json.decode(' + json.dumps(json.dumps(expected)) + r''')
 local packages = vim.pack.get()
 assert(#packages == 5)

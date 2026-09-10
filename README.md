@@ -22,76 +22,85 @@ See [skills/README.md](skills/README.md) for the installation layout, discovery
 evidence, and verification. This policy concerns skills, not a change to the
 separately documented editor/plugin dependencies below.
 
-## Conservative link installer
+## GNU Stow installation
 
-[`install/links.tsv`](install/links.tsv) is the complete, unconditional inventory.
-It includes both RSpec aliases, all three special Vim mappings, and only the
-Treehouse and Neovim subdirectories of `.config`. There are no core/legacy groups or selection flags.
+Requires **GNU Stow** (tested with 2.4.1) and Bash 3.2+. Install prerequisites
+separately; this repository never bootstraps dependencies. [`packages/`](packages)
+is the inventory: every immediate directory is one application/coherent package,
+and all packages are passed to Stow together. No manifest or generated tree exists.
+Herdr and other configuration outside that tree are not installed.
 
 ```sh
-./install.sh --dry-run                 # inspect the plan for $HOME; writes nothing
+# Create a disposable target first; use absolute physical paths.
 ./install.sh --home /absolute/test-home --dry-run
 ./install.sh --home /absolute/test-home
-# ./install.sh                        # apply to $HOME only when deliberately requested
+./install.sh --home /absolute/test-home --restow --dry-run
+./install.sh --home /absolute/test-home --restow
+./install.sh --home /absolute/test-home --unstow --dry-run
+./install.sh --home /absolute/test-home --unstow
+# Omitting --home selects $HOME. Live apply requires separate authorization.
 ```
 
-Run the script, **do not source it**. Absolute/relative invocation, Bash invocation
-(`bash /path/to/clone/install.sh`), PATH lookup, and script symlink chains are supported.
-Sources always come from the clone containing the **resolved installer**, not the
-working directory or another preferred checkout. Keep that clone accessible for the
-lifetime of the links. Paths with spaces work. Final symlink chains are bounded at
-64 hops; loops fail (a loop at launch may be rejected by the OS before the script runs).
+Run (do not source) the script directly from its clone; script symlink aliases are
+not supported. Working directory does not select sources. Keep the installing
+clone at its original path for the lifetime of its links. Paths with spaces work.
+The target must already exist and not resolve to `/`. Use trusted, non-overlapping
+clone/target directories and serialize operations; this is not a transaction or
+protection against concurrent filesystem changes. Stow diagnostics/status are
+propagated, not translated into the retired installer's error contract.
 
-Requires Bash 3.2+, standard macOS/Unix utilities (`readlink`, `mkdir`, `tr`), and Perl.
-Perl's `symlink(2)` binding provides exact-destination, atomic no-clobber creation;
-portable `ln` can instead nest a link inside a directory that appears after a check.
-No GNU-only `ln -T` or `readlink -f` is used. Missing dependencies are not installed.
+The wrapper fixes `--no-folding --dotfiles --verbose`. Ambient `$HOME/.stowrc`,
+`packages/.stowrc`, and `$HOME/.stow-global-ignore` are refused because options such
+as `--adopt` can change safety even with explicit arguments. If needed, use an
+existing empty disposable directory as invocation `HOME` and set `--home` explicitly;
+do not move or edit live Stow settings just to run this installer.
+Custom XDG/tool-directory overrides do not change the package destinations.
 
-### Safety and limits
+### Deliberate Stow semantics
 
-- The manifest is data, never sourced/evaluated: exactly two tab-separated normalized
-  relative paths per row, with blank lines and `#` comments allowed. No absolute paths,
-  dot/parent components, empty/extra fields, or control bytes (other than tab/LF).
-  Destination duplicates/ancestor overlaps are rejected, including ASCII case variants.
-- Every valid mapping is preflighted before writes: source readability/type (and
-  directory searchability), destination conflicts, source/destination overlap, and
-  ancestor safety. Known errors are reported deterministically. Directory checks do
-  not validate every contained file or establish application readiness.
-- Equivalent absolute, relative, or chained correct links stay **verbatim**. Real files,
-  directories, special files, and wrong/dangling/looping links are conflicts, never
-  overwritten, backed up, merged, removed, or repointed. Reconcile conflicts separately.
-- Only missing links and required parents are created. Existing shared directories,
-  tool-managed skills, private hooks, local Vim state, and links outside the manifest
-  remain untouched. An existing real `~/.vim`, `~/.config/nvim`, or `~/.config/treehouse` is a conflict,
-  not permission to merge its contents. A skill conflict prevents config writes too.
-- `--home` defaults to `$HOME`; it must be a normalized, non-root absolute path.
-  **All destination ancestors, including the selected home, must be real directories,
-  not symlinks.** Missing ancestors must have a writable existing parent. Use a physical
-  path for temporary homes (on macOS `/tmp` and `/var` are often symlinks; `pwd -P`
-  inside an existing temporary directory gives its physical spelling).
-- Dry-run creates nothing, including parents. Apply rechecks sources, ancestors, and
-  destinations; link creation cannot overwrite or nest inside an existing entry.
-  Use serially in a trusted filesystem: concurrent installers/ancestor renames are
-  unsupported, and rechecks are not a transaction or protection against a hostile
-  concurrent filesystem actor. On runtime failure, stop with partial-progress counts
-  and nonzero exit; **no rollback**. After resolving the cause, reruns converge.
-- V1 uses the documented default destinations under the chosen home. Custom
-  `XDG_CONFIG_HOME`, `CODEX_HOME`, `ZDOTDIR`, or other tool-directory overrides are
-  **unsupported and do not change the manifest destinations**. Setting such variables
-  may mean an application does not use these links.
+- Real directories are merged at file granularity, not rejected wholesale. Shared
+  `.config` and tool skills roots stay real directories; unrelated material stays
+  untouched. Ordinary file/wrong/dangling link conflicts abort the whole plan.
+- Existing relative Stow-owned links work; equivalent **absolute** legacy links
+  conflict in 2.4.1. Do not use `--adopt`, overrides or blanket deletion to fix them.
+- Foreign symlinked shared ancestors conflict in the prototype. Unlike the old
+  installer, no custom blanket ancestor checker exists: supply physical target
+  paths and review Stow's complete dry-run, especially with preexisting links.
+- Unstow removes owned links but can leave empty real directories under
+  `--no-folding`. It preserves unrelated files; no custom pruning is added.
+- Existing file edits are visible immediately. **New files need another Stow run**
+  in real destination directories. All three tools' tracked per-skill aliases point
+  through the package to canonical `skills/` directories, so new skill files remain
+  visible immediately. This small exception preserves Codex directory discovery.
+- Vim now mirrors `.vimrc`, `.gvimrc`, `.vim/` directly. RSpec's `.rspec-config`
+  is a tracked relative alias to `.rspec-config.rb`, not a content copy. Git's
+  `dot-gitignore` becomes the intentional home `.gitignore` via `--dotfiles`,
+  retaining Stow's default ignores without a local ignore override. The root
+  `.gitignore` is now solely repository policy; the home policy retains its content.
 
-Exit codes: **0** success/clean dry-run; **1** conflicts, unavailable sources/dependencies,
-filesystem/runtime failures; **2** invalid arguments/manifest (takes precedence when
-both manifest and filesystem errors are found). `--help` exits 0.
+### Private/runtime policy
 
-This only links files: no packages, plugins/submodules, startup sourcing, hook or
-skill invocation, settings edits, private configuration generation, or old home-link
-cleanup. Linking a shell file is not a claim that a particular shell loads it.
+**Package trees are public installation input, not runtime storage.** Stow does
+not consult Git's ignore rules: even gitignored files in packages can be installed.
+Keep Neovim `local.lua`, Treehouse `hooks/<origin-basename>-post-create.sh`, Vim
+plugin checkouts/backups/swap/undo, and tool-managed skills in target-side real
+directories, never in package trees. Existing Git ignore rules are only a secondary
+commit guard, not an installation filter. Inspect package trees for ignored/untracked
+material before installing from a previously used clone. Do not generate local
+files there. No parallel Git/Stow ignore inventory is maintained.
+
+Neovim's native data/state/cache remain target-side; its tracked package lockfile
+is linked configuration (an explicit plugin update can edit that source). Vim's
+tracked legacy Vundle files remain unchanged. Treehouse's hooks directory retains
+a tracked placeholder; create missing target-side runtime directories as needed.
+This installer invokes no shell config, editor, plugin, hook, skill or settings API.
+Updating a clone that currently supplies home links requires separate
+reconciliation. No live-home switch is authorized here.
 
 ## Neovim daily baseline (incremental migration)
 
-The installer links the whole [`.config/nvim`](.config/nvim) directory to
-`~/.config/nvim`; no additional plugin links are needed. `init.lua` loads the
+The installer links files from [`packages/nvim/.config/nvim`](packages/nvim/.config/nvim)
+into the real `~/.config/nvim` directory; no additional plugin links are needed. `init.lua` loads the
 `options`, `keymaps`, `autocmds`, and `plugins` modules under `lua/config/`.
 
 Requires **Neovim 0.12+ and Git** for native `vim.pack`. These packages are pinned
@@ -211,7 +220,7 @@ project libraries is not. Custom extension aliases (including `.prawn`), old Vue
 rules, Ruby syntax preferences and the global XML performance guard are excluded.
 
 An optional **`stdpath('config')/local.lua`** loads last. The default linked path
-`.config/nvim/local.lua` is gitignored; never commit private settings or copy/source
+`~/.config/nvim/local.lua` is target-only; never commit private settings or copy/source
 `~/.vimrc.local`. A custom app name/config path needs its own ignore policy. Missing
 local config is normal; errors in an existing override are visible. **Restart
 Neovim after config edits.** Lua modules are cached; sourcing init.lua is not a hot
@@ -314,11 +323,12 @@ The rename no-clobber primitive is exercised on macOS; Linux support remains sub
 to its libc/kernel/filesystem and must fail closed when unavailable. No CI bypass is
 implied by local tests.
 
-Fixture tests also cover occupied Neovim destinations and future
-nested files becoming visible through the directory link without installer changes. They cover the full inventory, preservation,
-repeat runs, dry runs, path/symlink resolution, malformed data, all conflict classes,
-unsafe/unwritable ancestors, unavailable sources, and injected partial/racing failures.
-Permission tests require an unprivileged user.
+Real-Stow fixture tests cover intended destinations, aliases, ignore behavior,
+spaces, dry-run/repeat/restow/unstow, conflicts across packages, shared skill
+references, private/runtime coexistence, and a synthetic legacy migration/rollback.
+New file discovery is tested with a subsequent Stow invocation. Retired manifest,
+atomic-link-engine and bespoke diagnostic tests are gone. Permission tests in the
+Neovim suite require an unprivileged user.
 
 The opt-in Codex probe starts its own isolated stdio app-server with temporary `HOME`
 and `CODEX_HOME`, using the documented [initialize / skills/list protocol](https://developers.openai.com/codex/app-server/).
@@ -330,7 +340,7 @@ shared-source updates, standalone copied skill directories, and conflict refusal
 across all three skill roots. Unrelated operator-installed skill directories and
 symlinks, their supporting files, and tool settings are preserved across repeat runs.
 
-Validation on macOS with system Bash 3.2 and **codex-cli 0.153.2** confirms
+Validation on macOS with system Bash 3.2 and **codex-cli 0.153.4** confirms
 both repository-owned skills' live fixture discovery. Cursor and Claude
 executables were unavailable; see the manual discovery checks in
 [skills/README.md](skills/README.md). Documentation/layout checks are static evidence;

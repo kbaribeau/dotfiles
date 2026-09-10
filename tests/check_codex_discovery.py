@@ -14,7 +14,7 @@ import subprocess
 import tempfile
 import time
 
-from test_install import ROOT, SKILLS, fixture
+from test_install import ROOT, SKILLS, CANONICAL, fixture
 
 
 def main():
@@ -28,7 +28,7 @@ def main():
         codex_home = home / ".codex"
         codex_home.mkdir(parents=True)
         config = codex_home / "config.toml"
-        disabled = repo / "skills/consulting-principles/SKILL.md"
+        disabled = repo / CANONICAL / "consulting-principles/SKILL.md"
         config.write_text('[analytics]\nenabled = false\n[[skills.config]]\n'
                           f'path = {json.dumps(str(disabled))}\nenabled = false\n')
         before = config.read_bytes()
@@ -89,7 +89,7 @@ def main():
                 skills = {item["name"]: item for item in data["skills"]}
                 for name in SKILLS:
                     skill = skills[name]
-                    expected = repo / "skills" / name / "SKILL.md"
+                    expected = repo / CANONICAL / name / "SKILL.md"
                     assert skill["path"] == str(expected), "Expected canonical fixture skill path"
                     assert skill["scope"] == "user"
                     assert skill["enabled"] == (name != "consulting-principles")
