@@ -20,7 +20,7 @@ class FixtureIsolationTests(unittest.TestCase):
             root = Path(tmp)
             source = root / "synthetic-config"
             copytree = shutil.copytree
-            copytree(ROOT / ".config/nvim", source,
+            copytree(ROOT / "packages/nvim/.config/nvim", source,
                      ignore=shutil.ignore_patterns("local.lua"))
             marker = root / "override-executed"
             (source / "local.lua").write_text(
@@ -28,7 +28,7 @@ class FixtureIsolationTests(unittest.TestCase):
             destinations = []
 
             def copy_config(src, dst, *args, **kwargs):
-                if Path(src) == ROOT / ".config/nvim":
+                if Path(src) == ROOT / "packages/nvim/.config/nvim":
                     src = source
                     destinations.append(Path(dst))
                     result = copytree(src, dst, *args, **kwargs)

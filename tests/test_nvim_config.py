@@ -15,7 +15,7 @@ class NvimFixture:
         self.tmp = tempfile.TemporaryDirectory(prefix=".nvim-test-", dir=ROOT)
         self.root = Path(self.tmp.name)
         self.config = self.root / "config/nvim"
-        shutil.copytree(ROOT / ".config/nvim", self.config,
+        shutil.copytree(ROOT / "packages/nvim/.config/nvim", self.config,
                         ignore=shutil.ignore_patterns("local.lua"))
         self.env = {"PATH": os.environ["PATH"], "TERM": "xterm-256color",
                     "HOME": str(self.root / "home"), "TEST_ROOT": str(self.root),
@@ -47,7 +47,9 @@ vim.schedule(function()
 end)
 ''')
         init = self.root / "bootstrap.lua"
-        init.write_text(("" if real else "vim.pack = { add = function() end }\n") + bootstrap)
+        # External theme selection is unrelated to offline workflow assertions.
+        init.write_text(("" if real else "vim.pack = { add = function() end }\n"
+                        "vim.cmd.colorscheme = function() end\n") + bootstrap)
         return subprocess.run([NVIM, "--headless", "--cmd", "luafile " + str(init),
                                "-c", "luafile " + str(script)], cwd=self.root,
                               env=self.env, text=True, capture_output=True, timeout=timeout)
@@ -168,7 +170,7 @@ end
 ''')
         (self.fixture.config / "local.lua").write_text("vim.opt.shiftwidth = 6\n")
         self.check("assert(vim.o.shiftwidth == 6)")
-        result = subprocess.run(["git", "check-ignore", ".config/nvim/local.lua"],
+        result = subprocess.run(["git", "check-ignore", "packages/nvim/.config/nvim/local.lua"],
                                 cwd=ROOT, text=True, capture_output=True)
         self.assertEqual(result.returncode, 0)
 

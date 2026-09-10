@@ -1,7 +1,7 @@
 # Shared personal skills
 
-One canonical source per repository-owned skill, linked as a whole directory for
-Codex, Cursor, and Claude Code. Thin `SKILL.md` wrappers select relevant contexts
+One canonical source per repository-owned skill here in `skills/`, exposed to
+Codex, Cursor, and Claude Code through tracked per-skill directory aliases. Thin `SKILL.md` wrappers select relevant contexts
 and load their own supporting documents only when needed:
 
 - [Organizational lifecycle](organizational-lifecycle/SKILL.md) → [reference](organizational-lifecycle/references/organizational-lifecycle.md)
@@ -24,23 +24,22 @@ traversal, or custom loader is required.
 
 ## Installation and coexistence
 
-Storage here alone does not activate skills. The [repository installer](../README.md#conservative-link-installer)
-links each of the two skill directories individually into each destination below.
-[`install/links.tsv`](../install/links.tsv) is the complete inventory; neither the
-installer nor the manifest scans or adopts other skills found on the laptop.
+Storage here alone does not activate skills. The [repository installer](../README.md#gnu-stow-installation)
+uses the `personal-skills` Stow package. All three tools receive tracked relative
+per-skill aliases that resolve through the package to the canonical directories
+here. This preserves directory-level discovery: a Codex fixture did not discover
+skills when only `SKILL.md` and reference files were symlinked individually.
+Neither installer nor package scans/adopts other skills found on the laptop.
 
-Existing real parent directories retain their identity. Unrelated operator-installed
-skill directories and symlinks, supporting files, tool-managed skills, and settings
-remain untouched. Correct repository links are kept verbatim across repeat runs.
-A real file/directory or wrong link at a listed destination is a conflict, not
-permission to overwrite, merge, or repoint it; preflight aborts without writes.
-Reconcile a same-name skill separately. A symlink at a shared parent is also refused
-rather than followed. See the root installer guide for the full safety limits.
+Existing shared real parents retain their identity. Unrelated operator-installed
+skills, supporting files and settings remain untouched. Ordinary occupied-file or
+foreign-link conflicts abort the plan. Stow can merge real directories; reconcile
+same-name skills separately rather than mixing two owners' contents. No entire
+shared skill root is linked. See the root guide for Stow's safety limits.
 
-All six links point directly to the same two repository directories; no shared
-parent is replaced. Updating a repository skill in the installing clone makes the
-new content available through all three tool links. A moved/deleted clone breaks
-links; keep the installing clone available.
+Editing or adding canonical files is visible in all tools immediately through the
+per-skill directory aliases. References remain skill-relative and standalone-copy
+compatible. A moved/deleted clone breaks links; keep the installing clone available.
 
 ## Discovery evidence
 

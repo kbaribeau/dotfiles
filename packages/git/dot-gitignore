@@ -6,7 +6,7 @@
 .rspec-local
 
 # Optional private Neovim override, loaded last.
-packages/nvim/.config/nvim/local.lua
+.config/nvim/local.lua
 
 tags
 
@@ -16,7 +16,7 @@ tags
 
 # Gas Town (added by gt)
 .runtime/
-/.claude/
+.claude/
 .logs/
 __pycache__/
 state.json
