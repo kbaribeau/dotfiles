@@ -274,6 +274,74 @@ For a separately approved live installation, inspect the dry-run above first and
 reconcile any existing Neovim destination separately; the installer never replaces
 it. This change performs no live installation.
 
+## Pi context usage in Herdr
+
+[`packages/pi/.pi/agent/extensions/herdr-context.ts`](packages/pi/.pi/agent/extensions/herdr-context.ts)
+is a separate personal Pi extension. Never edit or vendor Herdr's managed
+`herdr-agent-state.ts`; it retains sole responsibility for activity/session identity.
+The Pi package installs only this additional file, not settings or managed resources.
+The matching Pi-only expanded-sidebar rows remain in
+[`.config/herdr/config.toml`](.config/herdr/config.toml), which is intentionally
+**outside Stow's inventory**. Other Herdr choices and other agents' rows are unchanged.
+
+Verified against Pi's installed `ContextUsage` API and Herdr 0.8.2's
+[metadata contract](https://github.com/herdrdev/herdr/blob/v0.8.2/docs/next/website/src/content/docs/socket-api.mdx)
+and [sidebar configuration](https://github.com/herdrdev/herdr/blob/v0.8.2/docs/next/website/src/content/docs/configuration.mdx).
+`ctx 25.0%` is Pi's `getContextUsage().percent`, not cumulative tokens: Pi uses
+last assistant usage plus estimates for trailing messages. `ctx ?` means unavailable
+(including immediately after compaction); a genuinely empty context can be `0.0%`.
+This is the same current-window estimate Pi exposes, not an exact provider meter.
+
+Only TUI mode with terminal stdin/stdout can publish. Each write checks that this
+process is in the owning pane's foreground process list; inherited Herdr environment
+variables alone are insufficient. RPC/JSON/print children cannot overwrite it.
+The extension patches only `$pi_context`, refreshes every 10 seconds and on lifecycle
+events, clears on graceful shutdown/reload/reset, and uses a 30-second TTL so crashes
+or lost ownership cannot leave a permanent stale number. During a Herdr outage an
+old value can remain until that TTL; an expired/unreported token disappears.
+No prompts, transcripts, model names, session paths or project identifiers are sent.
+Collapsed/mobile sidebar layouts are not affected.
+
+### Narrow activation (separate authorization required)
+
+Do not run the overall installer or change live symlinks for this feature.
+From the reviewed clone, after authorization:
+
+1. Confirm `~/.pi/agent/extensions` is a real directory and
+   `~/.pi/agent/extensions/herdr-context.ts` does not exist (including dangling links).
+   Copy just the extension to that new regular file with no-clobber semantics.
+2. Confirm `~/.config/herdr/config.toml` is a regular, non-symlink file. Preserve its
+   contents; add only `[ui.sidebar.agents.rows_by_agent]` with the `pi` row from the
+   tracked config. If that table or key already exists, reconcile instead of appending
+   a duplicate. Do not replace the complete live config with the tracked copy.
+3. Existing idle Pi TUIs can load the new file with `/reload`; new TUIs discover it
+   automatically. Do not inject reload into working agents. This reload also reloads
+   their other Pi extensions/resources.
+4. Herdr requires a config reload to apply sidebar rows. The shared production server
+   must **not** be reloaded/restarted by a worker or test. Hand that step to the fleet
+   operator for an approved window (Herdr's global-menu **reload config** applies UI
+   settings without restarting panes). File installation alone does not activate the
+   existing Herdr display.
+
+Rollback removes only the new regular extension file and the Pi-only sidebar override,
+then follows the same operator-controlled reload steps. The token expires within
+30 seconds after its reporter stops. Never remove the managed integration.
+
+Validate without real-home writes:
+
+```sh
+node --test tests/herdr_context.test.mjs # Node 24+: native TypeScript stripping
+# Opt-in, approved named-session helper required; never target default:
+HERDR_LAB_HELPER=/absolute/path/to/fm-herdr-lab.sh bash tests/test_herdr_context_lab.sh
+```
+
+Unit tests cover calculations, unavailable data, headless/foreground ownership,
+ordered shutdown, heartbeat and lifecycle replacement. The lab drives synthetic Pi
+lifecycle events in a real Herdr PTY through the actual socket transport, checks
+metadata and cleanup, validates the sidebar config, and verifies the default-session
+fleet tripwire at teardown. It sends no model requests. This does not claim a visual
+production rollout or an end-to-end provider compaction test.
+
 ## Shared skills: Codex, Cursor, Claude Code
 
 The [skill installation guide](skills/README.md) owns the per-tool discovery paths,

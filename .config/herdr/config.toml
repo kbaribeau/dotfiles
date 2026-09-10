@@ -12,6 +12,10 @@ status_indicators = "symbols"
 agent_panel_sort = "priority"
 mouse_capture = false
 
+# Pi-only addition; all other agents retain Herdr's default rows.
+[ui.sidebar.agents.rows_by_agent]
+pi = [["state_icon", "workspace", "tab"], ["agent", "$pi_context"]]
+
 [ui.toast]
 delivery = "herdr"
 

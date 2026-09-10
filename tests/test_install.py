@@ -68,13 +68,14 @@ class InstallerTests(unittest.TestCase):
                      ".rspec-config.rb", ".rdebugrc", ".psqlrc", ".vimrc", ".gvimrc",
                      ".vim/plugins.vim", ".vim/autoload/pathogen.vim",
                      ".config/nvim/init.lua", ".config/nvim/nvim-pack-lock.json",
-                     ".config/treehouse/config.toml", ".config/treehouse/post-create.sh"]:
+                     ".config/treehouse/config.toml", ".config/treehouse/post-create.sh",
+                     ".pi/agent/extensions/herdr-context.ts"]:
             self.assertTrue((self.home / path).is_file(), path)
         self.assertEqual((self.home / ".rspec-config").resolve(),
                          (self.home / ".rspec-config.rb").resolve())
         self.assertEqual((self.home / ".gitignore").resolve(),
                          self.repo / "packages/git/dot-gitignore")
-        for directory in [".config", ".config/nvim", ".vim", *SKILL_ROOTS]:
+        for directory in [".config", ".config/nvim", ".vim", ".pi/agent/extensions", *SKILL_ROOTS]:
             self.assertFalse((self.home / directory).is_symlink(), directory)
         before = snapshot(self.home)
         self.run_install()
@@ -93,7 +94,8 @@ class InstallerTests(unittest.TestCase):
     def test_coexistence_private_runtime_and_removal(self):
         paths = [".config/nvim/local.lua", ".config/treehouse/hooks/fixture-post-create.sh",
                  ".config/other/settings", ".vim/bundle/fixture/plugin.vim", ".vim/undo/history",
-                 ".vim/backups/fixture", ".vim/swap/fixture", ".viminfo", ".codex/config.toml"]
+                 ".vim/backups/fixture", ".vim/swap/fixture", ".viminfo", ".codex/config.toml",
+                 ".pi/agent/extensions/herdr-agent-state.ts", ".pi/agent/settings.json"]
         paths += [f"{root}/operator-owned/SKILL.md" for root in SKILL_ROOTS]
         for name in paths:
             path = self.home / name
@@ -116,7 +118,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(sources, snapshot(self.repo))
 
     def test_conflicts_across_packages_and_skill_roots(self):
-        for name in [".zshrc", ".config/nvim/init.lua"] + [f"{r}/{n}/SKILL.md"
+        for name in [".zshrc", ".config/nvim/init.lua", ".pi/agent/extensions/herdr-context.ts"] + [f"{r}/{n}/SKILL.md"
                     for r in SKILL_ROOTS for n in SKILLS]:
             with self.subTest(name=name):
                 path = self.home / name
