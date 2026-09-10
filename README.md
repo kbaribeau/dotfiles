@@ -94,8 +94,8 @@ is linked configuration (an explicit plugin update can edit that source). Vim's
 tracked legacy Vundle files remain unchanged. Treehouse's hooks directory retains
 a tracked placeholder; create missing target-side runtime directories as needed.
 This installer invokes no shell config, editor, plugin, hook, skill or settings API.
-See [migration and rollback](docs/stow-migration.md) **before updating a clone
-that currently supplies home links**. No live-home switch is authorized here.
+Updating a clone that currently supplies home links requires separate
+reconciliation. No live-home switch is authorized here.
 
 ## Neovim daily baseline (incremental migration)
 

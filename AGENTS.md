@@ -1,6 +1,6 @@
 # Agent notes
 
-`packages/` is the GNU Stow inventory; `install.sh` only orchestrates it. See `README.md` for usage, target-only private/runtime policy and fixture validation, and `docs/stow-migration.md` before moving sources that supply live links. Never apply against the real home without explicit authorization; conflicts require separate reconciliation.
+`packages/` is the GNU Stow inventory; `install.sh` only orchestrates it. See `README.md` for usage, target-only private/runtime policy and fixture validation. Never apply against the real home without explicit authorization; conflicts require separate reconciliation.
 
 Keep shared `~/.config` and tool skills roots real; use Stow's no-folding policy and only per-skill aliases. Canonical personal skills stay in `skills/` with their own `references/`; see `skills/README.md` for discovery/coexistence and `README.md` for ownership policy.
 
