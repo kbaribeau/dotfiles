@@ -55,6 +55,9 @@ export PATH="/usr/local/opt/qt@5.5/bin:$PATH" # qt is installed with brew via a 
 
 # export CDPATH=".:$HOME:$HOME/code" # causes tab completion to be slow
 
+# Enable labeled terminal links when Pi cannot detect hyperlink support.
+export PI_HYPERLINKS=1
+
 export EDITOR=vim
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
