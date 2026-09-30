@@ -1,6 +1,6 @@
 [core]
 	excludesfile = ~/.gitignore
-	editor = /usr/bin/vim
+	editor = nvim
 	quotepath = false
 	autocrlf = input
 [user]
