@@ -19,7 +19,7 @@ test("current context percentage and unavailable values", () => {
 });
 
 test("socket framing, pane ownership, lifecycle, heartbeat and cleanup", async (t) => {
-  const directory = await mkdtemp(`${process.cwd()}/.context-test-`);
+  const directory = await mkdtemp(".context-test-");
   const endpoint = `${directory}/api.sock`;
   let foreground = true;
   let failure = false;
