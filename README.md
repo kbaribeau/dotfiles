@@ -327,10 +327,10 @@ Rollback removes only the new regular extension file and the Pi-only sidebar ove
 then follows the same operator-controlled reload steps. The token expires within
 30 seconds after its reporter stops. Never remove the managed integration.
 
-Validate without real-home writes:
+For offline unit tests, see [Validation](#validation). The separately authorized
+live transport lab runs without real-home writes:
 
 ```sh
-node --test tests/herdr_context.test.mjs # Node 24+: native TypeScript stripping
 # Opt-in, approved named-session helper required; never target default:
 HERDR_LAB_HELPER=/absolute/path/to/fm-herdr-lab.sh bash tests/test_herdr_context_lab.sh
 ```
@@ -355,7 +355,7 @@ between repository-owned personal skills and operator-managed third-party skills
 /bin/bash -n install.sh
 shellcheck install.sh                         # optional development lint
 python3 -B -m unittest discover -s tests -v   # Python 3.8+, no third-party modules
-node --test tests/herdr_context.test.mjs     # Node 24+: offline mocked socket tests
+node --test tests/herdr_context.test.mjs     # Node 24+: native TypeScript stripping
 python3 -B tests/check_codex_discovery.py      # optional, requires installed Codex
 # Opt-in: downloads/executes the pinned baseline only inside disposable fixture homes
 RUN_NVIM_PICKER_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_picker.py -v
