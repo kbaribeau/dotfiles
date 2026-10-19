@@ -4,7 +4,7 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.plugins")
 
--- Machine-local code is optional, private, Neovim-specific, and deliberately last.
+-- Machine-local code is optional, private, and Neovim-specific.
 -- Restart after configuration edits; sourcing this file does not reload cached Lua.
 local local_config = vim.fn.stdpath("config") .. "/local.lua"
 if vim.fn.filereadable(local_config) == 1 then
