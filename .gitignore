@@ -5,7 +5,7 @@
 .rubocop.yml
 .rspec-local
 
-# Optional private Neovim override, loaded last.
+# Optional private Neovim override; see README.md for loading order.
 packages/nvim/.config/nvim/local.lua
 
 tags

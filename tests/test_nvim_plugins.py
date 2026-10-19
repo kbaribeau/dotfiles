@@ -25,21 +25,32 @@ class PluginTests(unittest.TestCase):
     def test_decline_then_pinned_startup(self):
         declined = NvimFixture()
         self.addCleanup(declined.close)
-        result = declined.run('assert(_G.asked > 0); assert(vim.v.errmsg == "", vim.v.errmsg)',
-                              real=True, bootstrap="_G.asked=0; vim.fn.confirm=function() _G.asked=_G.asked+1; return 2 end")
+        result = declined.run('''
+assert(_G.asked > 0)
+assert(vim.v.errmsg == "", vim.v.errmsg)
+assert(vim.g.colors_name == "default")
+edit("declined installation.txt")
+vim.api.nvim_buf_set_lines(0, 0, -1, false, {"native editor remains usable"})
+vim.cmd.write()
+assert(vim.fn.readfile(root .. "/declined installation.txt")[1] == "native editor remains usable")
+''', real=True, bootstrap="_G.asked=0; vim.fn.confirm=function() _G.asked=_G.asked+1; return 2 end")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertFalse(any((declined.root / "data/nvim/site/pack").glob("**/.git")))
         # Lockfile is the serialized native package contract, not an implementation-text test.
         expected = json.loads((ROOT / "packages/nvim/.config/nvim/nvim-pack-lock.json").read_text())["plugins"]
         self.check('local expected = vim.json.decode(' + json.dumps(json.dumps(expected)) + r''')
 local packages = vim.pack.get()
-assert(#packages == 5)
+assert(#packages == vim.tbl_count(expected))
 for _, p in ipairs(packages) do
   assert(expected[p.spec.name].rev == p.rev)
   assert(vim.startswith(p.path, root .. "/data/nvim/"))
 end
 -- Regression: the old MRU menu path left E328 even in otherwise usable startup.
 assert(vim.fn.exists(":MRU") == 2 and vim.v.errmsg == "", vim.v.errmsg)
+-- Keep the existing installed Catppuccin selection and its normal appearance.
+assert(vim.g.colors_name == "catppuccin-mocha")
+local normal = vim.api.nvim_get_hl(0, {name="Normal", link=false})
+assert(normal.fg == 0xcdd6f4 and normal.bg == 0x1e1e2e)
 ''')
 
     def test_mru_restart_filter_split_tab_and_stale_file(self):

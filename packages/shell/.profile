@@ -39,7 +39,10 @@ export PATH="/usr/local/opt/qt@5.5/bin:$PATH" # qt is installed with brew via a 
 
 export CDPATH=".:$HOME:$HOME/code"
 
-export EDITOR=vim
+# Defaults use the real PATH command, not an interactive vim alias.
+# Keep inherited per-invocation choices; ~/.profile.local can override these.
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-nvim}"
 export ANT_HOME=/usr/share/ant/
 export ANT_OPTS="-Xms256M -Xmx512M"
 
@@ -48,7 +51,6 @@ alias 'bs=bundle exec rspec'
 alias 'ls=ls -G'
 alias 'psg=ps ax | grep'
 alias 'x=exit'
-alias 'vm=if jobs | grep vim > /dev/null; then fg vim; else vim; fi'
 alias 'rv=git show head > ~/patch.txt;git show origin/master > ~/patch_parent.txt' #for reviewboard
 alias 'gg=git grep'
 alias 'ggi=git grep -i'
