@@ -67,6 +67,7 @@ if os.environ.get("WAIT_EDITOR") == "1":
         executable = shutil.which(shell)
         if not executable:
             self.skipTest(f"requires {shell}")
+        script = 'export PATH="$HOME/bin:$PATH"\n' + script
         if shell == "zsh":
             return [executable, "-d", "-ilc" if login else "-ic", script]
         return [executable, "--noprofile", "--rcfile", str(self.home / "bashrc"), "-ic", script]
@@ -77,6 +78,25 @@ if os.environ.get("WAIT_EDITOR") == "1":
                                 capture_output=True, text=True, timeout=15)
         self.assertEqual(result.returncode, 0, result.stderr)
         return result.stdout.strip()
+
+    def test_fixture_editors_take_precedence_after_shell_startup(self):
+        competing_bin = self.home / "competing bin"
+        competing_bin.mkdir()
+        for name in ("vim", "nvim"):
+            executable = competing_bin / name
+            executable.write_text("#!/bin/sh\nexit 91\n")
+            executable.chmod(0o755)
+        startup = f'export PATH={shlex.quote(str(competing_bin))}:"$PATH"\n'
+        (self.home / ".profile.local").write_text(startup)
+        (self.home / ".zlogin").write_text(startup)
+        for shell, _ in SHELLS:
+            for login in ((False, True) if shell == "zsh" else (False,)):
+                for name in ("vim", "nvim"):
+                    with self.subTest(shell=shell, login=login, editor=name):
+                        (self.root / "dispatch.json").unlink(missing_ok=True)
+                        self.run_shell(shell, f'{name} "file with spaces"', login=login)
+                        self.assertEqual(json.loads((self.root / "dispatch.json").read_text()),
+                                         [name, "file with spaces"])
 
     def test_defaults_exported_to_children_and_direct_vim_unchanged(self):
         for shell, _ in SHELLS:
