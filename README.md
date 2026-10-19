@@ -184,7 +184,11 @@ indentation, expandtab, softtabstop=0, nowrap, line numbers, list, showmode,
 scrolloff=3, winwidth=120, cursorline, block virtual editing, alphabetic/hex numeric
 increments, autoread and silent bells. Filetypes can override buffer-local defaults;
 real-tab formats still use their bundled runtime. `winwidth` is a preference, not a
-terminal resize. Native path-focused statusline and the built-in theme remain.
+terminal resize. The native path-focused statusline remains. The existing
+Catppuccin Mocha theme is selected when available; if installation is declined or
+the theme is absent, startup uses Neovim's built-in `default` colors instead.
+This does not force installation, and errors from an available theme or other
+plugins remain visible.
 
 Persistent undo is enabled with native Neovim undo/swap/ShaDa paths. Trial HOME/XDG
 paths must all be isolated: `NVIM_APPNAME` alone does not repair literal paths in
@@ -294,9 +298,9 @@ available. The remaining tmux `vi` key modes and Git completion's `vimdiff` cand
 are not editor launch overrides and remain unchanged.
 
 **`vim`, `vi`, `view`, and `vimdiff` commands are not aliased or replaced.** A
-`vim` → `nvim` shell alias remains an optional, unapproved follow-up, not a prerequisite
-for these defaults. Vim's configuration/plugins and rollback baseline remain
-untouched. Original Vim is still available through its existing PATH command or an
+`vim` → `nvim` shell alias is explicitly excluded from the migration plan, not
+pending or deferred. These defaults invoke `nvim` independently. Vim's
+configuration/plugins and rollback baseline remain untouched. Original Vim is still available through its existing PATH command or an
 explicit system path (verify for your OS; `/usr/bin/vim` is verified on macOS).
 Behavioral migration remains tracked in https://github.com/kbaribeau/dotfiles/issues/9;
 this integration does not declare the whole issue or normal installation complete.
@@ -436,7 +440,12 @@ fallback, and preservation of unsaved buffers. It requires Neovim 0.12+, Git and
 network access; no live links or plugin stores are touched. The baseline plugin suite
 covers native install/decline, pinned loading without startup errors, MRU persistence,
 filter/split/tab/stale entries, Fugitive's index/diff/blame/history/grep workflows,
-Surround, indent-object and retained native brackets. Offline executable tests cover
+Surround, indent-object and retained native brackets. The real installation-decline
+case verifies usable built-in colors without acquiring packages; the installed case
+checks the existing Catppuccin Mocha selection and highlights against the lockfile.
+[`tests/test_nvim_theme.py`](tests/test_nvim_theme.py) also exercises absent/available
+theme startup offline and verifies that theme-loader and unrelated package errors
+are not suppressed. Offline executable tests cover
 options/maps, literal path expansions, explicit mock clipboard, buffer-local Ruby
 abbreviations/manual completion, local overrides, undo/marks/private sessions, swap
 collisions, and save failures. The Unix PTY fixture supplies its own job-control shell
