@@ -267,12 +267,57 @@ increments. Removing a plugin requires reverting its declaration and lock change
 not deleting another editor's package tree. Validate increments and the combined
 set in isolated directories; broad implementation is not one required live switch.
 
-Vim's sources and links remain independent and unchanged. Continue invoking `vim`
-and `nvim` separately; aliases and `EDITOR`/`VISUAL` are not changed. Behavioral
-migration remains tracked in https://github.com/kbaribeau/dotfiles/issues/9.
-For a separately approved live installation, inspect the dry-run above first and
-reconcile any existing Neovim destination separately; the installer never replaces
-it. This change performs no live installation.
+#### Default-editor integration (independent of a `vim` alias)
+
+The selected baseline has now been used daily; deferred features remain deferred.
+[`packages/shell/.zshrc`](packages/shell/.zshrc) and
+[`.profile`](packages/shell/.profile) default exported `EDITOR` and `VISUAL` to
+**`nvim`** when unset or empty. Nonempty inherited choices are preserved, and the
+existing optional `~/.profile.local` loads afterward for machine-local overrides.
+Bash users must arrange to load `.profile` through their own startup configuration;
+this repository does not install `.bashrc` or `.bash_profile`. Noninteractive shells
+normally inherit these values rather than loading interactive startup files.
+
+[`packages/git/.gitconfig`](packages/git/.gitconfig) already explicitly selects
+`core.editor = nvim`; that is retained. Git does not need an interactive alias.
+Its optional `~/.gitconfig.local`, repository settings, `git -c core.editor=...`,
+and invocation-specific `GIT_EDITOR` keep their usual precedence. Interactive
+rebase uses the same editor unless `sequence.editor` or `GIT_SEQUENCE_EDITOR`
+overrides it. A plain `EDITOR=...` does not override Git's explicit `core.editor`.
+Ensure the real `nvim` executable is on PATH (with the 0.12+ baseline above);
+there is no silent fallback if it is missing. Terminal Neovim waits until exit;
+no GUI/remote wrapper or extra wait flag is introduced.
+
+The unused **`vm` shell helper is removed**, not migrated. Neovim's Ctrl-Z
+save/suspend mappings are unchanged; normal shell job control (`jobs`, `fg`) remains
+available. The remaining tmux `vi` key modes and Git completion's `vimdiff` candidates
+are not editor launch overrides and remain unchanged.
+
+**`vim`, `vi`, `view`, and `vimdiff` commands are not aliased or replaced.** A
+`vim` → `nvim` shell alias remains an optional, unapproved follow-up, not a prerequisite
+for these defaults. Vim's configuration/plugins and rollback baseline remain
+untouched. Original Vim is still available through its existing PATH command or an
+explicit system path (verify for your OS; `/usr/bin/vim` is verified on macOS).
+Behavioral migration remains tracked in https://github.com/kbaribeau/dotfiles/issues/9;
+this integration does not declare the whole issue or normal installation complete.
+
+After review/landing and separate normal-setup authorization, refresh the installing
+clone without losing local edits (stop on conflicts). Existing file symlinks see
+these edits immediately; **no Stow run is needed for this change if those links
+already point to that clone**. Otherwise inspect the installer dry-run and reconcile
+conflicts separately; never replace a foreign destination blindly. Start a fresh
+shell to pick up defaults and lose the old `vm` alias; existing shells keep their
+old state. A nested shell also preserves inherited nonempty editor values; distinguish
+stale inherited values from deliberate overrides before clearing anything. Check
+`printenv EDITOR VISUAL`, `command -v nvim`, `command -v vim`, and `git var GIT_EDITOR`
+in the intended repository, accounting for deliberate overrides. This implementation
+performs no live installation.
+
+Rollback: restore the two shell files from the reviewed pre-cutover revision and
+start a fresh shell, or select Vim explicitly per invocation (`EDITOR=vim VISUAL=vim`
+for other applications; `GIT_EDITOR=vim git ...` for Git). Git's preexisting global
+editor was already Neovim; reverting this change does not change that. Do not delete
+either editor's config, plugin, undo, swap, history or session directories.
 
 ## Pi context usage in Herdr
 
@@ -361,6 +406,14 @@ python3 -B tests/check_codex_discovery.py      # optional, requires installed Co
 RUN_NVIM_PICKER_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_picker.py -v
 RUN_NVIM_BASELINE_TESTS=1 python3 -B -m unittest discover -s tests -p test_nvim_plugins.py -v
 ```
+
+[`tests/test_editor_defaults.py`](tests/test_editor_defaults.py) executes the public
+shell configs in synthetic homes (legacy absolute home paths redirected; unrelated
+machine bootstraps stubbed). It checks fresh interactive zsh and login zsh, Bash's
+explicit `.profile` loading, exported defaults/inherited/private overrides, direct
+Vim and system fallback, `vm` removal, Git editor precedence, and actual
+Git editor dispatch with quoted arguments and a blocking editor handshake. It
+creates no commits and never launches an interactive Git operation in a real repo.
 
 Python discovery does not run the Node suite above. Check the unittest summary
 for skips: missing GNU Stow, zsh or a suitable Neovim can leave relevant suites
