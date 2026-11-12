@@ -221,3 +221,21 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
+# cd to the worktree that has the named branch checked out
+gwt() {
+  emulate -L zsh
+  if [[ -z "$1" ]]; then
+    print -u2 "usage: gwt <branch>"
+    return 1
+  fi
+
+  local dir
+  dir=$(git worktree list --porcelain | awk -v b="refs/heads/$1" '
+    /^worktree /{wt=substr($0,10)} $0=="branch " b {print wt; exit}')
+  if [[ -z "$dir" ]]; then
+    print -u2 "gwt: no worktree for branch $1"
+    return 1
+  fi
+  builtin cd "$dir"
+}
